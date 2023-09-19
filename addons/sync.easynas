@@ -1,0 +1,9 @@
+<addon>
+ <name>sync</name>
+ <description>sync</description>
+ <version>1.0.0</version>
+ <author>Yariv Hakim</author>
+ <icon>fa-refresh</icon>
+ <type>storage</type>
+ <program>sync.pl</program>
+</addon>

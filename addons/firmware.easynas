@@ -1,0 +1,8 @@
+<addons>
+ <name>firmware</name>
+ <description>firmware</description>
+ <version>1.0.0</version>
+ <author>Yariv Hakim</author>
+ <icon>fa-cloud-download</icon>
+ <program>firmware.pl</program>
+</addons>

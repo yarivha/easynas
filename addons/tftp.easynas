@@ -1,0 +1,11 @@
+<addon>
+ <name>tftp</name>
+ <description>tftp</description>
+ <version>1.0.0</version>
+ <author>Yariv Hakim</author>
+ <icon>fa-file-code-o</icon>
+ <type>sharing</type>
+ <program>tftp.pl</program>
+ <config>/etc/easynas/tftp</config>
+ <service>easynas-tftp.service</service>
+</addon>

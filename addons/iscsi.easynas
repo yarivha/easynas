@@ -1,0 +1,11 @@
+<addon>
+ <name>iscsi</name>
+ <description>iscsi</description>
+ <version>1.0.0</version>
+ <author>Yariv Hakim</author>
+ <icon>fa-external-link</icon>
+ <type>storage</type>
+ <program>iscsi.pl</program>
+ <config>/etc/easynas/tgt/targets.conf</config>
+ <service>easynas-tgtd.service</service>
+</addon>

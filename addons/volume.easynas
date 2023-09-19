@@ -1,0 +1,9 @@
+<addon>
+ <name>volume</name>
+ <description>vol_manager</description>
+ <version>0.7.0</version>
+ <icon>fa-folder-open-o</icon>
+ <author>Yariv Hakim</author>
+ <type>storage</type>
+ <program>volume</program>
+</addon>

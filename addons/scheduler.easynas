@@ -1,0 +1,9 @@
+<addon>
+ <name>scheduler</name>
+ <description>scheduler</description>
+ <icon>fa-clock-o</icon>
+ <version>0.7.0</version>
+ <author>Yariv Hakim</author>
+ <type>system</type>
+ <program>scheduler.pl</program>
+</addon>

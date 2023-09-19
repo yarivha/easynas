@@ -1,0 +1,11 @@
+<addon>
+ <name>users</name>
+ <description>users_manager</description>
+ <version>0.7.0</version>
+ <author>Yariv Hakim</author>
+ <type>realm</type>
+ <icon>fa-user</icon>
+ <config>/etc/passwd</config>
+ <config2>/etc/shadow</config2>
+ <program>users</program>
+</addon>

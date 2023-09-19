@@ -1,0 +1,9 @@
+<addons>
+ <name>addons</name>
+ <description>addons</description>
+ <version>1.0.0</version>
+ <author>Yariv Hakim</author>
+ <type>system</type>
+ <icon>fa-cloud-download</icon>
+ <program>addons.pl</program>
+</addons>

@@ -1,0 +1,54 @@
+% layout 'default';
+
+<div class="row"><div class="col-lg-10"><div class="panel panel-default"><div class="panel-heading"><%= ($TEXT->{'create_fs'}) %></div><div class="panel-body">
+%= form_for filesystem => begin
+%= hidden_field action=>'createfs'
+ <table><tr><td>
+  %= label_for name => 'Name:'
+  </td><td>&nbsp;</td><td>
+  %= text_field 'name', id => 'name', class => 'appearance-none block w-full py-3 px-4 leading-tight text-gray-700 focus:bg-white border border-gray-200 focus:border-gray-500 rounded focus:outline-none'
+  </td></tr>
+  <tr><td>
+  %= label_for raid => 'Raid:'
+  </td><td>&nbsp;</td><td>
+  %= select_field raid => [[JBOD => 'single'],'RAID1','RAID10','RAID5','RAID6'], class => 'appearance-none block w-full py-3 px-4 leading-tight text-gray-700 focus:bg-white border border-gray-200 focus:border-gray-500 rounded focus:outline-none'
+  </td></tr>
+  <tr><td>
+  %= label_for compression => 'Compression:'
+  </td><td>&nbsp;</td><td>
+  %= select_field compression => ['Faster','Better','None'], class => 'appearance-none block w-full py-3 px-4 leading-tight text-gray-700 focus:bg-white border border-gray-200 focus:border-gray-500 rounded focus:outline-none'
+ </td></tr>
+ <tr><td>
+  %= label_for mount => 'Mount Options:'
+  </td><td>&nbsp;</td><td>
+  %= select_field mount => ['ReadOnly','Read&Write'], class => 'appearance-none block w-full py-3 px-4 leading-tight text-gray-700 focus:bg-white border border-gray-200 focus:border-gray-500 rounded focus:outline-none'
+ </td></tr>
+ <tr><td>
+  %= label_for disks => 'Disks:'
+  </td><td>&nbsp;</td><td> 
+  %= select_field disks => $freedisks, class => 'appearance-none block w-full py-3 px-4 leading-tight text-gray-700 focus:bg-white border border-gray-200 focus:border-gray-500 rounded focus:outline-none'
+  </td></tr>
+  <tr><td>
+  %= label_for ssd => 'SSD Optimization:'
+  </td><td>&nbsp;</td><td>
+  %= check_box id => "ssd"
+  </td></tr>
+  <tr><td>
+  %= label_for defrag => 'Auto Defrag:'
+  </td><td>&nbsp;</td><td>
+  %= check_box id => "defrag"
+  </td></tr>
+  <tr><td>
+  %= label_for mount => 'Auto Mount:'
+  </td><td>&nbsp;</td><td>
+  %= check_box id => "mount"
+  </td></tr>
+  </table>
+  </div>
+  <div class="panel-footer"><center>
+  %= submit_button 'Save'
+  % end
+  </center>
+  </div>
+</div></div></div></div>
+
