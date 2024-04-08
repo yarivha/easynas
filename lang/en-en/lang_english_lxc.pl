@@ -20,3 +20,7 @@
 $TEXT{'virtualization'} = "Virtualization";
 $TEXT{'lxc_on_off'} = "ON/OFF";
 $TEXT{'lxc_settings'} = "Settings";
+$TEXT{'lxc_name'} = "Name";
+$TEXT{'lxc_state'} = "State";
+$TEXT{'lxc_ip'} = "IP";
+$TEXT{'lxc_action'} = "Action";

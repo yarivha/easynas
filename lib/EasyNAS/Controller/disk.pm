@@ -1,7 +1,7 @@
 package EasyNAS::Controller::Disk;
 use lib '.';
 use Mojo::Base 'Mojolicious::Controller', -signatures;
-use modules;
+use Common;
 
 
 sub view ($self) {

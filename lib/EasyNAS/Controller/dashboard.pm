@@ -1,7 +1,7 @@
 package EasyNAS::Controller::Dashboard;
 use lib '.';
 use Mojo::Base 'Mojolicious::Controller', -signatures;
-use modules;
+use Common;
 
 
 sub view ($self) {
@@ -12,7 +12,7 @@ sub view ($self) {
   my %users  = users_info();
 
   $self->render(template => 'easynas/dashboard', 
-		title => $TEXT{%addons{'dashboard'}->{'description'}},
+		title => $TEXT{'dashboard'},
 		program => $addons{dashboard}->{program},
 		username => get_username(),
 		menu =>\@html_output,

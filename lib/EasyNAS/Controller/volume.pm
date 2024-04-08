@@ -1,7 +1,7 @@
 package EasyNAS::Controller::Volume;
 use lib '.';
 use Mojo::Base 'Mojolicious::Controller', -signatures;
-use modules;
+use Common;
 
 
 my $msg;
