@@ -229,7 +229,9 @@ sub get_lang_list
  my $file;
  my $lang;
  my $flag;
- opendir (DIR, $lang_dir) or die "Error";
+ 
+ if (!@lang_list) {
+  opendir (DIR, $lang_dir) or die "Error";
   while ($file = readdir(DIR))
   {
    if ($file ne "." && $file ne ".." && -f "$lang_dir/$file/iso.txt")
@@ -238,8 +240,9 @@ sub get_lang_list
             push(@lang_list,{name=>$lang,symbol=>$file,flag=>$flag});
         }
     }
- close(DIR);
- return;
+  close(DIR);
+ }
+  return;
 }
 
 
@@ -332,11 +335,11 @@ sub get_addons
     my $addon_service;
     my $addon_program;
     
-
-    opendir (DIR, $addons_dir) or die $!;
-    while ($file = readdir(DIR))
-    {
-	if (($file ne ".") && ($file ne ".."))
+    if (!@html_output) {
+     opendir (DIR, $addons_dir) or die $!;
+     while ($file = readdir(DIR))
+     {
+ 	if (($file ne ".") && ($file ne ".."))
 	{
 	    $addon_enable="true";
 	    $addon_name="";
@@ -474,6 +477,7 @@ sub get_addons
      push(@html_output,{type=>$TEXT{$type},addons=>$addons_by_type->{$type}});
      push(@categories,$type);
     }
+  }
 }
 
 
