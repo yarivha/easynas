@@ -1,5 +1,5 @@
 package EasyNAS;
-use lib '/app/easy_nas/lib/EasyNAS/Controller';
+use lib '/easynas/lib/EasyNAS/Controller';
 use Mojo::Base 'Mojolicious', -signatures;
 use Common;
 
