@@ -649,7 +649,7 @@ sub fs_info
 
 #### Check Environemnt
 if  ( !-d $conf_dir) {
- mkdir($conf_dir, 0700)
+ mkdir($conf_dir, 0755)
 }
 
 if ( !-e $lang_conf) {
