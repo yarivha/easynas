@@ -2,7 +2,7 @@ package EasyNAS::Controller::Filesystem;
 use lib '.';
 #use Switch;
 use Mojo::Base 'Mojolicious::Controller', -signatures;
-use Common;
+use easynas;
 
 my $mount_dir=get_mount_dir();
 my $conf_cron=get_conf_cron();

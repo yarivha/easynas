@@ -1,7 +1,7 @@
 package EasyNAS;
 use lib '/easynas/lib/EasyNAS/Controller';
 use Mojo::Base 'Mojolicious', -signatures;
-use Common;
+use easynas;
 
 # This method will run once at server start
 sub startup ($self) {

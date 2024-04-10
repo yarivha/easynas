@@ -1,7 +1,7 @@
 package EasyNAS::Controller::Lxc;
 use Mojo::Base 'Mojolicious::Controller', -signatures;
 use lib '/easynas/lib/EasyNAS/Controller';
-use Common;
+use easynas;
 
 my $msg;
 my $result;

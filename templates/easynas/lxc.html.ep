@@ -44,5 +44,5 @@
                                         </table>
                                     </div>
 				</div>
-
-
+				 <br><br><br><br><br><a href="?action=createlxcmenu">[<%= ($TEXT->{'lxc_create'}) %>]</a>
+			

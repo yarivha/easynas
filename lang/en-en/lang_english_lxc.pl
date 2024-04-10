@@ -24,3 +24,4 @@ $TEXT{'lxc_name'} = "Name";
 $TEXT{'lxc_state'} = "State";
 $TEXT{'lxc_ip'} = "IP";
 $TEXT{'lxc_action'} = "Action";
+$TEXT{'lxc_create'} = "Create new System";

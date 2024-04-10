@@ -19,7 +19,7 @@
 #
 #########################################################################
 
-package Common;
+package easynas;
 
 use strict;
 use warnings;
