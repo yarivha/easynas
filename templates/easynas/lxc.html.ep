@@ -34,10 +34,10 @@
                                             <tbody>
 						% foreach my $system (keys (%$systems)) {
                                                 <tr>
-                                                    <td><a href="?action=settingsmenu&fs=<%= $system %>"><i class="fa fa-desktop fa-2x" title="Settings"></i></a></td>
+                                                    <td><a href="?action=terminal&name=<%= $system %>" target="_blank" rel="noopener noreferrer"><i class="fa fa-desktop fa-2x" title="Settings"></i></a></td>
+						    <td><%= $systems->{$system}[0] %></td>
 						    <td><%= $systems->{$system}[1] %></td>
 						    <td><%= $systems->{$system}[2] %></td>
-						    <td><%= $systems->{$system}[3] %></td>
 						</tr>
 					 	%}
                                             </tbody>
