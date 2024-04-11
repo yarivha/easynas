@@ -28,7 +28,7 @@ use Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw();
 our @EXPORT    = qw( %TEXT %addons @html_output @lang_list get_mount_dir get_conf_cron get_categories  
-		     write_log fs_info vol_info users_info drive_status);
+		     write_log fs_info vol_info users_info disk_info drive_status);
 
 ############# Declarations #####################
 my $authentication_enable = 1;
@@ -43,6 +43,7 @@ my %mount_options = ( 'rw'=>'Read&Write','ro'=>'ReadOnly');
 my $addons_dir = "/easynas/addons";
 my $lang_dir= "/easynas/lang";
 my $conf_dir= "/etc/easynas";
+my $log_dir= "/var/log/easynas";
 my $mount_dir = "/mnt";
 
 ##########  Configuration files ############
@@ -51,7 +52,7 @@ my $conf_cron="/etc/cron.d/easynas.cron";
 my $conf_roles=$conf_dir."/easynas.roles";
 my $conf_cert  = $conf_dir."/easynas.pem";
 my $conf_hosts = "/etc/hosts";
-my $log_file = "/var/log/easynas/easynas.log";
+my $log_file = $log_dir."/easynas.log";
 
 ############ Settings ################
 our %addons;
@@ -116,6 +117,24 @@ sub get_lang
     }
 }
 
+
+########### check_env ###########
+sub check_env
+{
+  if  ( !-d $conf_dir) {
+   mkdir($conf_dir, 0755);
+  }
+
+  if ( !-e $lang_conf) {
+   open(FH, '>', $lang_conf) or die $!;
+   print FH $lang_default;
+   close(FH);
+  }
+
+ if ( !-d $log_dir) {
+  mkdir($log_dir, 0755);
+ } 
+}
 
 ########### write_log ###########
 sub write_log
@@ -641,17 +660,7 @@ sub fs_info
 
 ########################### Main ############################
 
-#### Check Environemnt
-if  ( !-d $conf_dir) {
- mkdir($conf_dir, 0755)
-}
-
-if ( !-e $lang_conf) {
- open(FH, '>', $lang_conf) or die $!;
- print FH $lang_default;
- close(FH);
-} 
-
+check_env;
 get_lang_list;
 load_language;
 get_addons;
