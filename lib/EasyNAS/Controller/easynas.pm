@@ -27,7 +27,7 @@ use File::Path qw( make_path );
 use Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw();
-our @EXPORT    = qw( %TEXT %addons @html_output @lang_list get_mount_dir get_conf_cron get_username get_categories  
+our @EXPORT    = qw( %TEXT %addons @html_output @lang_list get_mount_dir get_conf_cron get_categories  
 		     write_log fs_info vol_info users_info drive_status);
 
 ############# Declarations #####################
@@ -303,12 +303,6 @@ sub load_language
 	}
     }
     close(DIR);
-}
-
-
-
-sub get_username {
-  return("Admin");
 }
 
 

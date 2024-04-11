@@ -19,7 +19,7 @@ sub view ($self) {
   $self->render(template => 'easynas/volume', 
 	        title => $TEXT{%addons{filesystem}->{description}},
                 program => $addons{filesystem}->{program},
-                username => get_username(),
+                username => $username,
                 menu =>\@html_output,
                 TEXT =>\%TEXT,
                 addons =>\%addons,

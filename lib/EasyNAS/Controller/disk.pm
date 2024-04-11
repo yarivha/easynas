@@ -12,7 +12,7 @@ sub view ($self) {
   my $action=$self->param('action'); 
   $self->render(template => 'easynas/disk', 
 	        title => $TEXT{'disk'},
-		username => get_username(),
+		username => $username,
 		menu =>\@html_output,
 		TEXT =>\%TEXT
 		);

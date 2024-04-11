@@ -18,7 +18,7 @@ sub view ($self) {
   $self->render(template => 'easynas/dashboard', 
 		title => $TEXT{'dashboard'},
 		program => $addons{dashboard}->{program},
-		username => get_username(),
+		username => $username,
 		menu =>\@html_output,
 		TEXT =>\%TEXT,
 		addons =>\%addons,
