@@ -1,18 +1,20 @@
 package EasyNAS::Controller::Filesystem;
-use lib '.';
+use lib '/easynas/lib/EasyNAS/Controller';
 #use Switch;
 use Mojo::Base 'Mojolicious::Controller', -signatures;
 use easynas;
 
 my $mount_dir=get_mount_dir();
 my $conf_cron=get_conf_cron();
-#my %TEXT=get_text("filesystem");
 my $msg;
 my $result;
-my $action;
 
 sub view($self) {
-    $action=$self->param('action');
+    if (!($self->session('is_auth'))) {
+        $self->redirect_to('login');
+    }
+    my $username=$self->session('user');
+    my $action=$self->param('action'); 
     $msg="";
     $result="";
     $self->stash(title => $TEXT{%addons{filesystem}->{description}},
@@ -192,7 +194,6 @@ sub createfs($self) {
     my $btrfs;
     my $disk;
     my $rc;
-    $action="";
 
 if ($ssd)
     {

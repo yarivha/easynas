@@ -21,9 +21,13 @@ foreach (@systems) {
 }
 
 sub view ($self) {
+  if (!($self->session('is_auth'))) {
+        $self->redirect_to('login');
+  }
+  my $username=$self->session('user');
+  my $action=$self->param('action'); 
   $msg="";
   $result="";
-  my $action=$self->param('action'); 
   
   if (defined $action && $action eq "terminal" )
   {

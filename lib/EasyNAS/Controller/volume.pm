@@ -9,6 +9,11 @@ my $result;
 
 
 sub view ($self) {
+  if (!($self->session('is_auth'))) {
+        $self->redirect_to('login');
+  }
+  my $username=$self->session('user');
+  my $action=$self->param('action'); 
   $msg="";
   $result="";
   $self->render(template => 'easynas/volume', 

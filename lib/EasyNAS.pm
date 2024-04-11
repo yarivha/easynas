@@ -18,6 +18,8 @@ sub startup ($self) {
 
   # Normal route to controller
   $r->get('/')->to('dashboard#view');
+  $r->any('/login')->to('login#view');
+  $r->get('/logout')->to('login#logout');
   foreach my $item (keys %addons) {
 	  $r->get('/'.$addons{$item}{'program'})->to($addons{$item}{'program'}.'#view');
   }

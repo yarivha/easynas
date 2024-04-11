@@ -5,7 +5,11 @@ use easynas;
 
 
 sub view ($self) {
-
+  if (!($self->session('is_auth'))) {
+        $self->redirect_to('login');
+  }
+  my $username=$self->session('user');
+  my $action=$self->param('action'); 
   my %fs = fs_info();
   my %disks  = drive_status();
   my %vol    = vol_info();
