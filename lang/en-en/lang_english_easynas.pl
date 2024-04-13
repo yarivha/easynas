@@ -274,30 +274,34 @@ $TEXT{'firmware_refreshed'} = "Repositories refreshed";
 
 
 #### Disk ####
-$TEXT{'free'} = "Free";
-$TEXT{'used'} = "Used";
-$TEXT{'system'} = "System";
-$TEXT{'failed'} = "Failed";
 $TEXT{'disk_manager'} = "Disk Manager";
+$TEXT{'disk'} = "Disk";
+$TEXT{'disk_size'} = "Size";
+$TEXT{'disk_status'} = "Status";
+$TEXT{'disk_type'} = "Type";
+$TEXT{'disk_health'} = "Health";
+$TEXT{'disk_model'} = "Model";
+$TEXT{'disk_serial'} = "Serial";
+$TEXT{'disk_firmware'} = "Firmware";
+$TEXT{'disk_actions'} = "Actions";
+$TEXT{'disk_free'} = "Free";
+$TEXT{'disk_used'} = "Used";
+$TEXT{'disk_system'} = "System";
+$TEXT{'disk_bad'} = "Bad";
+$TEXT{'disk_good'} = "Good";
+$TEXT{'disk_format'} = "Format";
+$TEXT{'disk_settings'} = "Settings";
+
 $TEXT{'disk_performace'} = "Disk Performace";
 $TEXT{'testing'} = "Testing";
 $TEXT{'rerun_test'} = "ReRun Test";
-$TEXT{'disk_performance_help'} = "Disk performace test will check the read performace of a disk.";
 $TEXT{'error_updating_param'} = "Error updating disk parameters";
 $TEXT{'error_formating_disk'} = "Error Formating Disk";
 $TEXT{'disk_format_success'} = "Disk formatted successfully";
 $TEXT{'disk_update_success'} = "Disk updated successfully";
 $TEXT{'physical_disks'} = "Physical Disks";
-$TEXT{'disk'} = "Disk";
-$TEXT{'size'} = "Size";
-$TEXT{'status'} = "Status";
-$TEXT{'model_number'} = "Model Number";
-$TEXT{'serial_number'} = "Serial Number";
-$TEXT{'firmware_version'} = "Firmware Version";
-$TEXT{'actions'} = "Actions";
 $TEXT{'disk_format_are_u_sure'} = "Are you sure you want to format disk ?";
 $TEXT{'disk_test_are_u_sure'} = "Are you sure you want to test disk ?";
-$TEXT{'disk_format'} = "Format";
 $TEXT{'test_performance'} = "Test Performance";
 $TEXT{'disk_distribution'} = "Disk Distribution";
 $TEXT{'disk_settings'} = "Disk Settings";

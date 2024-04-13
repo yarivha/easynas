@@ -11,7 +11,7 @@ sub view ($self) {
   my $username=$self->session('user');
   my $action=$self->param('action'); 
   my %fs = fs_info();
-  my %disks  = drive_status();
+  my %disks  = disk_info();
   my %vol    = vol_info();
   my %users  = users_info();
 

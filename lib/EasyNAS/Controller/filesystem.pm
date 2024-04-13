@@ -27,7 +27,7 @@ sub view($self) {
 
 #--------- Create Menu ----------
     if ($action eq "createfsmenu") {
-      my %disks = drive_status();
+      my %disks = disk_info();
       my $size;
       my $pre_size;
       my $number_free = 0;  

@@ -28,7 +28,7 @@ use Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw();
 our @EXPORT    = qw( %TEXT %addons @html_output @lang_list get_mount_dir get_conf_cron get_categories  
-		     write_log fs_info vol_info users_info disk_info drive_status);
+		     write_log fs_info vol_info users_info disk_info);
 
 ############# Declarations #####################
 my $authentication_enable = 1;
@@ -515,62 +515,84 @@ sub users_info
 }
 
 
-#### drive_status ######
+#### disk_info ######
 
-sub drive_status
+sub disk_info
 {
     my $disk;
-    my $fs;
+    my $type;
+    my $status;
+    my $health;
     my $size;
-    my $pre_size;
-    my $system;
+    my $presize;
+    my $model;
     my $mount_dir=get_mount_dir();
     my %fs=fs_info();
     my @disks_errors;
     my $disks_errors;
     my %disks_errors;
     my %disks;
-    my @disks = `/usr/bin/sudo /sbin/fdisk -l 2> /dev/null | /usr/bin/grep "Disk /dev"`;
+    my @sysmon;
+    my @disks = `/usr/bin/sudo /usr/sbin/smartctl --scan`;
 
     #### Check disks errors in Filesystems ######
-    foreach $fs (keys %fs) {
+    #foreach $fs (keys %fs) {
 	    #     @disks_errors=`/usr/bin/sudo /usr/sbin/btrfs device stats --check $mount_dir/$_ | grep -vE ' 0$' `;
-     foreach $disks_errors (@disks_errors) {
-      ($disk,undef)=split(/\./,$disks_errors);
-      $disks_errors{$disk}=1;
-     }
-    }
+	    #foreach $disks_errors (@disks_errors) {
+	    #  ($disk,undef)=split(/\./,$disks_errors);
+	    #$disks_errors{$disk}=1;
+	    #}
+	    #}
 
     foreach (@disks)
     {
-	(undef,$disk,$size,$pre_size,)=split(" ", $_);
-	chop($disk);
-	chop($pre_size);
-	if (!(($disk =~ /\/dev\/ram/) or ($disk =~ /\/dev\/loop/)))
+	($disk,undef,$type,undef,undef,undef)=split(" ", $_);
+	@sysmon = `/usr/bin/sudo /usr/sbin/smartctl -i  $disk`; 
+	foreach (@sysmon) 
 	{
-            if (index(`/usr/bin/sudo /usr/bin/mount | grep "on / "`,$disk) != -1) 
-            {
-              $disks{$disk} = [$TEXT{'system'},$size,$pre_size]; 
-            }
-            else
-            {
-	      if (`/usr/bin/sudo /sbin/btrfs filesystem show | /usr/bin/grep $disk`)
-	      {
-                if (defined($disks_errors{"[$disk]"})) {
-		 $disks{$disk} = [$TEXT{'failed'},$size,$pre_size];
-                }
-                else {
-	  	 $disks{$disk} = [$TEXT{'used'},$size,$pre_size];
-		}
-	      }
-	      else
-	      {
-  		$disks{$disk} = [$TEXT{'free'},$size,$pre_size];
-	      }
+	  if ($_ =~ /User Capacity/s) {
+	    (undef,undef,undef,undef,$size,$presize) = split(" ",$_);
 	  }
-       }
+	  if ($_ =~ /Device Model/s) {
+	    (undef,undef,$model) = split(" ",$_);
+	  }
+	  if ($_ =~ /Product/s) {
+            (undef,$model) = split(" ",$_);
+          }
+	}
+	@sysmon = `/usr/bin/sudo /usr/sbin/smartctl -H  $disk`;
+        $health=$TEXT{'disk_bad'};
+	foreach (@sysmon) 
+        {
+          if (($_ =~ /PASSED/s) or ($_ =~ /OK/s)) {
+	    $health=$TEXT{'disk_good'};
+	  }
+        }
+
+        if (index(`/usr/bin/sudo /usr/bin/mount | grep "on / "`,$disk) != -1) 
+        {
+         $status=$TEXT{'disk_system'}; 
+        }
+	else 
+	{
+	  if (`/usr/bin/sudo /sbin/btrfs filesystem show | /usr/bin/grep $disk`)
+ 	  {
+	   $status=$TEXT{'disk_used'};
+	  }
+	  else
+	  {
+  	   $status=$TEXT{'disk_free'};
+	  }
+	}
+        $disks{$disk}=[$disk,$type,$size.$presize,$status,$health,$model];
+	$type="";
+	$size="";
+	$presize="";
+	$status="";
+	$health="";
+	$model="";
     }
-    return %disks;
+    return(%disks);
 }
 
 
