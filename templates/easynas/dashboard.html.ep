@@ -13,16 +13,16 @@
 
 <div class="col-lg-6"><div class="panel panel-default"><div class="panel-heading"><div class="row"><div class="col-xs-3">Disk</div><div class="panel-body">
 % foreach my $disk (keys (%$disks)) {
- % if ( $disks->{$disk}[0] eq "System") {
+ % if ( $disks->{$disk}[3] eq "System") {
 <a href="<%= ($addons->{'disk'}->{program}) %>?action=settings&disk=<%= $disk %>"><i class="fa fa-hdd-o fa-5x" style="color:blue" title="<%= $disk %>"></i></a>&nbsp
  %}
- % if ( $disks->{$disk}[0] eq "Failed") {
+ % if ( $disks->{$disk}[3] eq "Failed") {
 <a href="<%= ($addons->{'disk'}->{program}) %>?action=settings&disk=<%= $disk %>"><i class="fa fa-hdd-o fa-5x" style="color:red" title="<%= $disk %>"></i></a>&nbsp
  %}
- % if ( $disks->{$disk}[0] eq "Used") {
+ % if ( $disks->{$disk}[3] eq "Used") {
 <a href="<%= ($addons->{'disk'}->{program}) %>?action=settings&disk=<%= $disk %>"><i class="fa fa-hdd-o fa-5x" style="color:green" title="<%= $disk %>"></i></a>&nbsp
  %}
- % if ( $disks->{$disk}[0] eq "Free") {
+ % if ( $disks->{$disk}[3] eq "Free") {
 <a href="<%= ($addons->{'disk'}->{program}) %>?action=settings&disk=<%= $disk %>"><i class="fa fa-hdd-o fa-5x" style="color:gray" title="<%= $disk %>"></i></a>&nbsp
  %}
 %}
