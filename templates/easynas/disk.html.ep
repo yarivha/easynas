@@ -24,8 +24,8 @@
                                                 <tr>
 						<th></th>
 						<th><%= ($TEXT->{'disk'}) %></th>
-						<th><%= ($TEXT->{'disk_size'}) %></th>
 						<th><%= ($TEXT->{'disk_type'}) %></th>
+						<th><%= ($TEXT->{'disk_size'}) %></th>
 						<th><%= ($TEXT->{'disk_status'}) %></th>
 						<th><%= ($TEXT->{'disk_health'}) %></th>
 						<th><%= ($TEXT->{'disk_actions'}) %></th>
@@ -34,7 +34,12 @@
                                             <tbody>
 						% foreach my $disk (keys (%$disks)) {
                                                 <tr>
-                                                    <td><a href="?action=settingsmenu&disk=<%= $disk %>"><i class="fa fa-database fa-2x" title="Settings"></i></a></td>
+						   %if ($disks->{$disk}[4] eq $TEXT->{'disk_good'})  {
+                                                    <td><a href="?action=settingsmenu&disk=<%= $disk %>"><i class="fa fa-hdd-o fa-2x" style="color:green" title="Settings"></i></a></td>
+						   %}
+						   %if ($disks->{$disk}[4] eq $TEXT->{'disk_bad'})  {
+                                                    <td><a href="?action=settingsmenu&disk=<%= $disk %>"><i class="fa fa-hdd-o fa-2x" style="color:red" title="Settings"></i></a></td>
+                                                   %}
 						    <td><a href="?action=settingsmenu&disk=<%= $disk %>"><%= $disk %></a></td>
 						    <td><%= $disks->{$disk}[1] %></td>
 						    <td><%= $disks->{$disk}[2] %></td>
