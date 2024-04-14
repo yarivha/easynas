@@ -15,7 +15,7 @@ sub view ($self) {
   my $action=$self->param('action'); 
   $msg="";
   $result=""; 
-  $self->stash(title => $TEXT{%addons{disk}->{description}},
+  $self->stash(title => $TEXT{$addons{disk}->{description}},
                 program => $addons{disk}->{program},
                 username => $username,
                 menu =>\@html_output,
@@ -23,6 +23,10 @@ sub view ($self) {
                 addons =>\%addons,
                 lang_list => \@lang_list);
 
+  ##### format #####
+  if ($action eq "format") {
+   disk_format($self);
+  }
 
   ##### menu ######
 
@@ -32,6 +36,23 @@ sub view ($self) {
   $self->stash(msg => $msg);
   $self->render(template => 'easynas/disk'); 
   print keys(%disks);
+}
+
+###### format #######
+sub disk_format($self) {
+
+ my $disk = $self->param("disk");
+ my $rc = system("/usr/bin/sudo /usr/sbin/wipefs -f -o 0x10040  $disk >/dev/null");
+ 
+ if ($rc) {
+  $result="success";
+  $msg=$TEXT{'disk_format_success'};
+ }
+ else {
+  $result="fail";
+  $msg=$TEXT{'disk_format_failed'};
+ }
+ return;
 }
 
 1;

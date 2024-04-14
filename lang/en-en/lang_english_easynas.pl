@@ -291,6 +291,8 @@ $TEXT{'disk_bad'} = "Bad";
 $TEXT{'disk_good'} = "Good";
 $TEXT{'disk_format'} = "Format";
 $TEXT{'disk_settings'} = "Settings";
+$TEXT{'disk_format_success'} = "Disk Formatted Succesfully";
+$TEXT{'disk_format_failed'} = "Disk Format Failed";
 
 $TEXT{'disk_performace'} = "Disk Performace";
 $TEXT{'testing'} = "Testing";

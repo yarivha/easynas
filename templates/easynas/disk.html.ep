@@ -46,7 +46,7 @@
 						    <td><%= $disks->{$disk}[3] %></td>
 						    <td><%= $disks->{$disk}[4] %></td>
 						    <td>
-						    <a onclick="return confirm('<%= ($TEXT->{'disk_format_are_u_sure'}) %>')" href=disk.pl?action=format&menu=none&disk=$disk><i class="fa fa-trash fa-2x" title="<%= ($TEXT->{'disk_format'}) %>"></i>&nbsp;</a>
+						    <a onclick="return confirm('<%= ($TEXT->{'disk_format_are_u_sure'}) %>')" href=?action=format&disk=<%= $disk %>><i class="fa fa-trash fa-2x" title="<%= ($TEXT->{'disk_format'}) %>"></i>&nbsp;</a>
 						    <a href="disk.pl?menu=settings&action=display&disk=<%= $disk %>"><i class="fa fa-sliders fa-2x" title="$TEXT{'settings'}"></i>&nbsp;</a>
 						</td></tr>
 					 	%}
