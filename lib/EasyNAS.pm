@@ -20,6 +20,7 @@ sub startup ($self) {
   $r->get('/')->to('dashboard#view');
   $r->any('/login')->to('login#view');
   $r->get('/logout')->to('login#logout');
+  $r->get('/firmware')->to('firmware#view');
   foreach my $item (keys %addons) {
 	  $r->get('/'.$addons{$item}{'program'})->to($addons{$item}{'program'}.'#view');
   }
