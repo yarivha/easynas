@@ -121,19 +121,12 @@ sub get_lang
 ########### check_env ###########
 sub check_env
 {
-  if  ( !-d $conf_dir) {
-   mkdir($conf_dir, 0755);
-  }
-
   if ( !-e $lang_conf) {
    open(FH, '>', $lang_conf) or die $!;
    print FH $lang_default;
    close(FH);
   }
 
- if ( !-d $log_dir) {
-  mkdir($log_dir, 0755);
- } 
 }
 
 ########### write_log ###########
