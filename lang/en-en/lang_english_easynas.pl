@@ -222,7 +222,13 @@ $TEXT{'shutdown_help'} = "You are about to Shutdown EasyNAS<br>
                          Press Shutdown when ready";
 
 #### Firmware ####
-$TEXT{'addons'} = "Addons";
+$TEXT{'firmware'} = "Firmware";
+$TEXT{'firmware_name'} = "Name"; 
+$TEXT{'firmware_desc'} = "Description"; 
+$TEXT{'firmware_new'} = "New Version";
+$TEXT{'firmware_current'} = "Current Version";
+$TEXT{'firmware_actions'} = "Actions";
+
 $TEXT{'addon_installed'} = "Addon installed successfully";
 $TEXT{'addon_not_installed'} = "Error installing addon";
 $TEXT{'addon_deleted'} = "Addon deleted successfully";

@@ -1,6 +1,7 @@
 package EasyNAS::Controller::Firmware;
 use lib '/easynas/lib/EasyNAS/Controller';
 use Mojo::Base 'Mojolicious::Controller', -signatures;
+use XML::LibXML;
 use easynas;
 
 
@@ -16,8 +17,31 @@ sub view ($self) {
   my $action=$self->param('action'); 
   $msg="";
   $result="";
+  my $dom="";
+  my $updates="/etc/easynas/easynas.updates";
+  my $update;
+  my $package;
+  my $desc;
+  my $new_ver;
+  my $old_ver;
+  if (-e $updates) {
+   $dom = XML::LibXML->load_xml(location => $updates);
+   foreach $update ($dom->findnodes('/stream/update-status/update-list/update')) {
+    $package=$update->findvalue('./@name');
+    $desc=$update->findvalue('./summary');
+    $new_ver=$update->findvalue('./@edition');
+    $old_ver=$update->findvalue('./@edition-old');
+
+   }
+  }
+  else {
+   $result="fail";
+   $msg=$TEXT{'firmware_latest'};
+  }
+  
+
   $self->render(template => 'easynas/firmware', 
-	        title => $TEXT{%addons{firmware}->{description}},
+	        title => $TEXT{$addons{firmware}->{description}},
                 program => $addons{firmware}->{program},
                 username => $username,
                 menu =>\@html_output,
