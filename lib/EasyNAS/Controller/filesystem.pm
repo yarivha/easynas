@@ -17,7 +17,7 @@ sub view($self) {
     my $action=$self->param('action'); 
     $msg="";
     $result="";
-    $self->stash(title => $TEXT{%addons{filesystem}->{description}},
+    $self->stash(title => $TEXT{$addons{filesystem}->{description}},
                 program => $addons{filesystem}->{program},
                 username => $username,
                 menu =>\@html_output,

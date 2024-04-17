@@ -37,7 +37,7 @@ sub view ($self) {
   }  
 
   $self->render(template => 'easynas/lxc', 
-	        title => $TEXT{%addons{lxc}->{description}},
+	        title => $TEXT{$addons{lxc}->{description}},
                 program => $addons{lxc}->{program},
                 username => $username,
                 menu =>\@html_output,

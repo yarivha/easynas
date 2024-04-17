@@ -17,8 +17,8 @@ sub view ($self) {
   $msg="";
   $result="";
   $self->render(template => 'easynas/volume', 
-	        title => $TEXT{%addons{filesystem}->{description}},
-                program => $addons{filesystem}->{program},
+	        title => $TEXT{$addons{volume}->{description}},
+                program => $addons{volume}->{program},
                 username => $username,
                 menu =>\@html_output,
                 TEXT =>\%TEXT,
