@@ -32,14 +32,15 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-						    <tr>
-						    <td>fghfgh</td>
-						    <td>fghfgh</td>
-						    <td></td>
-						    <td></td>
-						    <td></td>
-						    <td></td>
-						    </tr>
+					    % foreach my $update (keys (%$updates)) {
+                                                <tr>
+						 <td><%= $updates->{$update}[1] %></td>
+						 <td><%= $updates->{$update}[2] %></td>
+						 <td><%= $updates->{$update}[3] %></td>
+						 <td><%= $updates->{$update}[4] %></td>
+						 <td></td>
+						</tr>
+					    %}
                                             </tbody>
                                         </table>
                                     </div>

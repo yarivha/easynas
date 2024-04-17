@@ -17,8 +17,21 @@ sub view ($self) {
   my $action=$self->param('action'); 
   $msg="";
   $result="";
+  $self->stash(title => $TEXT{$addons{firmware}->{description}},
+                program => $addons{firmware}->{program},
+                username => $username,
+                menu =>\@html_output,
+                TEXT =>\%TEXT,
+                addons =>\%addons,
+                lang_list => \@lang_list);
+
+
+
+
+##### Menu ######
   my $dom="";
   my $updates="/etc/easynas/easynas.updates";
+  my %updates;
   my $update;
   my $package;
   my $desc;
@@ -31,26 +44,18 @@ sub view ($self) {
     $desc=$update->findvalue('./summary');
     $new_ver=$update->findvalue('./@edition');
     $old_ver=$update->findvalue('./@edition-old');
-
+    $updates{$package}=[$package,$desc,$new_ver,$old_ver];
    }
   }
   else {
    $result="fail";
    $msg=$TEXT{'firmware_latest'};
   }
-  
-
-  $self->render(template => 'easynas/firmware', 
-	        title => $TEXT{$addons{firmware}->{description}},
-                program => $addons{firmware}->{program},
-                username => $username,
-                menu =>\@html_output,
-                TEXT =>\%TEXT,
-                addons =>\%addons,
-                lang_list => \@lang_list,
-                result => $result,
-                msg => $msg
-		);
+ 
+  $self->stash(result => $result,
+               msg => $msg,
+	       updates => \%updates);	
+  $self->render(template => 'easynas/firmware'); 
 }
 
 1;
