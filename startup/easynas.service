@@ -1,0 +1,13 @@
+[Unit]
+Description=EasyNAS application
+After=network.target
+
+[Service]
+Type=simple
+User=admin
+ExecStart=/easynas/script/easy_waf daemon -m production -l http://*:1443
+ExecStartPre=echo "Starting EasyNAS..." >> /var/log/easynas/easynas.log
+ExecStopPost=echo "Stoping EasyNAS..." >> /var/log/easynas/easynas.log
+
+[Install]
+WantedBy=multi-user.target
