@@ -66,10 +66,10 @@ sub view($self) {
           $raid{'raid10'}='RAID10';
         }
 	$result="success";
-        $self->stash(freedisks => \@free_disks);
-        $self->render(template => 'easynas/filesystem_create');
-        return;
-      }	
+      }
+       $self->stash(freedisks => \@free_disks);
+       $self->render(template => 'easynas/filesystem_create');
+       return;
     }
 
 #--------- settingsmenu ---------

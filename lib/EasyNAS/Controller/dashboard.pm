@@ -14,8 +14,7 @@ sub view ($self) {
   my %disks  = disk_info();
   my %vol    = vol_info();
   my %users  = users_info();
-  
-  write_log("Dashboard",$username,"INFO","access Dashboard menu");
+
   $self->render(template => 'easynas/dashboard', 
 		title => $TEXT{'dashboard'},
 		program => $addons{dashboard}->{program},

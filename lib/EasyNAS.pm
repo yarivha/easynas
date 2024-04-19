@@ -12,6 +12,7 @@ sub startup ($self) {
   # Configure the application
   $self->secrets($config->{secrets});
 
+
   # Router
   my $r = $self->routes;
 
