@@ -5,7 +5,7 @@ After=network.target
 [Service]
 Type=simple
 User=admin
-ExecStart=/easynas/script/easy_waf daemon -m production -l http://*:1443
+ExecStart=/easynas/script/easy_waf daemon -m production -l https://*:1443&cert=/etc/easynas/easynas.pem&key=/etc/easynas/easynas.pem
 ExecStartPre=echo "Starting EasyNAS..." >> /var/log/easynas/easynas.log
 ExecStopPost=echo "Stoping EasyNAS..." >> /var/log/easynas/easynas.log
 
