@@ -27,7 +27,7 @@ use File::Path qw( make_path );
 use Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw();
-our @EXPORT    = qw( %TEXT %addons @html_output @lang_list get_mount_dir get_conf_cron get_categories  
+our @EXPORT    = qw( %TEXT %addons @html_output @lang_list get_mount_dir get_conf_cron get_updates  get_categories  
 		     write_log fs_info vol_info users_info disk_info);
 
 ############# Declarations #####################
@@ -52,6 +52,7 @@ my $conf_cron="/etc/cron.d/easynas.cron";
 my $conf_roles=$conf_dir."/easynas.roles";
 my $conf_cert  = $conf_dir."/easynas.pem";
 my $conf_hosts = "/etc/hosts";
+my $conf_updates = $conf_dir."/easynas.updates";
 my $log_file = $log_dir."/easynas.log";
 
 ############ Settings ################
@@ -93,6 +94,14 @@ sub get_conf_cron
 }
 
 
+
+############# get_updates ###############
+sub get_updates
+{
+ return($conf_updates)
+}
+
+
 ######### get_lang #########
 sub get_lang
 {
@@ -121,11 +130,9 @@ sub get_lang
 ########### check_env ###########
 sub check_env
 {
-  if ( !-e $lang_conf) {
-   open(FH, '>', $lang_conf) or die $!;
-   print FH $lang_default;
-   close(FH);
-  }
+
+
+
 
 }
 
@@ -134,7 +141,8 @@ sub write_log
 {
  my $addon=$_[0];
  my $type=$_[1];
- my $message=$_[2];
+ my $username=$_[2];
+ my $message=$_[3];
  my $timestamp=localtime();
  my $FH;
  unless(-e $log_file) {
@@ -143,7 +151,7 @@ sub write_log
     `sudo chown easynas.easynas $log_file`;
  }
  open($FH, '>>', $log_file) or die $!;
- print $FH $timestamp." "."[$TEXT{$addons{$addon}->{description}}]"." ".$type." ".get_username()." ".$message."\n";
+ print $FH $timestamp." "."[$addon]"." ".$type." ".$username." ".$message."\n";
  close $FH;
 }
 

@@ -30,7 +30,7 @@ sub view ($self) {
 
 ##### Menu ######
   my $dom="";
-  my $updates="/etc/easynas/easynas.updates";
+  my $updates=get_updates();
   my %updates;
   my $update;
   my $package;
@@ -51,7 +51,6 @@ sub view ($self) {
    $result="fail";
    $msg=$TEXT{'firmware_latest'};
   }
- 
   $self->stash(result => $result,
                msg => $msg,
 	       updates => \%updates);	
