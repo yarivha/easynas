@@ -25,7 +25,10 @@ sub view ($self) {
                 addons =>\%addons,
                 lang_list => \@lang_list);
 
-
+#### Update #####
+ if ($action eq "update") {
+  update($self);
+ }  
 
 
 ##### Menu ######
@@ -58,4 +61,21 @@ sub view ($self) {
   $self->render(template => 'easynas/firmware'); 
 }
 
+##### update #####
+sub update($self) {
+ my $package=$self->param('package');
+ my $rc = system("/usr/bin/sudo /usr/bin/zypper -n update $package > /dev/null");
+ if ($rc) {
+  $result="fail";
+  $msg=$TEXT{'firmware_update_failed'};
+ }
+ else {
+  $result="success";
+  $msg=$TEXT{'firmware_update_success'};
+ }
+ $rc=system("/usr/bin/sudo /usr/bin/zypper --quiet -x lu -a --repo EasyNAS  | /usr/bin/sudo /usr/bin/tee /etc/easynas/easynas.updates");
+ return;
+}
+
+ 
 1;
