@@ -228,6 +228,10 @@ $TEXT{'firmware_desc'} = "Description";
 $TEXT{'firmware_new'} = "New Version";
 $TEXT{'firmware_current'} = "Current Version";
 $TEXT{'firmware_actions'} = "Actions";
+$TEXT{'firmware_update_r_u_sure'} = "Are you sure you want to update ?";
+$TEXT{'firmware_update'} = "Update";
+$TEXT{'firmware_update_available'} = "New updates available";
+$TEXT{'firmware_here'} = " click here to update";
 
 $TEXT{'addon_installed'} = "Addon installed successfully";
 $TEXT{'addon_not_installed'} = "Error installing addon";
@@ -236,7 +240,6 @@ $TEXT{'addon_not_deleted'} = "Error deleting Addon";
 $TEXT{'addon_updated'} = "Addon updated successfully";
 $TEXT{'addon_not_updated'} = "Error updating addon";
 $TEXT{'firmware_upgrade'} = "Firmware Upgrade";
-$TEXT{'firmware'} = "Firmware";
 $TEXT{'lang'} = "Language";
 $TEXT{'other_apps'} = "Other Apps";
 $TEXT{'component'} = "Component";
@@ -274,8 +277,6 @@ $TEXT{'install_addon?'} = "Install Addon ?";
 $TEXT{'update_addon?'} = "Update Addon ?";
 $TEXT{'delete_addon?'} = "Delete Addon ?";
 $TEXT{'update_all'} = "Update All";
-$TEXT{'firmware_update_available'} = "New updates available";
-$TEXT{'firmware_here'} = " click here to update";
 $TEXT{'firmware_refreshed'} = "Repositories refreshed";
 
 
