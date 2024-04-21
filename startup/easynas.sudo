@@ -1,3 +1,2 @@
-admin ALL = NOPASSWD: ALL
 easynas ALL = NOPASSWD: ALL
 
