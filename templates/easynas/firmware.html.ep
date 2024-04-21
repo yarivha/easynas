@@ -45,6 +45,8 @@
                                     </div>
 				</div>
 			</div>
+			<BR><BR><a href="?action=refresh">[<%= ($TEXT->{'firmware_refresh'}) %>]</a>
+
 
 
 

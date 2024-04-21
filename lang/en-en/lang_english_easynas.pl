@@ -232,6 +232,9 @@ $TEXT{'firmware_update_r_u_sure'} = "Are you sure you want to update ?";
 $TEXT{'firmware_update'} = "Update";
 $TEXT{'firmware_update_available'} = "New updates available";
 $TEXT{'firmware_here'} = " click here to update";
+$TEXT{'firmware_refresh'} = "Refresh";
+$TEXT{'firmware_refreshed'} = "Repositories refreshed";
+
 
 $TEXT{'addon_installed'} = "Addon installed successfully";
 $TEXT{'addon_not_installed'} = "Error installing addon";
@@ -278,7 +281,7 @@ $TEXT{'update_addon?'} = "Update Addon ?";
 $TEXT{'delete_addon?'} = "Delete Addon ?";
 $TEXT{'update_all'} = "Update All";
 $TEXT{'firmware_refreshed'} = "Repositories refreshed";
-
+$TEXT{'firmware_not_refreshed'} = "Error Refreshing Repositories";
 
 #### Disk ####
 $TEXT{'disk_manager'} = "Disk Manager";

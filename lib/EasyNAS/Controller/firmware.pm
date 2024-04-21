@@ -30,6 +30,11 @@ sub view ($self) {
   update($self);
  }  
 
+#### Refresh #####
+ if ($action eq "refresh") {
+  refresh($self);
+ }
+
 
 ##### Menu ######
   my $dom="";
@@ -77,5 +82,20 @@ sub update($self) {
  return;
 }
 
- 
+#####  Refresh #####
+sub refresh($self) {
+ my $rc=system("/usr/bin/sudo /usr/bin/zypper --quiet -x lu -a --repo EasyNAS  | /usr/bin/sudo /usr/bin/tee /etc/easynas/easynas.updates");
+ if ($rc) {
+  $result="fail";
+  $msg=$TEXT{'firmware_not_refreshed'};
+ }
+ else {
+  $result="success";
+  $msg=$TEXT{'firmware_refreshed'};
+ }
+  return;
+} 
+
+
+
 1;
