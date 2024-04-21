@@ -84,7 +84,8 @@ sub update($self) {
 
 #####  Refresh #####
 sub refresh($self) {
- my $rc=system("/usr/bin/sudo /usr/bin/zypper --quiet -x lu -a --repo EasyNAS  | /usr/bin/sudo /usr/bin/tee /etc/easynas/easynas.updates");
+ my $rc;
+ $rc=system("/usr/bin/sudo /usr/bin/zypper --quiet -x lu -a --repo EasyNAS  | /usr/bin/sudo /usr/bin/tee /etc/easynas/easynas.updates");
  if ($rc) {
   $result="fail";
   $msg=$TEXT{'firmware_not_refreshed'};
