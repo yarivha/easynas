@@ -57,7 +57,7 @@ sub view ($self) {
   }
   else {
    $result="fail";
-   $msg=$TEXT{'firmware_latest'};
+   $msg=$TEXT{'firmware_noupdate'};
   }
  
   $self->stash(result => $result,

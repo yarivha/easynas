@@ -234,7 +234,7 @@ $TEXT{'firmware_update_available'} = "New updates available";
 $TEXT{'firmware_here'} = " click here to update";
 $TEXT{'firmware_refresh'} = "Refresh";
 $TEXT{'firmware_refreshed'} = "Repositories refreshed";
-
+$TEXT{'firmware_noupdate'} = "No Updates Available";
 
 $TEXT{'addon_installed'} = "Addon installed successfully";
 $TEXT{'addon_not_installed'} = "Error installing addon";
