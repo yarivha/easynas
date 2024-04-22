@@ -26,12 +26,12 @@ sub view ($self) {
                 lang_list => \@lang_list);
 
 #### Update #####
- if ($action eq "update") {
+ if (defined $action && $action eq "update") {
   update($self);
  }  
 
 #### Refresh #####
- if ($action eq "refresh") {
+ if (defined $action && $action eq "refresh") {
   refresh($self);
  }
 

@@ -26,7 +26,7 @@ sub view($self) {
                 lang_list => \@lang_list);
 
 #--------- Create Menu ----------
-    if ($action eq "createfsmenu") {
+    if (defined $action && $action eq "createfsmenu") {
       my %disks = disk_info();
       my $size;
       my $pre_size;
@@ -73,7 +73,7 @@ sub view($self) {
     }
 
 #--------- settingsmenu ---------
-    if ($action eq "settingsmenu") {
+    if (defined $action && $action eq "settingsmenu") {
       my $fs=$self->param("fs");
       #  my $uuid=$self->param("uuid");
       #my $raid = raid_status($fs);
@@ -95,24 +95,24 @@ sub view($self) {
 
 
 #--------- createfs ----------
-    if ($action eq "createfs") {
+    if (defined $action && $action eq "createfs") {
       &createfs($self);
     }
 
 
 #-------- Unmount ---------
-    if ($action eq "unmoun") { 
+    if (defined $action && $action eq "unmoun") { 
 	&unmount($self);
     }
 
 
 #------- Mount -------
-   if ($action eq "mount") {
+   if (defined $action && $action eq "mount") {
         &mount($self);
     }
 
 #-------ChangeName -------
-   if ($action eq "changename")  {
+   if (defined $action && $action eq "changename")  {
      &changename($self);
    }
 

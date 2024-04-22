@@ -24,7 +24,7 @@ sub view ($self) {
                 lang_list => \@lang_list);
 
   ##### format #####
-  if ($action eq "format") {
+  if (defined $action && $action eq "format") {
    disk_format($self);
   }
 
