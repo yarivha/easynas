@@ -1,7 +1,7 @@
 <addon>
  <name>users</name>
  <description>users_manager</description>
- <version>0.7.0</version>
+ <version>1.2.0</version>
  <author>Yariv Hakim</author>
  <type>realm</type>
  <icon>fa-user</icon>

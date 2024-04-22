@@ -32,24 +32,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-						% foreach my $disk (keys (%$disks)) {
                                                 <tr>
-						   %if ($disks->{$disk}[4] eq $TEXT->{'disk_good'})  {
-                                                    <td><a href="?action=settingsmenu&disk=<%= $disk %>"><i class="fa fa-hdd-o fa-2x" style="color:green" title="Settings"></i></a></td>
-						   %}
-						   %if ($disks->{$disk}[4] eq $TEXT->{'disk_bad'})  {
-                                                    <td><a href="?action=settingsmenu&disk=<%= $disk %>"><i class="fa fa-hdd-o fa-2x" style="color:red" title="Settings"></i></a></td>
-                                                   %}
-						    <td><a href="?action=settingsmenu&disk=<%= $disk %>"><%= $disk %></a></td>
-						    <td><%= $disks->{$disk}[1] %></td>
-						    <td><%= $disks->{$disk}[2] %></td>
-						    <td><%= $disks->{$disk}[3] %></td>
-						    <td><%= $disks->{$disk}[4] %></td>
-						    <td>
-						    <a onclick="return confirm('<%= ($TEXT->{'disk_format_are_u_sure'}) %>')" href=?action=format&disk=<%= $disk %>><i class="fa fa-trash fa-2x" title="<%= ($TEXT->{'disk_format'}) %>"></i>&nbsp;</a>
-						    <a href="disk.pl?menu=settings&action=display&disk=<%= $disk %>"><i class="fa fa-sliders fa-2x" title="$TEXT{'settings'}"></i>&nbsp;</a>
-						</td></tr>
-					 	%}
+						    <td></td>
+						    <td></td>
+						    <td></td>
+						    <td></td>
+						    <td></td>
+						    <td></td>
+						</tr>
                                             </tbody>
                                         </table>
                                     </div>
