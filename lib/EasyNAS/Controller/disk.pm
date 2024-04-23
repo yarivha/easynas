@@ -35,7 +35,6 @@ sub view ($self) {
   $self->stash(result => $result);
   $self->stash(msg => $msg);
   $self->render(template => 'easynas/disk'); 
-  print keys(%disks);
 }
 
 ###### format #######
