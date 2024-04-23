@@ -1,5 +1,5 @@
 package EasyNAS::Controller::Users;
-use lib '.';
+use lib '/easynas/lib/EasyNAS/Controller';
 use Mojo::Base 'Mojolicious::Controller', -signatures;
 use easynas;
 
@@ -16,17 +16,23 @@ sub view ($self) {
   my $action=$self->param('action'); 
   $msg="";
   $result="";
-  $self->render(template => 'easynas/users', 
-	        title => $TEXT{$addons{users}->{description}},
+  $self->stash(title => $TEXT{$addons{users}->{description}},
                 program => $addons{users}->{program},
                 username => $username,
                 menu =>\@html_output,
                 TEXT =>\%TEXT,
                 addons =>\%addons,
-                lang_list => \@lang_list,
-                result => $result,
-                msg => $msg
-		);
+                lang_list => \@lang_list);
+
+
+  ##### menu ######
+
+  my %users=users_info();
+  $self->stash(users =>\%users);
+  $self->stash(result => $result);
+  $self->stash(msg => $msg);
+  $self->render(template => 'easynas/users'); 
+
 }
 
 1;

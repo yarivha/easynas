@@ -23,28 +23,28 @@
                                             <thead>
                                                 <tr>
 						<th></th>
-						<th><%= ($TEXT->{'disk'}) %></th>
-						<th><%= ($TEXT->{'disk_type'}) %></th>
-						<th><%= ($TEXT->{'disk_size'}) %></th>
-						<th><%= ($TEXT->{'disk_status'}) %></th>
-						<th><%= ($TEXT->{'disk_health'}) %></th>
-						<th><%= ($TEXT->{'disk_actions'}) %></th>
+						<th><%= ($TEXT->{'users_id'}) %></th>
+						<th><%= ($TEXT->{'users_name'}) %></th>
+						<th><%= ($TEXT->{'users_desc'}) %></th>
+						<th><%= ($TEXT->{'users_groups'}) %></th>
+						<th><%= ($TEXT->{'users_actions'}) %></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+						% foreach my $user (keys (%$users)) {
                                                 <tr>
 						    <td></td>
-						    <td></td>
-						    <td></td>
-						    <td></td>
-						    <td></td>
+						    <td><%= $users->{$user}[0] %></td>
+						    <td><%= $users->{$user}[1] %></td>
+						    <td><%= $users->{$user}[2] %></td>
 						    <td></td>
 						</tr>
+						%}
                                             </tbody>
                                         </table>
                                     </div>
 				</div>
 			</div>
 
-
+			<br><br><a href="?action=create">[<%= ($TEXT->{'users_create'}) %>]</a>
 

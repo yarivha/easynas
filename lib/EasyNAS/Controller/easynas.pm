@@ -501,7 +501,7 @@ sub users_info
         $groups = `/usr/bin/sudo /usr/bin/id -Gn $username`;
         if (($uid > 999 ) && ($uid < 6500))
         {
-            $users{$username}=[$uid,$groups];
+            $users{$username}=[$uid,$username,$groups];
         }
     }
    return(%users);
