@@ -52,6 +52,7 @@ $TEXT{'storage'} = "Storage";
 $TEXT{'system'} = "System";
 
 ######  Dashboard ######
+$TEXT{'dashboard'} = "Dashboard";
 $TEXT{'dashboard_view_details'} = "View Details";
 $TEXT{'dashboard_drives'} = "Drives";
 $TEXT{'dashboard_filesystems'} = "File Systems";
@@ -116,7 +117,6 @@ $TEXT{'disable'} = "Disable";
 
 #### User Profile ####
 $TEXT{'user_profile'} = "User Profile";
-
 
 
 #### Backup ####
@@ -191,7 +191,6 @@ $TEXT{'network_restart'} = "Restart EasyNAS server for the changes to take place
 #### Realm ####
 $TEXT{'computers'} = "Computers";
 $TEXT{'computers_manager'} = "Computers Manager";
-
 
 
 #### Monitor ####
@@ -454,9 +453,24 @@ $TEXT{'no_vol'} = "Volume was not selected";
 
 #### Users ####
 $TEXT{'users_manager'} = "Users Manager";
-$TEXT{'create_user'} = "Create User";
-$TEXT{'passwords_do_not_match'} = "Passwords do not match.";
-$TEXT{'admin_account'} = "Administration Account";
+$TEXT{'users_create'} = "Create User";
+$TEXT{'users_id'} = "ID";
+$TEXT{'users_name'} = "Name";
+$TEXT{'users_desc'} = "Description";
+$TEXT{'users_groups'} = "Groups";
+$TEXT{'users_actions'} = "Actions";
+$TEXT{'users_password'} = "Password";
+$TEXT{'users_password_retype'} = "Password Retype";
+$TEXT{'users_created'} = "User created successfully";
+$TEXT{'users_deleted'} = "User deleted successfully";
+$TEXT{'users_add'} = "Add User";
+$TEXT{'users_reset'} = "Reset";
+
+
+
+
+$TEXT{'users_passwords_do_not_match'} = "Passwords do not match.";
+$TEXT{'users_admin_account'} = "Administration Account";
 $TEXT{'all_groups'} = "All Groups";
 $TEXT{'failed_to_add_user'} = "Failed to add user";
 $TEXT{'failed_to_change_password'} = "Failed to change password";
@@ -481,8 +495,6 @@ $TEXT{'desc'} = "Description";
 $TEXT{'uid'} = "UID";
 $TEXT{'group'} = "Group";
 $TEXT{'groups'} = "Groups";
-$TEXT{'password'} = "Password";
-$TEXT{'password_again'} = "Password Again";
 $TEXT{'easynas_admin'} = "EasyNAS Admin";
 $TEXT{'delete_user?'} = "Are you sure you want to delete the user ?";
 $TEXT{'user_settings'} = "USER SETTINGS";

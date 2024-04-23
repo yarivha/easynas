@@ -24,6 +24,10 @@ sub view ($self) {
                 addons =>\%addons,
                 lang_list => \@lang_list);
 
+  if ($action eq "createusermenu") {
+   $self->render(template => 'easynas/users_create');
+   return;
+  }
 
   ##### menu ######
 

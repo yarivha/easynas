@@ -37,6 +37,7 @@
 						    <td><%= $users->{$user}[0] %></td>
 						    <td><%= $users->{$user}[1] %></td>
 						    <td><%= $users->{$user}[2] %></td>
+						    <td><%= $users->{$user}[3] %></td>
 						    <td></td>
 						</tr>
 						%}
@@ -46,5 +47,5 @@
 				</div>
 			</div>
 
-			<br><br><a href="?action=create">[<%= ($TEXT->{'users_create'}) %>]</a>
+			<br><br><a href="?action=createusermenu">[<%= ($TEXT->{'users_create'}) %>]</a>
 

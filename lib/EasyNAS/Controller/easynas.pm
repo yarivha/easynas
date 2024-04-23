@@ -28,7 +28,7 @@ use Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw();
 our @EXPORT    = qw( %TEXT %addons @html_output @lang_list get_mount_dir get_conf_cron get_categories  
-		     write_log fs_info vol_info users_info disk_info);
+		     write_log fs_info vol_info users_info groups_info  disk_info);
 
 ############# Declarations #####################
 my $authentication_enable = 1;
@@ -493,18 +493,38 @@ sub users_info
   my @userlist = `/usr/bin/cat /etc/passwd`;
   my $username;
   my $groups;
+  my $desc;
   my %users;
   my $uid;
   foreach (@userlist)
     {
-        ($username,undef,$uid,undef,undef,undef,undef) = split(/:/,$_);
+        ($username,undef,$uid,undef,$desc,undef,undef) = split(/:/,$_);
         $groups = `/usr/bin/sudo /usr/bin/id -Gn $username`;
         if (($uid > 999 ) && ($uid < 6500))
         {
-            $users{$username}=[$uid,$username,$groups];
+            $users{$username}=[$uid,$username,$desc,$groups];
         }
     }
    return(%users);
+}
+
+
+######### groups_info ##########
+sub groups_info
+{
+    my @grouplist = `/usr/bin/cat /etc/group` ;
+    my %groups;
+    my $groupname;
+    my $gid;
+    foreach (@grouplist)
+    {
+        ($groupname,undef,$gid) = split(/:/,$_);
+        if (($gid eq 100) || ($gid > 999 ) && ($gid < 2000) && ($groupname ne 'easynas'))
+        {
+           $groups{$groupname}=[$gid,$groupname];
+        }
+    }
+  return(%groups);
 }
 
 
