@@ -38,7 +38,11 @@
 						    <td><%= $users->{$user}[1] %></td>
 						    <td><%= $users->{$user}[2] %></td>
 						    <td><%= $users->{$user}[3] %></td>
-						    <td></td>
+						    <td>
+						     <a href=?action=password&username=<%= $users->{$user}[1] %>><i class="fa fa-key fa-2x" title="<%= ($TEXT->{'users_password'}) %>"></i>&nbsp;</a>
+						     <a href=?action=settings&username=$<%= $users->{$user}[1] %>><i class="fa fa-sliders fa-2x" title="<%= ($TEXT->{'users_settings'}) %>"></i>&nbsp;</a>
+						     <a onclick="return confirm('<%= ($TEXT->{'users_delete?'}) %>')" href=?action=deleteuser&username=<%= $users->{$user}[1] %>><i class="fa fa-trash fa-2x" title="<%= ($TEXT->{'users_delete'}) %>"></i></a>	
+						     </td>
 						</tr>
 						%}
                                             </tbody>

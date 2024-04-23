@@ -25,6 +25,8 @@ sub view ($self) {
                 lang_list => \@lang_list);
 
   if ($action eq "createusermenu") {
+   my %groups=groups_info();
+   $self->stash(groups => \%groups);
    $self->render(template => 'easynas/users_create');
    return;
   }
