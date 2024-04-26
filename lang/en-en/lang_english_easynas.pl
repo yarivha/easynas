@@ -465,11 +465,13 @@ $TEXT{'users_created'} = "User created successfully";
 $TEXT{'users_deleted'} = "User deleted successfully";
 $TEXT{'users_add'} = "Add User";
 $TEXT{'users_reset'} = "Reset";
+$TEXT{'users_delete'} = "Delete";
+$TEXT{'users_settings'} = "Settings";
+$TEXT{'users_passwords_do_no_match'}="Passwords do not match";
+$TEXT{'users_password_must_exist'} = "Password must exist";
+$TEXT{'users_user_must_exist'} = "User must exist";
 
 
-
-
-$TEXT{'users_passwords_do_not_match'} = "Passwords do not match.";
 $TEXT{'users_admin_account'} = "Administration Account";
 $TEXT{'all_groups'} = "All Groups";
 $TEXT{'failed_to_add_user'} = "Failed to add user";
