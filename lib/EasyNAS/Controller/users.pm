@@ -24,12 +24,23 @@ sub view ($self) {
                 addons =>\%addons,
                 lang_list => \@lang_list);
 
-  ##### createuser #####
+##### createuser #####
   if ($action eq "createuser") {
    createuser($self);
   }
 
-  ##### createusermenu #####
+##### deleteuser #####
+  if ($action eq "deleteuser") {
+   deleteuser($self);
+  }
+
+##### changepassword #####
+  if ($action eq "changepassword") {
+   changepassword($self);
+  }
+
+
+##### createusermenu #####
   if ($action eq "createusermenu") {
    my %groups=groups_info();
    $self->stash(groups => \%groups);
@@ -37,7 +48,17 @@ sub view ($self) {
    return;
   }
 
-  ##### menu ######
+
+##### passwordmenu #####
+  if ($action eq "passwordmenu") {
+   my $user=$self->param("username");
+   $self->stash(username => $user);
+   $self->render(template => 'easynas/users_password');
+   return;
+  }
+
+
+##### menu ######
 
   my %users=users_info();
   $self->stash(users =>\%users);
@@ -117,5 +138,85 @@ sub createuser($self) {
     $msg=$TEXT{'users_created'};
     return; 
 }
+
+
+
+###### deleteuser #######
+sub deleteuser($self) {
+  my $username = $self->param("username");
+  my $rc;
+    
+  if( -f "/usr/bin/smbpasswd" )
+   {
+    $rc = system("/usr/bin/sudo /usr/bin/smbpasswd -x $username >/dev/null");
+    if ($rc ne 0)
+    {
+     $result="fail";
+     $msg=$TEXT{'users_failed_to_delete_samba_user'};
+     return;    
+    }
+   }
+
+    $rc = system("/usr/bin/sudo /usr/sbin/userdel -f $username");
+    if ($rc ne 0)
+    {
+     $result="fail";
+     $msg=$TEXT{'users_failed_to_delete_user'};
+     return;  
+    }
+    else
+    {
+     $result="success";
+     $msg=$TEXT{'users_deleted'};
+     return;  
+    }
+}
+
+
+##### changepassword #####
+sub changepassword($self) {
+ my $name=$self->param("username");
+ my $password1=$self->param("password1");
+ my $password2=$self->param("password2");
+ my $rc;
+
+ if (!$password1)
+    {
+     $result="fail";
+     $msg=$TEXT{'users_password_must_exist'};
+     return;
+    }
+ if ($password1 ne $password2)
+    {
+     $result="fail";
+     $msg=$TEXT{'users_passwords_do_no_match'};
+     return;
+    }
+ $rc = system("/usr/bin/echo $name:$password1 | /usr/bin/sudo /usr/sbin/chpasswd");
+    if ($rc ne 0)
+    {
+        $result="fail";
+        $msg=$TEXT{'users_failed_to_change_password'};
+        return;
+    }
+
+ if( -f "/usr/bin/smbpasswd" )
+    {
+      $rc = system("/usr/bin/echo -e \"$password1\n$password1\" | /usr/bin/sudo /usr/bin/smbpasswd -s -a $name >/dev/null");
+      if ($rc ne 0)
+         {
+          $result="fail";
+          $msg=$TEXT{'users_failed_to_add_samba_user'};
+          return;
+         }
+    }
+
+
+    $result="success";
+    $msg=$TEXT{'users_password_changed'};
+    return;
+}
+
+
 
 1;

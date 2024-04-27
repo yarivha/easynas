@@ -455,7 +455,7 @@ $TEXT{'no_vol'} = "Volume was not selected";
 $TEXT{'users_manager'} = "Users Manager";
 $TEXT{'users_create'} = "Create User";
 $TEXT{'users_id'} = "ID";
-$TEXT{'users_name'} = "Name";
+$TEXT{'users_name'} = "User Name";
 $TEXT{'users_desc'} = "Description";
 $TEXT{'users_groups'} = "Groups";
 $TEXT{'users_actions'} = "Actions";
@@ -465,18 +465,23 @@ $TEXT{'users_created'} = "User created successfully";
 $TEXT{'users_deleted'} = "User deleted successfully";
 $TEXT{'users_add'} = "Add User";
 $TEXT{'users_reset'} = "Reset";
-$TEXT{'users_delete'} = "Delete";
+$TEXT{'users_delete'} = "Delete User";
 $TEXT{'users_settings'} = "Settings";
+$TEXT{'users_change_password'} = "Change Password";
 $TEXT{'users_passwords_do_no_match'}="Passwords do not match";
 $TEXT{'users_password_must_exist'} = "Password must exist";
 $TEXT{'users_user_must_exist'} = "User must exist";
-
+$TEXT{'users_failed_to_add_user'} = "Failed to add user";
+$TEXT{'users_failed_to_add_samba_user'} = "Failed to add Samba User";
+$TEXT{'users_failed_to_add_samba_user'} = "Failed to add Samba User";
+$TEXT{'users_failed_to_delete_user'} = "Failed to delete user";
+$TEXT{'users_delete?'} = "Are you sure you want to delete the user ?";
+$TEXT{'users_change_password'} = "Change Password";
+$TEXT{'users_save_password'} = "Save Password";
+$TEXT{'users_password_changed'} = "Password Changed Succesfully";
 
 $TEXT{'users_admin_account'} = "Administration Account";
 $TEXT{'all_groups'} = "All Groups";
-$TEXT{'failed_to_add_user'} = "Failed to add user";
-$TEXT{'failed_to_change_password'} = "Failed to change password";
-$TEXT{'failed_to_add_samba_user'} = "Failed to add Samba User";
 $TEXT{'delete_user'} = "Delete User";
 $TEXT{'user_admin_cant_be_delete'} = "User admin can't be deleted.";
 $TEXT{'user_admin_cant_be_changed'} = "User admin can't be changed.";
@@ -500,8 +505,6 @@ $TEXT{'groups'} = "Groups";
 $TEXT{'easynas_admin'} = "EasyNAS Admin";
 $TEXT{'delete_user?'} = "Are you sure you want to delete the user ?";
 $TEXT{'user_settings'} = "USER SETTINGS";
-$TEXT{'user_created'} = "User created successfully";
-$TEXT{'user_deleted'} = "User deleted successfully"; 
 
 
 
