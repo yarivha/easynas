@@ -197,6 +197,30 @@
 
         </div>
 
+	<div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+           <h4 class="modal-title" id="myModalLabel"><%= ($TEXT->{'about'}) %></h4>
+        </div>
+        <div class="modal-body">
+	 <h1><center>EasyNAS</center></h1>
+	 <BR>
+	 <h3><center><%= ($TEXT->{'version'}) %> <%= ($easynas->{'version'}) %></center></h3>
+	 <h4><center><%= ($TEXT->{'running'}) %> <%= ($easynas->{'arc'}) %></center></h4>
+ 	 <br> <center>Copyright &copy; 2013-2023</center>
+	 <h4><center><a <%= ($TEXT->{'easynas_url'}) %>><%= ($TEXT->{'easynas_url'}) %></a></center></h4>
+       </div>
+     <div class="modal-footer">
+     <button type="button" class="btn btn-default" data-dismiss="modal"><%= ($TEXT->{'close'}) %></button>
+    </div>
+  </div>
+  <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+ </div>
+
         <!-- jQuery -->
         <script src="js/jquery.min.js"></script>
 

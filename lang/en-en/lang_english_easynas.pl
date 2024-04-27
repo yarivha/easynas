@@ -33,13 +33,9 @@ $TEXT{'reset'} = "Reset";
 $TEXT{'create'} = "Create";
 $TEXT{'add'} = "Add";
 $TEXT{'performance'} = "Performance";
-$TEXT{'about_help'} = "
-<h1><center>EasyNAS</center></h1><br>
-<h3><center>Version ".easynas_ver()."</center></h3><br>
-<h4><center>Running on ".easynas_hardware()."</center></h4><br>
-<center>Copyright &copy; 2013-2023</center><br>
-<h4><center><a href=\"https://www.easynas.org\"  target=\"new\" >https://www.easynas.org</a></center><h4>";
-
+$TEXT{'easynas_url'} = "https://www.easynas.org";
+$TEXT{'running'} = "Running on";
+$TEXT{'close'} = "Close";
 
 
 ######  Menu ######
