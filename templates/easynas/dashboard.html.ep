@@ -13,30 +13,51 @@
 <div class="row"><div class="col-xs-3"><i class="fa fa-users fa-5x"></i></div><div class="col-xs-9 text-right"><div class="huge"><%= $user_number %></div><div><%= ($TEXT->{'dashboard_users'}) %></div></div></div></div><a href="<%= ($addons->{'users'}->{program}) %>"><div class="panel-footer"><span class="pull-left"><%= ($TEXT->{'dashboard_view_details'}) %></span><span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span><div class="clearfix"></div></div></a></div></div>
 
 <div class="col-lg-6"><div class="panel panel-default"><div class="panel-heading"><div class="row"><div class="col-xs-3">Disk</div><div class="panel-body">
+<table>
+<tr>
 % foreach my $disk (keys (%$disks)) {
  % if ( $disks->{$disk}[3] eq "System") {
-<a href="<%= ($addons->{'disk'}->{program}) %>?action=settings&disk=<%= $disk %>"><i class="fa fa-hdd-o fa-5x" style="color:blue" title="<%= $disk %>"></i></a>&nbsp
+<td><a href="<%= ($addons->{'disk'}->{program}) %>?action=settings&disk=<%= $disk %>"><i class="fa fa-hdd-o fa-5x" style="color:blue" title="<%= $disk %>"></i></a>&nbsp</td>
  %}
  % if ( $disks->{$disk}[3] eq "Failed") {
-<a href="<%= ($addons->{'disk'}->{program}) %>?action=settings&disk=<%= $disk %>"><i class="fa fa-hdd-o fa-5x" style="color:red" title="<%= $disk %>"></i></a>&nbsp
+<td><a href="<%= ($addons->{'disk'}->{program}) %>?action=settings&disk=<%= $disk %>"><i class="fa fa-hdd-o fa-5x" style="color:red" title="<%= $disk %>"></i></a>&nbsp</td>
  %}
  % if ( $disks->{$disk}[3] eq "Used") {
-<a href="<%= ($addons->{'disk'}->{program}) %>?action=settings&disk=<%= $disk %>"><i class="fa fa-hdd-o fa-5x" style="color:green" title="<%= $disk %>"></i></a>&nbsp
+<td><a href="<%= ($addons->{'disk'}->{program}) %>?action=settings&disk=<%= $disk %>"><i class="fa fa-hdd-o fa-5x" style="color:green" title="<%= $disk %>"></i></a>&nbsp</td>
  %}
  % if ( $disks->{$disk}[3] eq "Free") {
-<a href="<%= ($addons->{'disk'}->{program}) %>?action=settings&disk=<%= $disk %>"><i class="fa fa-hdd-o fa-5x" style="color:gray" title="<%= $disk %>"></i></a>&nbsp
+<td><a href="<%= ($addons->{'disk'}->{program}) %>?action=settings&disk=<%= $disk %>"><i class="fa fa-hdd-o fa-5x" style="color:gray" title="<%= $disk %>"></i></a>&nbsp</td>
  %}
 %}
+</tr>
+<tr>
+% foreach my $disk (keys (%$disks)) {
+ <td><%= $disks->{$disk}[2] %></td>
+%}
+</tr>
+</table>
+
 </div></div></div><div class="panel-footer"><span class="pull-left"><i class="fa fa-arrow-circle-right" style="color:red"></i></span><span class="pull-left">&nbsp;Failed</span><br><span class="pull-left"><i class="fa fa-arrow-circle-right" style="color:green"></i></span><span class="pull-left">&nbsp;Used</span><br><span class="pull-left"><i class="fa fa-arrow-circle-right" style="color:blue"></i></span><span class="pull-left">&nbsp;System</span><br><span class="pull-left"><i class="fa fa-arrow-circle-right" style="color:gray"></i></span><span class="pull-left">&nbsp;Free</span><div class="clearfix"></div></div></div></div>
 
 <div class="col-lg-6"><div class="panel panel-default"><div class="panel-heading"><div class="row"><div class="col-xs-3">File System</div><div class="panel-body">
+<table>
+<tr>
 % foreach my $fs (keys (%$filesystems)) {
  % if ( $filesystems->{$fs}[1]  eq "Good") {
-    <a href="<%= ($addons->{'filesystem'}->{program}) %>?action=settings&fs=<%= $fs %>"><i class="fa fa-database fa-5x" style="color:green" title="<%= $fs %>"></i></a>&nbsp
+    <td><a href="<%= ($addons->{'filesystem'}->{program}) %>?action=settings&fs=<%= $fs %>"><i class="fa fa-database fa-5x" style="color:green" title="<%= $fs %>"></i></a>&nbsp</td>
  %}
  % else {
-    <a href="<%= ($addons->{'filesystem'}->{program}) %>?action=settings&fs=<%= $fs %>"><i class="fa fa-database fa-5x" style="color:red" title="<%= $fs %>"></i></a>&nbsp
+    <td><a href="<%= ($addons->{'filesystem'}->{program}) %>?action=settings&fs=<%= $fs %>"><i class="fa fa-database fa-5x" style="color:red" title="<%= $fs %>"></i></a>&nbsp</td>
  %}
 %}
+</tr><tr>
+% foreach my $fs (keys (%$filesystems)) {
+ <td>
+ <div class="progress">
+   <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+ </div>
+ </td>
+%}
+</table>
 </div></div></div><div class="panel-footer"><span class="pull-left"><i class="fa fa-arrow-circle-right" style="color:red"></i></span><span class="pull-left">&nbsp;Degraded</span><br><span class="pull-left"><i class="fa fa-arrow-circle-right" style="color:green"></i></span><span class="pull-left">&nbsp;Good</span><br></div></div></div>  
 
