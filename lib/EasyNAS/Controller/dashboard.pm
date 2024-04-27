@@ -12,7 +12,6 @@ sub view ($self) {
   my $username=$self->session('user');
   my $action=$self->param('action'); 
   my %easynas = easynas_info();
-  my @easynas=("df","dfdf");
   my %fs = fs_info();
   my %disks  = disk_info();
   my %vol    = vol_info();

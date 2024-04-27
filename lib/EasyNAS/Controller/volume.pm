@@ -13,6 +13,7 @@ sub view ($self) {
         $self->redirect_to('login');
   }
   my $username=$self->session('user');
+  my %easynas = easynas_info();
   my $action=$self->param('action'); 
   $msg="";
   $result="";
@@ -20,6 +21,7 @@ sub view ($self) {
 	        title => $TEXT{$addons{volume}->{description}},
                 program => $addons{volume}->{program},
                 username => $username,
+		easynas => \%easynas,
                 menu =>\@html_output,
                 TEXT =>\%TEXT,
                 addons =>\%addons,

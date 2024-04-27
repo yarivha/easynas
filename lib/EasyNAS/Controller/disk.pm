@@ -12,16 +12,18 @@ sub view ($self) {
         $self->redirect_to('login');
   }
   my $username=$self->session('user');
+  my %easynas = easynas_info();
   my $action=$self->param('action'); 
   $msg="";
   $result=""; 
   $self->stash(title => $TEXT{$addons{disk}->{description}},
                 program => $addons{disk}->{program},
                 username => $username,
-                menu =>\@html_output,
-                TEXT =>\%TEXT,
-                addons =>\%addons,
-                lang_list => \@lang_list);
+		easynas => \%easynas,
+		menu =>\@html_output,
+		TEXT =>\%TEXT,
+		addons =>\%addons,
+		lang_list => \@lang_list);
 
   ##### format #####
   if (defined $action && $action eq "format") {

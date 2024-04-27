@@ -27,8 +27,9 @@ use File::Path qw( make_path );
 use Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw();
-our @EXPORT    = qw( %TEXT %addons @html_output @lang_list get_mount_dir get_conf_cron get_categories  
-		     write_log fs_info vol_info users_info groups_info  disk_info);
+our @EXPORT    = qw( %TEXT %addons @html_output @lang_list 
+		     get_mount_dir get_conf_cron get_categories get_group_default 
+		     write_log easynas_info fs_info vol_info users_info groups_info  disk_info);
 
 ############# Declarations #####################
 my $authentication_enable = 1;
@@ -61,21 +62,18 @@ our @categories;
 our %TEXT;
 our @lang_list;
 
-######### easynas_ver #########
-sub easynas_ver
+
+######## easynas_info #######
+sub easynas_info
 {
  my $imageversion=`/usr/bin/cat /etc/ImageVersion`;
+ my $arc=`/usr/bin/uname -m`;
  my $version;
- (undef,$version)=split("-",$imageversion);
- return($version);
-}
-
-
-######## easynas_hardware #######
-sub easynas_hardware
-{
- my $hardware=`/usr/bin/uname -m`;
- return($hardware);
+ my %easynas;
+ (undef,$version)=split("-",$imageversion);	
+ $easynas{'version'}=$version;
+ $easynas{'arc'}=$arc;
+ return(%easynas);
 }
 
 
@@ -85,6 +83,11 @@ sub get_mount_dir
  return($mount_dir)
 }
 
+########### get_group_default ###########
+sub get_group_default
+{
+ return($group_default);
+}
 
 ############# get_conf_cron ###############
 sub get_conf_cron

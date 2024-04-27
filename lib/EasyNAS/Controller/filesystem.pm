@@ -14,12 +14,14 @@ sub view($self) {
         $self->redirect_to('login');
     }
     my $username=$self->session('user');
+    my %easynas = easynas_info();
     my $action=$self->param('action'); 
     $msg="";
     $result="";
     $self->stash(title => $TEXT{$addons{filesystem}->{description}},
                 program => $addons{filesystem}->{program},
                 username => $username,
+		easynas => \%easynas,
                 menu =>\@html_output,
                 TEXT =>\%TEXT,
                 addons =>\%addons,
