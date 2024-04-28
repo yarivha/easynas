@@ -54,7 +54,7 @@ sub view ($self) {
     $desc=$update->findvalue('./summary');
     $new_ver=$update->findvalue('./@edition');
     $old_ver=$update->findvalue('./@edition-old');
-    $updates{$package}=[$package,$desc,$new_ver,$old_ver];
+    $updates{$package}=[$package,$desc,$old_ver,$new_ver];
    }
   }
   else {
