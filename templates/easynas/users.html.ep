@@ -33,14 +33,14 @@
                                             <tbody>
 						% foreach my $user (keys (%$users)) {
                                                 <tr>
-						    <td><a href=?action=settings&username=<%= $users->{$user}[1] %><i class="fa fa-user fa-2x" title="<%= ($TEXT->{'users_settings'}) %>"></i></a></td>
+						    <td><a href=?action=settingsmenu&username=<%= $users->{$user}[1] %>><i class="fa fa-user fa-2x" title="<%= ($TEXT->{'users_settings'}) %>"></i></a></td>
 						    <td><%= $users->{$user}[0] %></td>
 						    <td><%= $users->{$user}[1] %></td>
 						    <td><%= $users->{$user}[2] %></td>
 						    <td><%= $users->{$user}[3] %></td>
 						    <td>
 						     <a href=?action=passwordmenu&username=<%= $users->{$user}[1] %>><i class="fa fa-key fa-2x" title="<%= ($TEXT->{'users_change_password'}) %>"></i>&nbsp;</a>
-						     <a href=?action=settings&username=$<%= $users->{$user}[1] %>><i class="fa fa-sliders fa-2x" title="<%= ($TEXT->{'users_settings'}) %>"></i>&nbsp;</a>
+						     <a href=?action=settingsmenu&username=<%= $users->{$user}[1] %>><i class="fa fa-sliders fa-2x" title="<%= ($TEXT->{'users_settings'}) %>"></i>&nbsp;</a>
 						     <a onclick="return confirm('<%= ($TEXT->{'users_delete?'}) %>')" href=?action=deleteuser&username=<%= $users->{$user}[1] %>><i class="fa fa-trash fa-2x" title="<%= ($TEXT->{'users_delete'}) %>"></i></a>	
 						     </td>
 						</tr>

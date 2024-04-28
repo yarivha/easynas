@@ -27,23 +27,23 @@ sub view ($self) {
                 lang_list => \@lang_list);
 
 ##### createuser #####
-  if ($action eq "createuser") {
+  if (defined $action && $action eq "createuser") {
    createuser($self);
   }
 
 ##### deleteuser #####
-  if ($action eq "deleteuser") {
+  if (defined $action && $action eq "deleteuser") {
    deleteuser($self);
   }
 
 ##### changepassword #####
-  if ($action eq "changepassword") {
+  if (defined $action && $action eq "changepassword") {
    changepassword($self);
   }
 
 
 ##### createusermenu #####
-  if ($action eq "createusermenu") {
+  if (defined $action && $action eq "createusermenu") {
    my %groups=groups_info();
    $self->stash(groups => \%groups);
    $self->render(template => 'easynas/users_create');
@@ -52,10 +52,23 @@ sub view ($self) {
 
 
 ##### passwordmenu #####
-  if ($action eq "passwordmenu") {
+  if (defined $action && $action eq "passwordmenu") {
    my $user=$self->param("username");
    $self->stash(username => $user);
    $self->render(template => 'easynas/users_password');
+   return;
+  }
+
+
+##### settingsmenu #####
+  if (defined $action && $action eq "settingsmenu") {
+   my $user=$self->param("username");
+   my %groups=groups_info();
+   my %users=users_info();
+   $self->stash(username => $user,
+   		groups => \%groups,
+		users => \%users);
+   $self->render(template => 'easynas/users_settings');
    return;
   }
 

@@ -21,7 +21,7 @@ sub view ($self) {
   $self->stash(title => $TEXT{$addons{firmware}->{description}},
                 program => $addons{firmware}->{program},
                 username => $username,
-		easynas => %easynas,
+		easynas => \%easynas,
                 menu =>\@html_output,
                 TEXT =>\%TEXT,
                 addons =>\%addons,

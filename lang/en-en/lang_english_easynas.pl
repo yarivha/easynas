@@ -475,33 +475,7 @@ $TEXT{'users_delete?'} = "Are you sure you want to delete the user ?";
 $TEXT{'users_change_password'} = "Change Password";
 $TEXT{'users_save_password'} = "Save Password";
 $TEXT{'users_password_changed'} = "Password Changed Succesfully";
-
-$TEXT{'users_admin_account'} = "Administration Account";
-$TEXT{'all_groups'} = "All Groups";
-$TEXT{'delete_user'} = "Delete User";
-$TEXT{'user_admin_cant_be_delete'} = "User admin can't be deleted.";
-$TEXT{'user_admin_cant_be_changed'} = "User admin can't be changed.";
-$TEXT{'failed_to_delete_user'} = "Failed to delete user";
-$TEXT{'cant_change_admin_password'} = "Can't change admin password in a demo site";
-$TEXT{'passwords_do_not_match'} = "Passwords do not match";
-$TEXT{'password_must_exist'} = "Password must exist";
-$TEXT{'change_password'} = "Change Password";
-$TEXT{'one_group_needed'} = "At least one group is required";
-$TEXT{'failed_to_change_samba_password'} = "Failed to change Samba password";
-$TEXT{'failed_to_delete_samba_user'} = "Failed to delete Samba user";
-$TEXT{'change_settings'} = "Change Settings";
-$TEXT{'failed_to_change_settings'} = "Failed to change settings.";
-$TEXT{'users'} = "Users";
-$TEXT{'user_name'} = "User Name";
-$TEXT{'name'} = "Name";
-$TEXT{'desc'} = "Description";
-$TEXT{'uid'} = "UID";
-$TEXT{'group'} = "Group";
-$TEXT{'groups'} = "Groups";
-$TEXT{'easynas_admin'} = "EasyNAS Admin";
-$TEXT{'delete_user?'} = "Are you sure you want to delete the user ?";
-$TEXT{'user_settings'} = "USER SETTINGS";
-
+$TEXT{'users_save'} = "Save";
 
 
 #### Groups ####
