@@ -5,5 +5,5 @@
  <author>Yariv Hakim</author>
  <type>system</type>
  <icon>fa-cloud-download</icon>
- <program>addons.pl</program>
+ <program>addons</program>
 </addons>
