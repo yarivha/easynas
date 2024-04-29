@@ -31,7 +31,7 @@ sub view ($self) {
   }
 
 ###### clean_errs #####
-  if (defined $action && $action eq "clean_errs" {
+  if (defined $action && $action eq "clean_errs") {
    clean_errs($self);
   }
 
@@ -65,12 +65,12 @@ sub disk_format($self) {
  my $rc = system("/usr/bin/sudo /usr/sbin/wipefs -f -o 0x10040  $disk >/dev/null");
  
  if ($rc) {
-  $result="success";
-  $msg=$TEXT{'disk_format_success'};
- }
- else {
   $result="fail";
   $msg=$TEXT{'disk_format_failed'};
+ }
+ else {
+  $result="success";
+  $msg=$TEXT{'disk_format_success'}; 
  }
  return;
 }
@@ -84,12 +84,13 @@ sub clean_errs($self)
 
   if ($rc) {
    $result="fail";
-   $msg=$TEXT{'disk_clean_errs_success'};
+   $msg=$TEXT{'disk_clean_errs_failed'};
   }
   else {
    $result="success";
-   $msg=$TEXT{'disk_clean_errs_failed'};
+   $msg=$TEXT{'disk_clean_errs_success'};
   }
+
   return;
 }
 
