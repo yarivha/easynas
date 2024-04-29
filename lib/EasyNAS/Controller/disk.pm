@@ -30,6 +30,11 @@ sub view ($self) {
    disk_format($self);
   }
 
+###### clean_errs #####
+  if (defined $action && $action eq "clean_errs" {
+   clean_errs($self);
+  }
+
  ###### healthmenu #####
  if (defined $action && $action eq "healthmenu") {
   my $disk=$self->param('disk');
@@ -69,5 +74,24 @@ sub disk_format($self) {
  }
  return;
 }
+
+
+####### clean_errs ######
+sub clean_errs($self)
+{
+  my $disk=$self->param("disk");
+  my $rc=system("/usr/bin/sudo /usr/sbin/btrfs device stat -z $disk");
+
+  if ($rc) {
+   $result="fail";
+   $msg=$TEXT{'disk_clean_errs_success'};
+  }
+  else {
+   $result="success";
+   $msg=$TEXT{'disk_clean_errs_failed'};
+  }
+  return;
+}
+
 
 1;

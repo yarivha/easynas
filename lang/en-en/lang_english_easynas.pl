@@ -303,6 +303,9 @@ $TEXT{'disk_read_io_errs'} = "Read IO Errors";
 $TEXT{'disk_flush_io_errs'} = "Flush IO Errors";
 $TEXT{'disk_corruption_errs'} = "Corruptions Errors";
 $TEXT{'disk_generation_errs'} = "Generation Errors";
+$TEXT{'disk_clean_errs'} = "Clean Errors";
+$TEXT{'disk_clean_errs_success'} = "Errors Cleaned";
+$TEXT{'disk_clean_errs_failed'} = "Errors Failed to Clean";
 
 #### File System ####
 $TEXT{'fs'} = "File System";

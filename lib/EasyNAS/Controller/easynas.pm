@@ -597,7 +597,11 @@ sub health_info
  my %health;
  my @sysmon;
  my @errors;
- my $write_errs;
+ my $write_errs="NA";
+ my $read_errs="NA";
+ my $flush_errs="NA";
+ my $corruption_errs="NA";
+ my $generation_errs="NA";
  my @disks = `/usr/bin/sudo /usr/sbin/smartctl --scan`;
  foreach (@disks)
     {
@@ -610,17 +614,38 @@ sub health_info
             $health=$TEXT{'disk_good'};
           }
         }
-        @errors=`/usr/bin/sudo /sbin/btrfs device stats $_`;
-        foreach (@errors)
+        @errors=`/usr/bin/sudo /sbin/btrfs device stat $disk`;
+	foreach (@errors)
         {
           if ($_ =~ /write_io_errs/)
           {
             (undef,$write_errs) = split(" ",$_);
+	    print "write ".$write_errs
+          }
+	  if ($_ =~ /read_io_errs/)
+          {
+            (undef,$read_errs) = split(" ",$_);
+          }
+	  if ($_ =~ /flush_io_errs/)
+          {
+            (undef,$flush_errs) = split(" ",$_);
+          }
+	  if ($_ =~ /corruption_errs/)
+          {
+            (undef,$corruption_errs) = split(" ",$_);
+          }
+	  if ($_ =~ /generation_errs/)
+          {
+            (undef,$generation_errs) = split(" ",$_);
           }
 
         }
-        $health{$disk}=[$health,$write_errs];
-        $write_errs="";
+        $health{$disk}=[$health,$write_errs,$read_errs,$flush_errs,$corruption_errs,$generation_errs];
+        $write_errs="NA";
+	$read_errs="NA";
+	$flush_errs="NA";
+	$corruption_errs="NA";
+	$generation_errs="NA";
      }
 
  return(%health);

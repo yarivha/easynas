@@ -12,9 +12,10 @@ sub startup ($self) {
   # Configure the application
   $self->secrets($config->{secrets});
 
-
   # Router
   my $r = $self->routes;
+  
+  #  my %addons=addons_info();
 
   # Normal route to controller
   $r->get('/')->to('dashboard#view');
@@ -23,6 +24,7 @@ sub startup ($self) {
   $r->get('/firmware')->to('firmware#view');
   foreach my $item (keys %addons) {
 	  $r->get('/'.$addons{$item}{'program'})->to($addons{$item}{'program'}.'#view');
+
   }
 }
 

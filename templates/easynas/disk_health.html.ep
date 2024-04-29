@@ -23,32 +23,23 @@
    <div class="panel-body">
     <div class="row">
       <div class="col-lg-6">
-        <form role="form">
-         <input type=hidden name="action" value="fix">
-	 <input type=hidden name="disk" value="<%= $disk %>">
-	 <div class="form-group">
-          <label><%= ($TEXT->{'disk_write_io_errs'}) %></label>
- 	  10
-         </div>
-	 <div class="form-group">
-          <label><%= ($TEXT->{'disk_read_io_errs'}) %></label>
-          10
-         </div>
-	 <div class="form-group">
-          <label><%= ($TEXT->{'disk_flush_io_errs'}) %></label>
-          10
-         </div>
- 	 <div class="form-group">
-          <label><%= ($TEXT->{'disk_corruption_errs'}) %></label>
-          10
-         </div>
-	 <div class="form-group">
-          <label><%= ($TEXT->{'disk_generation_errs'}) %></label>
-          10
-         </div>
+	 <table class="table">
+	  <tr><th><%= ($TEXT->{'disk_write_io_errs'}) %></th>
+ 	  <td><%= $health->{$disk}[1] %></td></tr>
+          <tr><th><%= ($TEXT->{'disk_read_io_errs'}) %></th>
+          <td><%= $health->{$disk}[2] %></td></tr>
+          <tr><th><%= ($TEXT->{'disk_flush_io_errs'}) %></th>
+          <td><%= $health->{$disk}[3] %></td></tr>
+          <tr><th><%= ($TEXT->{'disk_corruption_errs'}) %></th>
+          <td><%= $health->{$disk}[4] %></td></tr>
+          <tr><th><%= ($TEXT->{'disk_generation_errs'}) %></th>
+          <td><%= $health->{$disk}[5] %></td></tr>
+ 	 </table>
        <BR>
-       <button type="submit" class="btn btn-default"><%= ($TEXT->{'users_add'}) %></button>
-       <button type="reset" class="btn btn-default"><%= ($TEXT->{'users_reset'}) %></button>
+      <form role="form">
+       <input type=hidden name="action" value="clean_errs">
+       <input type=hidden name="disk" value="<%= $disk %>">
+       <button type="submit" class="btn btn-default"><%= ($TEXT->{'disk_clean_errs'}) %></button>
       </form>
       </div>
     </div>
