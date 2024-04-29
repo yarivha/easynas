@@ -42,6 +42,11 @@ sub view ($self) {
   }
 
 
+#### changesettings #####
+  if (defined $action && $action eq "changesettings") {
+   changesettings($self);
+  }
+
 ##### createusermenu #####
   if (defined $action && $action eq "createusermenu") {
    my %groups=groups_info();
@@ -233,5 +238,34 @@ sub changepassword($self) {
 }
 
 
+##### changesettings #####
+sub changesettings($self) {
+ my $name=$self->param("username");
+ my $desc=$self->param("desc");
+ my @groups=$self->param("groups");
+ my $mount_dir=get_mount_dir;
+ my $group_default=get_group_default;
+ my $groups;
+ my $rc;
+
+ foreach(@groups)
+    {
+	$groups = $groups.$_.",";
+    }
+    chop($groups);
+    $rc = system("/usr/bin/sudo /usr/sbin/usermod -g $group_default -G \"$groups\" -d $mount_dir -c \"$desc\" $name");
+    if ($rc ne 0)
+    {
+     $result="fail";
+     $msg=$TEXT{'users_settings_failed_to_save'};
+
+    }
+    else 
+    {
+     $result="success";
+     $msg=$TEXT{'users_settings_saved'};
+    }
+    return; 
+}
 
 1;

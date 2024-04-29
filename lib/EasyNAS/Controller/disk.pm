@@ -30,12 +30,26 @@ sub view ($self) {
    disk_format($self);
   }
 
+ ###### healthmenu #####
+ if (defined $action && $action eq "healthmenu") {
+  my $disk=$self->param('disk');
+  my %health=health_info();
+  $self->stash(disk => $disk,
+	       health => \%health,
+               result => $result,
+               msg => $msg);
+  $self->render(template => 'easynas/disk_health');
+  return;
+ }
+
   ##### menu ######
 
   my %disks=disk_info();
-  $self->stash(disks =>\%disks);
-  $self->stash(result => $result);
-  $self->stash(msg => $msg);
+  my %health=health_info();
+  $self->stash(disks =>\%disks,
+   	       health =>\%health,
+               result => $result,
+      	       msg => $msg );
   $self->render(template => 'easynas/disk'); 
 }
 

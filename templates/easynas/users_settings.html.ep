@@ -10,10 +10,11 @@
     <div class="row">
       <div class="col-lg-6">
         <form role="form">
-         <input type=hidden name="action" value="createuser">
+         <input type=hidden name="action" value="changesettings">
+         <input type=hidden name="username" value="<%= $username %>">
          <div class="form-group">
           <label><%= ($TEXT->{'users_name'}) %></label>
-          <input class="form-control" name="name" placeholder="<%= $username %>" disabled>
+          <input class="form-control" name="username" placeholder="<%= $username %>" disabled>
          </div>
          <div class="form-group">
           <label><%= ($TEXT->{'users_desc'}) %></label>

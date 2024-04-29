@@ -298,24 +298,11 @@ $TEXT{'disk_format'} = "Format";
 $TEXT{'disk_settings'} = "Settings";
 $TEXT{'disk_format_success'} = "Disk Formatted Succesfully";
 $TEXT{'disk_format_failed'} = "Disk Format Failed";
-
-$TEXT{'disk_performace'} = "Disk Performace";
-$TEXT{'testing'} = "Testing";
-$TEXT{'rerun_test'} = "ReRun Test";
-$TEXT{'error_updating_param'} = "Error updating disk parameters";
-$TEXT{'error_formating_disk'} = "Error Formating Disk";
-$TEXT{'disk_format_success'} = "Disk formatted successfully";
-$TEXT{'disk_update_success'} = "Disk updated successfully";
-$TEXT{'physical_disks'} = "Physical Disks";
-$TEXT{'disk_format_are_u_sure'} = "Are you sure you want to format disk ?";
-$TEXT{'disk_test_are_u_sure'} = "Are you sure you want to test disk ?";
-$TEXT{'test_performance'} = "Test Performance";
-$TEXT{'disk_distribution'} = "Disk Distribution";
-$TEXT{'disk_settings'} = "Disk Settings";
-$TEXT{'multi_count'} = "Multi Count:";
-$TEXT{'io_supprt'} = "IO Support:";
-$TEXT{'read_only'} = "Read Only:";
-$TEXT{'read_ahead'} = "Read Ahead:";
+$TEXT{'disk_write_io_errs'} = "Write IO Errors";
+$TEXT{'disk_read_io_errs'} = "Read IO Errors";
+$TEXT{'disk_flush_io_errs'} = "Flush IO Errors";
+$TEXT{'disk_corruption_errs'} = "Corruptions Errors";
+$TEXT{'disk_generation_errs'} = "Generation Errors";
 
 #### File System ####
 $TEXT{'fs'} = "File System";
@@ -476,6 +463,8 @@ $TEXT{'users_change_password'} = "Change Password";
 $TEXT{'users_save_password'} = "Save Password";
 $TEXT{'users_password_changed'} = "Password Changed Succesfully";
 $TEXT{'users_save'} = "Save";
+$TEXT{'users_settings_failed_to_save'} = "Settings failed to be saved";
+$TEXT{'users_settings_saved'} = "Settings Saved Succesfully";
 
 
 #### Groups ####

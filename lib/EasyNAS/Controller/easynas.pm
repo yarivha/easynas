@@ -29,7 +29,7 @@ our @ISA = qw(Exporter);
 our @EXPORT_OK = qw();
 our @EXPORT    = qw( %TEXT %addons @html_output @lang_list 
 		     get_mount_dir get_conf_cron get_categories get_group_default 
-		     write_log easynas_info fs_info vol_info users_info groups_info  disk_info);
+		     write_log easynas_info fs_info vol_info users_info groups_info  disk_info health_info);
 
 ############# Declarations #####################
 my $authentication_enable = 1;
@@ -536,29 +536,15 @@ sub groups_info
 sub disk_info
 {
     my $disk;
+    my %disks;
     my $type;
     my $status;
-    my $health;
     my $size;
     my $presize;
     my $model;
-    my $mount_dir=get_mount_dir();
-    my %fs=fs_info();
-    my @disks_errors;
-    my $disks_errors;
-    my %disks_errors;
-    my %disks;
     my @sysmon;
     my @disks = `/usr/bin/sudo /usr/sbin/smartctl --scan`;
 
-    #### Check disks errors in Filesystems ######
-    #foreach $fs (keys %fs) {
-	    #     @disks_errors=`/usr/bin/sudo /usr/sbin/btrfs device stats --check $mount_dir/$_ | grep -vE ' 0$' `;
-	    #foreach $disks_errors (@disks_errors) {
-	    #  ($disk,undef)=split(/\./,$disks_errors);
-	    #$disks_errors{$disk}=1;
-	    #}
-	    #}
 
     foreach (@disks)
     {
@@ -576,14 +562,6 @@ sub disk_info
             (undef,$model) = split(" ",$_);
           }
 	}
-	@sysmon = `/usr/bin/sudo /usr/sbin/smartctl -H  $disk`;
-        $health=$TEXT{'disk_bad'};
-	foreach (@sysmon) 
-        {
-          if (($_ =~ /PASSED/s) or ($_ =~ /OK/s)) {
-	    $health=$TEXT{'disk_good'};
-	  }
-        }
 
         if (index(`/usr/bin/sudo /usr/bin/mount | grep "on / "`,$disk) != -1) 
         {
@@ -600,16 +578,54 @@ sub disk_info
   	   $status=$TEXT{'disk_free'};
 	  }
 	}
-        $disks{$disk}=[$disk,$type,$size.$presize,$status,$health,$model];
+        $disks{$disk}=[$disk,$type,$size.$presize,$status,$model];
 	$type="";
 	$size="";
 	$presize="";
 	$status="";
-	$health="";
 	$model="";
     }
     return(%disks);
 }
+
+
+########## health info ##########
+sub health_info
+{
+ my $disk;
+ my $health;
+ my %health;
+ my @sysmon;
+ my @errors;
+ my $write_errs;
+ my @disks = `/usr/bin/sudo /usr/sbin/smartctl --scan`;
+ foreach (@disks)
+    {
+        ($disk,undef,undef,undef,undef,undef)=split(" ", $_);
+        @sysmon = `/usr/bin/sudo /usr/sbin/smartctl -H  $disk`;
+        $health=$TEXT{'disk_bad'};
+        foreach (@sysmon)
+        {
+          if (($_ =~ /PASSED/s) or ($_ =~ /OK/s)) {
+            $health=$TEXT{'disk_good'};
+          }
+        }
+        @errors=`/usr/bin/sudo /sbin/btrfs device stats $_`;
+        foreach (@errors)
+        {
+          if ($_ =~ /write_io_errs/)
+          {
+            (undef,$write_errs) = split(" ",$_);
+          }
+
+        }
+        $health{$disk}=[$health,$write_errs];
+        $write_errs="";
+     }
+
+ return(%health);
+}
+
 
 
 
