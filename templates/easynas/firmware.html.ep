@@ -37,7 +37,7 @@
 						 <td><%= $updates->{$update}[1] %></td>
 						 <td><%= $updates->{$update}[2] %></td>
 						 <td><%= $updates->{$update}[3] %></td>
-						 <td><a onclick="return confirm('<%= ($TEXT->{'firmware_update_r_u_sure'}) %>')"href=action=update&package= <%= $updates->{$update}[0] %>><i class="fa fa-cloud-download fa-2x" title="<%= ($TEXT->{'firmware_update'}) %>"></i>&nbsp;</a></td>
+						 <td><a onclick="return confirm('<%= ($TEXT->{'firmware_update_r_u_sure'}) %>')"href=?action=update&package= <%= $updates->{$update}[0] %>><i class="fa fa-cloud-download fa-2x" title="<%= ($TEXT->{'firmware_update'}) %>"></i>&nbsp;</a></td>
 						</tr>
 					    %}
                                             </tbody>
