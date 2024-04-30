@@ -312,6 +312,17 @@ $TEXT{'disk_clean_errs_failed'} = "Errors Failed to Clean";
 
 #### File System ####
 $TEXT{'fs'} = "File System";
+$TEXT{'fs_create'} = "Create File System";
+$TEXT{'fs_name'} = "File System Name";
+$TEXT{'fs_raid_level'} = "Raid Level";
+$TEXT{'fs_compression'} = "Compression";
+$TEXT{'fs_ssd_optimization'} = "SSD Optimization";
+$TEXT{'fs_auto_defrag'} = "Auto Defrag";
+$TEXT{'fs_auto_mount'} = "Audo Mount";
+$TEXT{'fs_add'} = "Add Filesystem";
+$TEXT{'fs_reset'} = "Reset";
+
+
 $TEXT{'cancel'} = "Cancel";
 $TEXT{'resume'} = "Resume";
 $TEXT{'snapshot'} = "Snapshot";
@@ -325,7 +336,6 @@ $TEXT{'good'} = "Good";
 $TEXT{'degreded'} = "Degraded";
 $TEXT{'mount'} = "Mount";
 $TEXT{'unmount'} = "UnMount";
-$TEXT{'fs_name'} = "File System Name";
 $TEXT{'remove_hd'} = "Remove HD";
 $TEXT{'replace_hd'} = "Replace HD";
 $TEXT{'source_hd'} = "Source HD";
@@ -360,7 +370,6 @@ $TEXT{'mount_fs'} = "Mount File System";
 $TEXT{'unmount_fs'} = "Unmount File System";
 $TEXT{'fs_failed_unmounting_fs'} = "Failed unmounting a file system.";
 $TEXT{'no_free_disk'} = "No Free Disks Available";
-$TEXT{'fs_name'} = "Name";
 $TEXT{'raid_profile'} = "Raid Profile";
 $TEXT{'compression'} = "Compression";
 $TEXT{'disks'} = "Disks";
@@ -394,6 +403,11 @@ $TEXT{'filesystem_contain_vol'} = "File System Contain Volumes";
 $TEXT{'filesystem_not_changed'} = "File System name was not changed";
 $TEXT{'fs_created'} = "File System successfuly Created";
 
+$TEXT{'fs_jbod_info'} = "JBOD, which stands for just a bunch of disks, is a type of multilevel configuration for disks. It refers to a collection of disks in an array combined as one logical volume.";
+$TEXT{'fs_raid0_info'} = "RAID 0 (also known as a stripe set or striped volume) splits data evenly across two or more disks, without parity information, redundancy, or fault tolerance. Since RAID 0 provides no fault tolerance or redundancy, the failure of one drive will cause the entire array to fail, due to data being striped across all disks.";
+$TEXT{'fs_raid1_info'} = "RAID 1 consists of an exact copy (or mirror) of a set of data on two or more disks; a classic RAID 1 mirrored pair contains two disks. This configuration offers no parity, striping, or spanning of disk space across multiple disks";
+$TEXT{'fs_raid5_info'} = "RAID 5 consists of block-level striping with distributed parity. Parity information is distributed among the drives. It requires that all drives but one be present to operate. Upon failure of a single drive, subsequent reads can be calculated from the distributed parity such that no data is lost.RAID 5 requires at least three disks.";
+$TEXT{'fs_raid6_info'} = "RAID 6 extends RAID 5 by adding another parity block; thus, it uses block-level striping with two parity blocks distributed across all member disks.";
 
 #### Volumes ####
 $TEXT{'vol_manager'} = "Volume Manager";
