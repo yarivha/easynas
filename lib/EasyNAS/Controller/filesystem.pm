@@ -1,6 +1,5 @@
 package EasyNAS::Controller::Filesystem;
 use lib '/easynas/lib/EasyNAS/Controller';
-#use Switch;
 use Mojo::Base 'Mojolicious::Controller', -signatures;
 use easynas;
 
@@ -24,25 +23,23 @@ sub view($self) {
 		easynas => \%easynas,
                 menu =>\@html_output,
                 TEXT =>\%TEXT,
-                addons =>\%addons,
+		#addons =>\%addons,
                 lang_list => \@lang_list);
 
 #--------- Create Menu ----------
     if (defined $action && $action eq "createfsmenu") {
       my %disks = disk_info();
       my $size;
-      my $pre_size;
       my $number_free = 0;  
       my @free_disks; 
       my %raid;
 
       foreach (sort(keys(%disks)))
       {
-        if ($disks{$_}[0] eq "Free")
+        if ($disks{$_}[3] eq "Free")
         {
-            $size=$disks{$_}[1];
-            $pre_size=$disks{$_}[2];
-            push(@free_disks,$_." ".$size.$pre_size);
+            $size=$disks{$_}[2];
+            push(@free_disks,$_." ".$size);
             $number_free++;
         }
       }
@@ -51,27 +48,14 @@ sub view($self) {
 	$result="fail";     
 	$msg=$TEXT{'no_free_disk'};
       }
-      else {
-	$raid{'single'}='JBOD';
-        if ($number_free > 1)
-        {
-          $raid{'raid0'}='RAID0';
-          $raid{'raid1'}='RAID1';;
-        }
-        if ($number_free > 2)
-        {
-          $raid{'raid5'}='RAID5';
-        }
-        if ($number_free > 3)
-        {
-          $raid{'raid6'}='RAID6';
-          $raid{'raid10'}='RAID10';
-        }
+      else 
+      {
 	$result="success";
-      }
-       $self->stash(freedisks => \@free_disks);
-       $self->render(template => 'easynas/filesystem_create');
-       return;
+        $self->stash(freedisks => \@free_disks,
+	             numberoffree => $number_free);
+        $self->render(template => 'easynas/filesystem_create');
+        return;
+      }	
     }
 
 #--------- settingsmenu ---------

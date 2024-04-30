@@ -19,12 +19,15 @@
           <label><%= ($TEXT->{'fs_raid_level'}) %></label>
 	  <BR>
 	  <table class="table">
+	  % if ($numberoffree > 0) {
 	  <tr><td><label class="radio-inline">
            <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="single" checked></td>
            <td><img src="/images/jbod.png" width="120" height="100"></td>
 	   <td><%= ($TEXT->{'fs_jbod_info'}) %></td>
           </label>
           </tr>
+	  %}
+	  % if ($numberoffree > 1) {
 	  <tr><td><label class="radio-inline">
            <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="raid0"></td>
            <td><img src="/images/raid0.png" width="120" height="100"></td>
@@ -37,18 +40,23 @@
            <td><%= ($TEXT->{'fs_raid1_info'}) %></td> 
 	   </label>
           </tr>
+	  %}
+	  % if ($numberoffree > 2) {
 	  <tr><td><label class="radio-inline">
            <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="raid5"></td>
            <td><img src="/images/raid5.png" width="170" height="100"></td>
           <td><%= ($TEXT->{'fs_raid5_info'}) %></td>
 	  </label>
           </tr>
+	  %}
+	  % if ($numberoffree > 3) {
 	  <tr><td><label class="radio-inline">
            <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="raid6"></td>
            <td><img src="/images/raid6.png" width="170" height="100"></td>
 	   <td><%= ($TEXT->{'fs_raid6_info'}) %></td>
           </label>
           </tr>
+	  %}
 	  </table>
 	  <div class="form-group">
            <label><%= ($TEXT->{'fs_compression'}) %></label>
