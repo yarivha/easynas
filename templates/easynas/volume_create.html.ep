@@ -1,0 +1,35 @@
+% layout 'default';
+
+<div class="row">
+ <div class="col-lg-10">
+  <div class="panel panel-default">
+   <div class="panel-heading">
+    <label><%= ($TEXT->{'vol_create'}) %></label>
+   </div>
+   <div class="panel-body">
+    <div class="row">
+      <div class="col-lg-6">
+        <form role="form">
+         <input type=hidden name="action" value="createvol">
+         <div class="form-group">
+          <label><%= ($TEXT->{'vol_name'}) %></label>
+          <input class="form-control" name="name">
+         </div>
+	 <div class="form-group">
+           <label><%= ($TEXT->{'vol_filesystem'}) %></label>
+	   <select name="fs" class="form-control">
+           % foreach my $fs (keys (%$filesystems)) {
+	    <option><%= $fs %></option>
+	   %}
+	   </select>
+          </div> 
+       <BR>
+       <button type="submit" class="btn btn-default"><%= ($TEXT->{'users_add'}) %></button>
+       <button type="reset" class="btn btn-default"><%= ($TEXT->{'users_reset'}) %></button>
+      </form>
+      </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>

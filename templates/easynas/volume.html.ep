@@ -27,24 +27,25 @@
 						<th><%= ($TEXT->{'disk_type'}) %></th>
 						<th><%= ($TEXT->{'disk_size'}) %></th>
 						<th><%= ($TEXT->{'disk_status'}) %></th>
-						<th><%= ($TEXT->{'disk_health'}) %></th>
 						<th><%= ($TEXT->{'disk_actions'}) %></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+					    % foreach my $vol (keys (%$volumes)) {
                                                 <tr>
-						    <td></td>
-						    <td></td>
-						    <td></td>
-						    <td></td>
-						    <td></td>
-						    <td></td>
-						</tr>
+                                                    <td><a href="?action=settingsmenu&fs=<%= $vol %>"><i class="fa fa-database fa-2x" title="Settings"></i></a></td>
+						    <td><a href="?action=settingsmenu&vol=<%= $vol %>"><%= $vol %></a></td>
+						    <td><%= $volumes->{$vol}[1] %></td>
+						    <td><%= $volumes->{$vol}[2] %></td>
+						    <td><%= $volumes->{$vol}[3] %></td>
+						    <td><%= $volumes->{$vol}[4] %></td>
+                                                </tr>
+						%} 
                                             </tbody>
                                         </table>
                                     </div>
 				</div>
 			</div>
-
+<br><br><a href="?action=createvolmenu">[<%= ($TEXT->{'vol_create'}) %>]</a>
 
 

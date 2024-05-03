@@ -419,7 +419,10 @@ $TEXT{'fs_raid6_info'} = "RAID 6 extends RAID 5 by adding another parity block; 
 
 #### Volumes ####
 $TEXT{'vol_manager'} = "Volume Manager";
-$TEXT{'create_vol'} = "Create Volume";
+$TEXT{'vol_create'} = "Create Volume";
+$TEXT{'vol_filesystem'} = "File System";
+
+
 $TEXT{'no_vol_name'} = "No Volume name was entered";
 $TEXT{'no_fs_selected'} = "No File System was selected";
 $TEXT{'delete_vol'} = "Delete Volume";
