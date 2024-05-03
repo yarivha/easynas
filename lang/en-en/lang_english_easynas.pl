@@ -327,7 +327,9 @@ $TEXT{'fs_drives'} = "Drives";
 $TEXT{'fs_health'} = "Health";
 $TEXT{'fs_readonly'} = "Read Only";
 $TEXT{'fs_read&write'} = "Read & Write";
-
+$TEXT{'fs_filesystem_contain_vol'} = "File System Contain Volumes";
+$TEXT{'fs_failed_unmounting_fs'} = "Failed unmounting a file system.";
+$TEXT{'fs_failed_formating_disk'} = "Failed Formating Disks";
 
 $TEXT{'cancel'} = "Cancel";
 $TEXT{'resume'} = "Resume";

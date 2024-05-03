@@ -33,6 +33,12 @@ sub view($self) {
     }
 
 
+#---------deletefs ----------
+    if (defined $action && $action eq "deletefs") {
+      &deletefs($self);
+    }       
+        
+
 #-------- Unmount ---------
     if (defined $action && $action eq "unmoun") {
         &unmount($self);
@@ -130,7 +136,7 @@ sub deletefs($self) {
     if (@volumes)
     {
 	$result="fail";
-	$msg=$TEXT{'filesystem_contain_vol'};	
+	$msg=$TEXT{'fs_filesystem_contain_vol'};	
 	return;
     }
     if ($auto_mount)
@@ -151,7 +157,7 @@ sub deletefs($self) {
 	if ($rc ne 0)
 	{
            $result="fail";
-	   $msg=$TEXT{'error_formating_disk'};
+	   $msg=$TEXT{'fs_failed_formating_disk'};
 	   return;
 
 	}
@@ -164,7 +170,7 @@ sub deletefs($self) {
 }
 
 
-
+####### createfs #######
 sub createfs($self) {
 
     my @disks      = $self->param("disks");
@@ -267,7 +273,6 @@ if ($ssd)
 	return;
       }
     }
-    print "/usr/bin/sudo /sbin/mkfs.btrfs -f -L $fs -d $raid -m $raid $raid_disks > /dev/null";   
     $rc = system("/usr/bin/sudo /sbin/mkfs.btrfs -f -L $fs -d $raid -m $raid $raid_disks > /dev/null");
     if ($rc ne 0)
     {
@@ -296,6 +301,7 @@ if ($ssd)
     return;
 }
 
+##### unmount #####
 sub unmount($self) {
 
     my $fs = $self->param("fs");
@@ -329,7 +335,7 @@ sub mount($self) {
 
 }
 
-
+##### changename #######
 sub changename($self) {
 
   my $fs    = $self->param("fs");
