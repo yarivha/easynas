@@ -24,13 +24,13 @@
                                                 <tr>
 						<th></th>
 						<th><%= ($TEXT->{'fs'}) %></th>
-						<th><%= ($TEXT->{'health'}) %></th>
-						<th><%= ($TEXT->{'used'}) %></th>
-						<th><%= ($TEXT->{'drives'}) %></th>
-						<th><%= ($TEXT->{'status'}) %></th>
-						<th><%= ($TEXT->{'raid_level'}) %></th>
-						<th><%= ($TEXT->{'compression'}) %></th>
-						<th><%= ($TEXT->{'actions'}) %></th>
+						<th><%= ($TEXT->{'fs_health'}) %></th>
+						<th><%= ($TEXT->{'fs_used'}) %></th>
+						<th><%= ($TEXT->{'fs_drives'}) %></th>
+						<th><%= ($TEXT->{'fs_status'}) %></th>
+						<th><%= ($TEXT->{'fs_raid_level'}) %></th>
+						<th><%= ($TEXT->{'fs_compression'}) %></th>
+						<th><%= ($TEXT->{'fs_actions'}) %></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -46,7 +46,7 @@
 						    <td><%= $filesystems->{$fs}[6] %></td>
 						    <td>
 
- %if ( $filesystems->{$fs}[5] eq "Mounted"){ 
+ %if ( $filesystems->{$fs}[4] eq "Mounted"){ 
      <a href=?action=unmount&fs=<%= $fs %>><i class="fa fa-unlink fa-2x" title="<%= $TEXT->{'unmount'} %>"></i>&nbsp;</a>
      <a onclick="return confirm('<%= ($TEXT->{'fs_delete'}) %>')" href="?action=deletefs&fs=<%= $fs %>&uuid=<%= $filesystems->{$fs}[0] %>"><i class="fa fa-trash-o fa-2x" title="<%= ($TEXT->{'delete'}) %>"></i></a>
  %}else{

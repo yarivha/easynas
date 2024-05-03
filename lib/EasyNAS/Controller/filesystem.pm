@@ -26,6 +26,31 @@ sub view($self) {
 		#addons =>\%addons,
                 lang_list => \@lang_list);
 
+
+#--------- createfs ----------
+    if (defined $action && $action eq "createfs") {
+      &createfs($self);
+    }
+
+
+#-------- Unmount ---------
+    if (defined $action && $action eq "unmoun") {
+        &unmount($self);
+    }
+
+
+#------- Mount -------
+   if (defined $action && $action eq "mount") {
+        &mount($self);
+    }
+
+#-------ChangeName -------
+   if (defined $action && $action eq "changename")  {
+     &changename($self);
+   }
+
+
+
 #--------- Create Menu ----------
     if (defined $action && $action eq "createfsmenu") {
       my %disks = disk_info();
@@ -50,7 +75,6 @@ sub view($self) {
       }
       else 
       {
-	$result="success";
         $self->stash(freedisks => \@free_disks,
 	             numberoffree => $number_free);
         $self->render(template => 'easynas/filesystem_create');
@@ -79,28 +103,6 @@ sub view($self) {
       return;
     }  
 
-
-#--------- createfs ----------
-    if (defined $action && $action eq "createfs") {
-      &createfs($self);
-    }
-
-
-#-------- Unmount ---------
-    if (defined $action && $action eq "unmoun") { 
-	&unmount($self);
-    }
-
-
-#------- Mount -------
-   if (defined $action && $action eq "mount") {
-        &mount($self);
-    }
-
-#-------ChangeName -------
-   if (defined $action && $action eq "changename")  {
-     &changename($self);
-   }
 
 #------- Menu --------    
    my %fs=fs_info();
@@ -265,7 +267,7 @@ if ($ssd)
 	return;
       }
     }
-     
+    print "/usr/bin/sudo /sbin/mkfs.btrfs -f -L $fs -d $raid -m $raid $raid_disks > /dev/null";   
     $rc = system("/usr/bin/sudo /sbin/mkfs.btrfs -f -L $fs -d $raid -m $raid $raid_disks > /dev/null");
     if ($rc ne 0)
     {

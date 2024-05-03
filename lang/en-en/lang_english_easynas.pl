@@ -321,6 +321,12 @@ $TEXT{'fs_auto_defrag'} = "Auto Defrag";
 $TEXT{'fs_auto_mount'} = "Audo Mount";
 $TEXT{'fs_add'} = "Add Filesystem";
 $TEXT{'fs_reset'} = "Reset";
+$TEXT{'fs_used'} = "Used";
+$TEXT{'fs_status'} = "Status";
+$TEXT{'fs_drives'} = "Drives";
+$TEXT{'fs_health'} = "Health";
+$TEXT{'fs_readonly'} = "Read Only";
+$TEXT{'fs_read&write'} = "Read & Write";
 
 
 $TEXT{'cancel'} = "Cancel";
