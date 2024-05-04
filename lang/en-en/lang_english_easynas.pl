@@ -38,14 +38,12 @@ $TEXT{'running'} = "Running on";
 $TEXT{'close'} = "Close";
 
 
-######  Menu ######
-$TEXT{'dashboard'} = "Dashboard";
-$TEXT{'multimedia'} = "MultiMedia";
-$TEXT{'realm'} = "Realm";
-$TEXT{'sharing'} = "File Sharing";
-$TEXT{'services'} = "Services";
-$TEXT{'storage'} = "Storage";
-$TEXT{'system'} = "System";
+#####   Login #####
+$TEXT{'login'} = "Login";
+$TEXT{'login_to_easynas'} = "Login to EasyNAS";
+$TEXT{'login_username'} = "User Name";
+$TEXT{'login_password'} = "Password";
+$TEXT{'login_remember_me'} = "Remember me";
 
 ######  Dashboard ######
 $TEXT{'dashboard'} = "Dashboard";

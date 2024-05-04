@@ -32,6 +32,7 @@ sub view ($self) {
                  msg => $msg,
 		 username => '',
                  title => 'EasyNAS',
+		 TEXT => \%TEXT,
                  url => '/login');
     $self->render(template => 'easynas/login');
     
