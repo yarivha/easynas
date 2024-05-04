@@ -234,7 +234,8 @@ $TEXT{'firmware_here'} = " click here to update";
 $TEXT{'firmware_refresh'} = "Refresh";
 $TEXT{'firmware_refreshed'} = "Repositories refreshed";
 $TEXT{'firmware_noupdate'} = "No Updates Available";
-
+$TEXT{'firmware_update_success'} = "Update Finished Succesfuly";
+$TEXT{'firmware_update_failed'} = "Update Failed";
 
 #### Addons #####
 $TEXT{'addons'} = "Addons";
