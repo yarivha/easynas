@@ -21,8 +21,6 @@
 
 $TEXT{'easynas'} = "EasyNAS";
 $TEXT{'yariv'} = "Yariv Hakim";
-$TEXT{'username'} = "Username";
-$TEXT{'password'} = "Password";
 $TEXT{'please_wait'} = "Please Wait....";
 $TEXT{'not_authorized'} = "You are not authorize to use this function";
 $TEXT{'edit'} = "Edit";
@@ -36,6 +34,14 @@ $TEXT{'performance'} = "Performance";
 $TEXT{'easynas_url'} = "https://www.easynas.org";
 $TEXT{'running'} = "Running on";
 $TEXT{'close'} = "Close";
+
+#### Types ####
+$TEXT{'storage'} = "Storage";
+$TEXT{'system'} = "System";
+$TEXT{'sharing'} = "File Sharing";
+$TEXT{'services'} = "Services";
+$TEXT{'multimedia'} = "Multimedia";
+$TEXT{'realm'} = "Realm";
 
 
 #####   Login #####
