@@ -674,7 +674,7 @@ sub vol_info
        (undef,$id,undef,undef,undef,undef,undef,undef,$vol) = split(" ",$_);
        $du = `/usr/bin/sudo /usr/bin/du -h -a -c  $mount_dir/$fs/$vol | /usr/bin/tail -1`;
        ($size,undef) = split(" ",$du);
-        $volumes{$fs."/".$vol}=[$fs,$vol,$id,$size];
+        $volumes{$fs."/".$vol}=[$id,$vol,$fs,$size];
     }
   }
  return(%volumes);

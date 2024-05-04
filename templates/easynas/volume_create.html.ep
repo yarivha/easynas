@@ -22,7 +22,24 @@
 	    <option><%= $fs %></option>
 	   %}
 	   </select>
+          </div>
+         <div class="form-group">
+           <label><%= ($TEXT->{'vol_user_owner'}) %></label>
+           <select name="user" class="form-control">
+           % foreach my $user (keys (%$users)) {
+            <option><%= $user %></option>
+           %}
+           </select>
           </div> 
+	 <div class="form-group">
+           <label><%= ($TEXT->{'vol_group_owner'}) %></label>
+           <select name="group" class="form-control">
+           % foreach my $group (keys (%$groups)) {
+            <option><%= $group %></option>
+           %}
+           </select>
+          </div>
+  
        <BR>
        <button type="submit" class="btn btn-default"><%= ($TEXT->{'users_add'}) %></button>
        <button type="reset" class="btn btn-default"><%= ($TEXT->{'users_reset'}) %></button>

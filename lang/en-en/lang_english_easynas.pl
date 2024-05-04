@@ -420,20 +420,26 @@ $TEXT{'fs_raid6_info'} = "RAID 6 extends RAID 5 by adding another parity block; 
 #### Volumes ####
 $TEXT{'vol_manager'} = "Volume Manager";
 $TEXT{'vol_create'} = "Create Volume";
+$TEXT{'vol_name'} = "Volume Name";
 $TEXT{'vol_filesystem'} = "File System";
+$TEXT{'vol_user_owner'} = "User Owner";
+$TEXT{'vol_group_owner'} = "Group Owner";
+$TEXT{'vol_no_vol_name'} = "No Volume name was entered";
+$TEXT{'vol_no_fs_selected'} = "No File System was selected";
+$TEXT{'vol_created'} = "Volume Created Succesfuly";
+$TEXT{'vol_id'} = "ID";
+$TEXT{'vol_size'} = "Size";
+$TEXT{'vol_fs'} = "File System";
+$TEXT{'vol_actions'} = "Actions";
+$TEXT{'vol_delete'} = "Delete Volume";
+$TEXT{'vol_delete?'} = "Are you sure you want to delete the volume ?";
 
-
-$TEXT{'no_vol_name'} = "No Volume name was entered";
-$TEXT{'no_fs_selected'} = "No File System was selected";
-$TEXT{'delete_vol'} = "Delete Volume";
 $TEXT{'faild_to_delete_vol'} = "Failed to delete volume";
 $TEXT{'create_snapshot'} = "Create Snapshot";
 $TEXT{'no_snapshot_name'} = "No Snapshot name was entered";
 $TEXT{'failed_to_add_snapshot'} = "Failed to add snapshot";
 $TEXT{'failed_to_change_owner'} = "Failed to change owner";
 $TEXT{'failed_to_change_permission'} = "Failed to change permission";
-$TEXT{'vol_name'} = "Volume Name";
-$TEXT{'user_owner'} = "User Owner";
 $TEXT{'group_owner'} = "Group Owner";
 $TEXT{'user_permission'} = "User Permission";
 $TEXT{'group_permission'} = "Group Permission";

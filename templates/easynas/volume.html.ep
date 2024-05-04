@@ -23,22 +23,22 @@
                                             <thead>
                                                 <tr>
 						<th></th>
-						<th><%= ($TEXT->{'disk'}) %></th>
-						<th><%= ($TEXT->{'disk_type'}) %></th>
-						<th><%= ($TEXT->{'disk_size'}) %></th>
-						<th><%= ($TEXT->{'disk_status'}) %></th>
-						<th><%= ($TEXT->{'disk_actions'}) %></th>
+						<th><%= ($TEXT->{'vol_id'}) %></th>
+						<th><%= ($TEXT->{'vol_name'}) %></th>
+						<th><%= ($TEXT->{'vol_fs'}) %></th>
+						<th><%= ($TEXT->{'vol_size'}) %></th>
+						<th><%= ($TEXT->{'vol_actions'}) %></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
 					    % foreach my $vol (keys (%$volumes)) {
                                                 <tr>
-                                                    <td><a href="?action=settingsmenu&fs=<%= $vol %>"><i class="fa fa-database fa-2x" title="Settings"></i></a></td>
-						    <td><a href="?action=settingsmenu&vol=<%= $vol %>"><%= $vol %></a></td>
+                                                    <td><a href="?action=settingsmenu&fs=<%= $vol %>"><i class="fa fa-folder fa-2x" title="Settings"></i></a></td>
+						    <td><a href="?action=settingsmenu&vol=<%= $vol %>"><%= $volumes->{$vol}[0] %></a></td>
 						    <td><%= $volumes->{$vol}[1] %></td>
 						    <td><%= $volumes->{$vol}[2] %></td>
 						    <td><%= $volumes->{$vol}[3] %></td>
-						    <td><%= $volumes->{$vol}[4] %></td>
+						    <td><a onclick="return confirm(<%= ($TEXT->{'vol_delete?'}) %>" href=?action=delete&vol=<%= $vol %>><i class="fa fa-trash-o fa-2x" title="<%= ($TEXT->{'vol_delete'}) %>"></i></a></td>
                                                 </tr>
 						%} 
                                             </tbody>
@@ -46,6 +46,6 @@
                                     </div>
 				</div>
 			</div>
-<br><br><a href="?action=createvolmenu">[<%= ($TEXT->{'vol_create'}) %>]</a>
+<br><a href="?action=createvolmenu">[<%= ($TEXT->{'vol_create'}) %>]</a>
 
 
