@@ -11,6 +11,7 @@ sub view ($self) {
   }
   my $username=$self->session('user');
   my $action=$self->param('action'); 
+  my @lang_list = get_lang_list();
   my %easynas = easynas_info();
   my %fs = fs_info();
   my %disks  = disk_info();
@@ -37,8 +38,8 @@ sub view ($self) {
   $self->render(template => 'easynas/dashboard', 
 		title => $TEXT{'dashboard'},
 		program => $addons{dashboard}->{program},
-		username => $username,
-		easynas => \%easynas,
+		lang_list => \@lang_list,
+		easynas =>\%easynas,
 		menu =>\@html_output,
 		TEXT =>\%TEXT,
 		missing_update => $missing_update,

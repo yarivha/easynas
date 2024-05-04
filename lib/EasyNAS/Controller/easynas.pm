@@ -28,7 +28,7 @@ use Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw();
 our @EXPORT    = qw( %TEXT %addons @html_output @lang_list 
-		     get_mount_dir get_conf_cron get_categories get_group_default 
+		     get_mount_dir get_conf_cron get_categories get_group_default get_lang_list 
 		     write_log easynas_info fs_info vol_info users_info groups_info  disk_info health_info);
 
 ############# Declarations #####################
@@ -244,20 +244,19 @@ sub get_lang_list
  my $file;
  my $lang;
  my $flag;
+ my @lang_list;
  
- if (!@lang_list) {
-  opendir (DIR, $lang_dir) or die "Error";
-  while ($file = readdir(DIR))
+ opendir (DIR, $lang_dir) or die "Error";
+ while ($file = readdir(DIR))
+ {
+  if ($file ne "." && $file ne ".." && -f "$lang_dir/$file/iso.txt")
   {
-   if ($file ne "." && $file ne ".." && -f "$lang_dir/$file/iso.txt")
-        {
-            ($lang,$flag) = split(",",`/usr/bin/cat $lang_dir/$file/iso.txt`);
-            push(@lang_list,{name=>$lang,symbol=>$file,flag=>$flag});
-        }
-    }
-  close(DIR);
+    ($lang,$flag) = split(",",`/usr/bin/cat $lang_dir/$file/iso.txt`);
+    push(@lang_list,{name=>$lang,symbol=>$file,flag=>$flag});
+  }
  }
-  return;
+ close(DIR);
+ return @lang_list;
 }
 
 
@@ -740,7 +739,7 @@ sub fs_info
 ########################### Main ############################
 
 check_env;
-get_lang_list;
+#get_lang_list;
 load_language;
 get_addons;
 

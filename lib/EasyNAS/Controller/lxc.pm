@@ -24,7 +24,6 @@ sub view ($self) {
   if (!($self->session('is_auth'))) {
         $self->redirect_to('login');
   }
-  my $username=$self->session('user');
   my %easynas = easynas_info();
   my $action=$self->param('action'); 
   $msg="";
@@ -40,7 +39,6 @@ sub view ($self) {
   $self->render(template => 'easynas/lxc', 
 	        title => $TEXT{$addons{lxc}->{description}},
                 program => $addons{lxc}->{program},
-                username => $username,
 		easynas => %easynas,
                 menu =>\@html_output,
                 TEXT =>\%TEXT,
