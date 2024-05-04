@@ -739,7 +739,6 @@ sub fs_info
 ########################### Main ############################
 
 check_env;
-#get_lang_list;
 load_language;
 get_addons;
 

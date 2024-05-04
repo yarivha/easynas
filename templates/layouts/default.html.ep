@@ -1,4 +1,7 @@
-% my $username=$self->session('user'); 
+<% 
+ use easynas;
+ my $username=$self->session('user'); 
+%>
 
 <!DOCTYPE html>
 <html lang="en">
