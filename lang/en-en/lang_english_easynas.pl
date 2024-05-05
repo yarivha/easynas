@@ -438,8 +438,9 @@ $TEXT{'vol_fs'} = "File System";
 $TEXT{'vol_actions'} = "Actions";
 $TEXT{'vol_delete'} = "Delete Volume";
 $TEXT{'vol_delete?'} = "Are you sure you want to delete the volume ?";
+$TEXT{'vol_faild_to_delete'} = "Failed to delete volume";
+$TEXT{'vol_deleted'} = "Volume Deleted Succesfully";
 
-$TEXT{'faild_to_delete_vol'} = "Failed to delete volume";
 $TEXT{'create_snapshot'} = "Create Snapshot";
 $TEXT{'no_snapshot_name'} = "No Snapshot name was entered";
 $TEXT{'failed_to_add_snapshot'} = "Failed to add snapshot";

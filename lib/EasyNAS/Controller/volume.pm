@@ -1,5 +1,5 @@
 package EasyNAS::Controller::Volume;
-use lib '.';
+use lib '/easynas/lib/EasyNAS/Controller';
 use Mojo::Base 'Mojolicious::Controller', -signatures;
 use easynas;
 
@@ -7,6 +7,7 @@ use easynas;
 my $msg;
 my $result;
 my $mount_dir=get_mount_dir();
+my $conf_cron=get_conf_cron();
 
 sub view ($self) {
   if (!($self->session('is_auth'))) {
@@ -35,6 +36,12 @@ sub view ($self) {
    createvol($self);
  }
 
+
+####### deletevol ######
+ if (defined $action && $action eq "deletevol") 
+ {
+  deletevol($self);
+ }
 
  ###### createvolmenu #######
  if (defined $action && $action eq "createvolmenu") 
@@ -97,5 +104,29 @@ sub createvol($self) {
  return;
 }
 
+
+##### deletevol #####
+sub deletevol($self) {
+ my $vol=$self->param("vol");
+ my $cmount_dir;
+ $cmount_dir = substr($mount_dir,1);
+ my $rc = system("/usr/bin/sudo /sbin/btrfs subvolume delete $mount_dir/$vol > /dev/null");
+ if ($rc ne 0)
+ {
+  $result="fail";
+  $msg=$TEXT{'vol_faild_to_delete'};
+ }
+ else 
+ {
+  if (`/usr/bin/grep " $mount_dir/$vol " $conf_cron`)
+  {   
+    system("/usr/bin/sudo /usr/bin/sed -i '/.$cmount_dir.$vol /d' $conf_cron");
+    system("/usr/bin/sudo /usr/bin/systemctl restart cron.service restart");
+  }
+  $result="success";
+  $msg=$TEXT{'vol_deleted'};
+ }
+ return;
+}
 
 1;

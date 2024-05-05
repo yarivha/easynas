@@ -38,7 +38,7 @@
 						    <td><%= $volumes->{$vol}[1] %></td>
 						    <td><%= $volumes->{$vol}[2] %></td>
 						    <td><%= $volumes->{$vol}[3] %></td>
-						    <td><a onclick="return confirm(<%= ($TEXT->{'vol_delete?'}) %>" href=?action=delete&vol=<%= $vol %>><i class="fa fa-trash-o fa-2x" title="<%= ($TEXT->{'vol_delete'}) %>"></i></a></td>
+						    <td><a onclick="return confirm('<%= ($TEXT->{'vol_delete?'}) %>')" href=?action=deletevol&vol=<%= $vol %>><i class="fa fa-trash fa-2x" title="<%= ($TEXT->{'vol_delete'}) %>"></i></a></td>
                                                 </tr>
 						%} 
                                             </tbody>
