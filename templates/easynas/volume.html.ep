@@ -38,8 +38,12 @@
 						    <td><%= $volumes->{$vol}[1] %></td>
 						    <td><%= $volumes->{$vol}[2] %></td>
 						    <td><%= $volumes->{$vol}[3] %></td>
-						    <td><a onclick="return confirm('<%= ($TEXT->{'vol_delete?'}) %>')" href=?action=deletevol&vol=<%= $vol %>><i class="fa fa-trash fa-2x" title="<%= ($TEXT->{'vol_delete'}) %>"></i></a></td>
-                                                </tr>
+						    <td>
+                                                        <a href=?action=snapshotmenu&vol=<%= $vol %>><i class="fa fa-camera fa-2x" title="<%= ($TEXT->{'vol_snapshot'}) %>"></i>&nbsp;</a> 
+	    						<a href=?action=setting&vol=<%= $vol %>><i class="fa fa-edit fa-2x" title="<%= ($TEXT->{'vol_settings'}) %>"></i>&nbsp;</a>
+							<a onclick="return confirm('<%= ($TEXT->{'vol_delete?'}) %>')" href=?action=deletevol&vol=<%= $vol %>><i class="fa fa-trash fa-2x" title="<%= ($TEXT->{'vol_delete'}) %>"></i></a>
+						 </td>
+						</tr>
 						%} 
                                             </tbody>
                                         </table>

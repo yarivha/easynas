@@ -72,8 +72,11 @@ sub createvol($self) {
  my $fs=$self->param("fs");
  my $user=$self->param("user");
  my $group=$self->param("group");
+ my $user_perm=$self->("user_perm");
+ my $group_perm=$self->("group_perm");
+ my $others_perm=$self->("others_perm");
  my $rc;
-
+ my $permission=0;
  if ($vol eq '')
  { 
    $result="fail";
@@ -88,7 +91,30 @@ sub createvol($self) {
   $msg=$TEXT{'vol_no_fs_selected'};
   return;
  }
-
+ if ($user_perm eq "read")
+ {
+  $permission = $permission+500;
+ }
+ if ($user_perm eq "read&write")
+ {
+  $permission = $permission+700;
+ }
+ if ($group_perm eq "read")
+ {
+  $permission = $permission+50;
+ }
+ if ($group_perm eq "read&write")
+ {
+  $permission = $permission+70;
+ }
+ if ($others_perm eq "read")
+ {
+  $permission = $permission+5;
+ }
+ if ($others_perm eq "read&write")
+ {
+  $permission = $permission+7;
+ } 
 
  $rc = system("/usr/bin/sudo /sbin/btrfs subvolume create $mount_dir/$fs/$vol > /dev/null");
  if($rc ne 0)
@@ -98,8 +124,11 @@ sub createvol($self) {
  }
  else 
  {
+   $rc = system("/usr/bin/sudo /usr/bin/chown $user.$group $mount_dir/$fs/$vol > /dev/null");
+   $rc = system("/usr/bin/sudo /bin/chmod $permission $mount_dir/$fs/$vol > /dev/null");  
    $result="success";
    $msg=$TEXT{'vol_created'};
+
  }
  return;
 }

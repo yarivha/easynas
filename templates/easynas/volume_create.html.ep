@@ -8,7 +8,7 @@
    </div>
    <div class="panel-body">
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-8">
         <form role="form">
          <input type=hidden name="action" value="createvol">
          <div class="form-group">
@@ -38,15 +38,46 @@
             <option><%= $group %></option>
            %}
            </select>
+	 </div>
+            <div class="panel panel-default">
+             <div class="panel-heading">
+              <%= ($TEXT->{'vol_permission'}) %>
+             </div>
+             <!-- /.panel-heading -->
+            <div class="panel-body">
+             <div class="table-responsive table-bordered">
+             <table class="table">
+              <tr>
+              <th></th>
+              <th><%= ($TEXT->{'vol_read&write'}) %></th>
+              <th><%= ($TEXT->{'vol_readonly'}) %></th>
+              <th><%= ($TEXT->{'vol_deny'}) %></th>
+              </tr>
+              <tr><th><%= ($TEXT->{'vol_user'}) %></th>
+              <td><input type="radio" name="user_perm" value="read&write" checked></td>
+	      <td><input type="radio" name="user_perm" value="read"></td>
+	      <td><input type="radio" name="user_perm" value="deny"></td></tr>
+	      <tr><th><%= ($TEXT->{'vol_group'}) %></th>
+	      <td><input type="radio" name="group_perm" value="read&write"></td>
+              <td><input type="radio" name="group_perm" value="read" checked></td>
+              <td><input type="radio" name="group_perm" value="deny"></td></tr>
+	      <tr><th><%= ($TEXT->{'vol_others'}) %></th>
+	      <td><input type="radio" name="others_perm" value="read&write"></td>
+              <td><input type="radio" name="others_perm" value="read"></td>
+              <td><input type="radio" name="others_perm" value="deny" checked></td></tr>
+              </table>
+            <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+           </div>
+	  <button type="submit" class="btn btn-default"><%= ($TEXT->{'vol_create'}) %></button>
+          <button type="reset" class="btn btn-default"><%= ($TEXT->{'vol_reset'}) %></button>
+	  </form>
           </div>
-  
-       <BR>
-       <button type="submit" class="btn btn-default"><%= ($TEXT->{'users_add'}) %></button>
-       <button type="reset" class="btn btn-default"><%= ($TEXT->{'users_reset'}) %></button>
-      </form>
+         </div>
+        </div>
+       </div>
       </div>
-    </div>
-   </div>
-  </div>
- </div>
-</div>
+     </div>
