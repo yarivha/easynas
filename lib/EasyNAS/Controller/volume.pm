@@ -72,9 +72,9 @@ sub createvol($self) {
  my $fs=$self->param("fs");
  my $user=$self->param("user");
  my $group=$self->param("group");
- my $user_perm=$self->("user_perm");
- my $group_perm=$self->("group_perm");
- my $others_perm=$self->("others_perm");
+ my $user_perm=$self->param("user_perm");
+ my $group_perm=$self->param("group_perm");
+ my $others_perm=$self->param("others_perm");
  my $rc;
  my $permission=0;
  if ($vol eq '')
