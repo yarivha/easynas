@@ -334,6 +334,7 @@ $TEXT{'fs_read&write'} = "Read & Write";
 $TEXT{'fs_filesystem_contain_vol'} = "File System Contain Volumes";
 $TEXT{'fs_failed_unmounting_fs'} = "Failed unmounting a file system.";
 $TEXT{'fs_failed_formating_disk'} = "Failed Formating Disks";
+$TEXT{'fs_size'} = "Size";
 
 $TEXT{'cancel'} = "Cancel";
 $TEXT{'resume'} = "Resume";
@@ -400,7 +401,6 @@ $TEXT{'fs_disks'} = "Disks";
 $TEXT{'number'} = "Number";
 $TEXT{'disk'} = "Disk";
 $TEXT{'total_size'} = "Total Size";
-$TEXT{'used'} = "Used";
 $TEXT{'status'} = "Status";
 $TEXT{'remove_hd?'} = "Are you sure you want to remove the hardisk ?";
 $TEXT{'repair_hd?'} = "Are you sure you want to repair the hardisk ?";

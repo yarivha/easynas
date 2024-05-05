@@ -72,8 +72,12 @@
           </div>
 	  <div class="form-group">
            <label><%= ($TEXT->{'fs_disks'}) %></label>
-           <BR>
-	    %= select_field disks => $freedisks
+	   <select multiple class="form-control" name="disks">
+	    % foreach my $disk (@$freedisks) {
+	    <option><%= $disk %></option>
+	   %}
+  
+	   </select>
           </div>
 	  <div class="form-group">
 	   <div class="checkbox">

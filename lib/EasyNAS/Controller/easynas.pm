@@ -688,11 +688,13 @@ sub fs_info
  my $health;
  my $mounted;
  my $raid;
- my $size=0;
- my $used=0;
+ my $size;
+ my $used;
+ my $free;
  my $devices;
  my %filesystems;
  my @filesystem_list = `/usr/bin/sudo /sbin/btrfs filesystem show`;
+ my @usage;
  foreach (@filesystem_list)
     {
 	### List by LABEL ?
@@ -711,7 +713,7 @@ sub fs_info
 
        if($_ =~ m/Total/)
        {
-	(undef,undef,$devices,undef,undef,undef,$used) = split(' ',$_);
+	(undef,undef,$devices,undef,undef,undef,undef) = split(' ',$_);
        } 
 
 	if (mounted($fs) eq "Mounted")
@@ -725,11 +727,27 @@ sub fs_info
            $mounted="UnMounted";
 	   $raid='';
         }
-
+	
+       @usage=`/usr/bin/sudo /sbin/btrfs filesystem usage $mount_dir/$fs`;
+       foreach (@usage) 
+       { 
+	if($_ =~ m/Device size:/)
+        {
+         (undef,undef,$size) = split(' ',$_);
+        }
+	if($_ =~ m/Used:\s/)
+        {
+         (undef,$used) = split(' ',$_);
+        }
+	if($_ =~ m/Free \(/)
+        {
+         (undef,undef,undef,$free) = split(' ',$_);
+        }
+       }
 
        if ($fs ne "ROOT" && $fs ne "BOOT")
        {
-         $filesystems{$fs}=[$uuid,$health,$used,$devices,$mounted,$raid,get_compress_status($fs)];
+         $filesystems{$fs}=[$uuid,$health,$size,$used,$free,$devices,$mounted,$raid,get_compress_status($fs)];
        }
     }
     return (%filesystems);

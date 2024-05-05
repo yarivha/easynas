@@ -25,7 +25,7 @@
 						<th></th>
 						<th><%= ($TEXT->{'fs'}) %></th>
 						<th><%= ($TEXT->{'fs_health'}) %></th>
-						<th><%= ($TEXT->{'fs_used'}) %></th>
+						<th><%= ($TEXT->{'fs_size'}) %></th>
 						<th><%= ($TEXT->{'fs_drives'}) %></th>
 						<th><%= ($TEXT->{'fs_status'}) %></th>
 						<th><%= ($TEXT->{'fs_raid_level'}) %></th>
@@ -40,10 +40,10 @@
 						    <td><a href="?action=settingsmenu&fs=<%= $fs %>"><%= $fs %></a></td>
 						    <td><%= $filesystems->{$fs}[1] %></td>
 						    <td><%= $filesystems->{$fs}[2] %></td>
-						    <td><%= $filesystems->{$fs}[3] %></td>
-						    <td><%= $filesystems->{$fs}[4] %></td>
 						    <td><%= $filesystems->{$fs}[5] %></td>
 						    <td><%= $filesystems->{$fs}[6] %></td>
+						    <td><%= $filesystems->{$fs}[7] %></td>
+						    <td><%= $filesystems->{$fs}[8] %></td>
 						    <td>
 
  %if ( $filesystems->{$fs}[4] eq "Mounted"){ 

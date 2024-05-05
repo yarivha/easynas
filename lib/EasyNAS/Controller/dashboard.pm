@@ -2,6 +2,7 @@ package EasyNAS::Controller::Dashboard;
 use lib '/easynas/lib/EasyNAS/Controller';
 use Mojo::Base 'Mojolicious::Controller', -signatures;
 use XML::LibXML;
+use Number::Bytes::Human qw(format_bytes parse_bytes);
 use easynas;
 
 
@@ -20,7 +21,7 @@ sub view ($self) {
   my $updates="/etc/easynas/easynas.updates";
   my $missing_update;
   my $dom;
-
+  
   if ($username eq "admin") {
    if (-e $updates) {
     eval {  $dom = XML::LibXML->load_xml(location => $updates) };
@@ -34,7 +35,7 @@ sub view ($self) {
     }
    }
   }
-
+  
   $self->render(template => 'easynas/dashboard', 
 		title => $TEXT{'dashboard'},
 		program => $addons{dashboard}->{program},
