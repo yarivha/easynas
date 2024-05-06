@@ -40,10 +40,10 @@
 						    <td><a href="?action=settingsmenu&fs=<%= $fs %>"><%= $fs %></a></td>
 						    <td><%= $filesystems->{$fs}[1] %></td>
 						    <td><%= $filesystems->{$fs}[2] %></td>
-						    <td><%= $filesystems->{$fs}[5] %></td>
 						    <td><%= $filesystems->{$fs}[6] %></td>
 						    <td><%= $filesystems->{$fs}[7] %></td>
 						    <td><%= $filesystems->{$fs}[8] %></td>
+						    <td><%= $filesystems->{$fs}[9] %></td>
 						    <td>
 
  %if ( $filesystems->{$fs}[4] eq "Mounted"){ 

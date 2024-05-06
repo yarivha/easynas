@@ -53,8 +53,8 @@
 </tr><tr>
 % foreach my $fs (keys (%$filesystems)) {
  <td>
-  <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-   100%<div class="progress-bar" style="width: 25%"></div>
+  <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="<%= $filesystems->{$fs}[5] %>" aria-valuemin="0" aria-valuemax="100">
+   <%= $filesystems->{$fs}[5] %>%<div class="progress-bar" style="width: <%= $filesystems->{$fs}[5] %>%"></div>
   </div>
  </td>
 %}

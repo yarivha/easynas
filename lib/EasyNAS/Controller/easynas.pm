@@ -25,6 +25,7 @@ use strict;
 use warnings;
 use File::Path qw( make_path );
 use Exporter;
+use Number::Bytes::Human qw(format_bytes parse_bytes);
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw();
 our @EXPORT    = qw( %TEXT %addons @html_output @lang_list 
@@ -691,6 +692,7 @@ sub fs_info
  my $size;
  my $used;
  my $free;
+ my $percentage;
  my $devices;
  my %filesystems;
  my @filesystem_list = `/usr/bin/sudo /sbin/btrfs filesystem show`;
@@ -744,10 +746,10 @@ sub fs_info
          (undef,undef,undef,$free) = split(' ',$_);
         }
        }
-
+       $percentage=(int((parse_bytes($used))/(parse_bytes($size))*100));
        if ($fs ne "ROOT" && $fs ne "BOOT")
        {
-         $filesystems{$fs}=[$uuid,$health,$size,$used,$free,$devices,$mounted,$raid,get_compress_status($fs)];
+         $filesystems{$fs}=[$uuid,$health,$size,$used,$free,$percentage,$devices,$mounted,$raid,get_compress_status($fs)];
        }
     }
     return (%filesystems);
