@@ -23,9 +23,17 @@ use XML::LibXML;
 
 ##### Declaration ####
 my $addons="/etc/easynas/easynas.addons";
+my $log_file="/var/log/easynas/easynas.log";
 my $package;
 my $dom;
 my $fh;
+my $timestamp=localtime();
+
+###### write log ######
+ open($fh, '>>', $log_file) or die $!;
+ print $fh $timestamp." [SYSTEM] Checking EasyNAS updates\n";
+ close $fh;
+
 
 ####### Refresh Repo #######
 `/usr/bin/sudo /usr/bin/zypper --quiet --gpg-auto-import-keys refresh`;
