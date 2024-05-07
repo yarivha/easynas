@@ -220,9 +220,10 @@ sub createsnapshot($self) {
 ##### deletevol #####
 sub deletevol($self) {
  my $vol=$self->param("vol");
+ my $fs=$self->param("fs");
  my $cmount_dir;
  $cmount_dir = substr($mount_dir,1);
- my $rc = system("/usr/bin/sudo /sbin/btrfs subvolume delete $mount_dir/$vol > /dev/null");
+ my $rc = system("/usr/bin/sudo /sbin/btrfs subvolume delete $mount_dir/$fs/$vol > /dev/null");
  if ($rc ne 0)
  {
   $result="fail";
@@ -230,9 +231,9 @@ sub deletevol($self) {
  }
  else 
  {
-  if (`/usr/bin/grep " $mount_dir/$vol " $conf_cron`)
+  if (`/usr/bin/grep " $mount_dir/$fs/$vol " $conf_cron`)
   {   
-    system("/usr/bin/sudo /usr/bin/sed -i '/.$cmount_dir.$vol /d' $conf_cron");
+    system("/usr/bin/sudo /usr/bin/sed -i '/.$cmount_dir.$fs.$vol /d' $conf_cron");
     system("/usr/bin/sudo /usr/bin/systemctl restart cron.service restart");
   }
   $result="success";
