@@ -43,6 +43,14 @@ sub view ($self) {
   deletevol($self);
  }
 
+####### createsnapshot ######
+ if (defined $action && $action eq "createsnapshot")
+ {
+  createsnapshot($self);
+ }
+
+ 
+
  ###### createvolmenu #######
  if (defined $action && $action eq "createvolmenu") 
  {
@@ -56,6 +64,21 @@ sub view ($self) {
    return;
  }
 
+
+ ###### createsnapshotmenu #######
+ if (defined $action && $action eq "createsnapshotmenu")
+ { 
+   my %users=users_info();
+   my %groups=groups_info();
+   my $vol=$self->param("vol");
+   my $fs=$self->param("fs");
+   $self->stash(users => \%users,
+                groups => \%groups,
+		vol => $vol,
+                fs => $fs);
+   $self->render(template => 'easynas/volume_create_snapshot');
+   return;
+ }
 
 	      
 ##### menu #######
@@ -129,6 +152,66 @@ sub createvol($self) {
    $result="success";
    $msg=$TEXT{'vol_created'};
 
+ }
+ return;
+}
+
+########### createsnapshot ###############
+sub createsnapshot($self) {
+ my $vol=$self->param("vol");
+ my $fs=$self->param("fs");
+ my $snapshot=$self->param("name");
+ my $user=$self->param("user");
+ my $group=$self->param("group");
+ my $user_perm=$self->param("user_perm");
+ my $group_perm=$self->param("group_perm");
+ my $others_perm=$self->param("others_perm");
+ my $rc;
+ my $permission=0;
+ if ($snapshot eq '')
+ {
+   $result="fail";
+   $msg=$TEXT{'vol_no_snapshot_name'};
+   return;
+ }
+
+ if ($user_perm eq "read")
+ {
+  $permission = $permission+500;
+ }
+ if ($user_perm eq "read&write")
+ {
+  $permission = $permission+700;
+ }
+ if ($group_perm eq "read")
+ {
+  $permission = $permission+50;
+ }
+ if ($group_perm eq "read&write")
+ {
+  $permission = $permission+70;
+ }
+ if ($others_perm eq "read")
+ {
+  $permission = $permission+5;
+ }
+ if ($others_perm eq "read&write")
+ {
+  $permission = $permission+7;
+ }
+ 
+ $rc = system("/usr/bin/sudo /sbin/btrfs subvolume snapshot $mount_dir/$fs/$vol $mount_dir/$fs/$snapshot > /dev/null");
+ if($rc ne 0)
+ {
+   $result="fail";
+   $msg=$TEXT{'vol_failed_to_add_snapshot'};
+ }
+ else
+ {
+   $rc = system("/usr/bin/sudo /usr/bin/chown $user.$group $mount_dir/$fs/$snapshot > /dev/null");
+   $rc = system("/usr/bin/sudo /bin/chmod $permission $mount_dir/$fs/$snapshot > /dev/null");
+   $result="success";
+   $msg=$TEXT{'vol_snapshot_created'};
  }
  return;
 }

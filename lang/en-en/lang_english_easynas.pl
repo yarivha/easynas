@@ -449,17 +449,19 @@ $TEXT{'vol_readonly'} = "Read Only";
 $TEXT{'vol_read&write'} = "Read & Write";
 $TEXT{'vol_deny'} = "Deny";
 $TEXT{'vol_reset'} = "Reset";
+$TEXT{'vol_create_snapshot'} = "Create Snapshot";
+$TEXT{'vol_snapshot_name'} = "Snapshot Name";
+$TEXT{'vol_no_snapshot_name'} = "No Snapshot name was entered";
+$TEXT{'vol_failed_to_add_snapshot'} = "Failed to add snapshot";
+$TEXT{'vol_snapshot_created'} = "Snapshot Created Succesfuly";
 
-$TEXT{'create_snapshot'} = "Create Snapshot";
-$TEXT{'no_snapshot_name'} = "No Snapshot name was entered";
-$TEXT{'failed_to_add_snapshot'} = "Failed to add snapshot";
+
 $TEXT{'failed_to_change_owner'} = "Failed to change owner";
 $TEXT{'failed_to_change_permission'} = "Failed to change permission";
 $TEXT{'group_owner'} = "Group Owner";
 $TEXT{'user_permission'} = "User Permission";
 $TEXT{'group_permission'} = "Group Permission";
 $TEXT{'others_permission'} = "Others Permissions";
-$TEXT{'snapshot_name'} = "Snapshot Name";
 $TEXT{'vols'} = "Volumes";
 $TEXT{'vol'} = "Volume";
 $TEXT{'id'} = "ID";

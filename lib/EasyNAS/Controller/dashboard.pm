@@ -2,7 +2,6 @@ package EasyNAS::Controller::Dashboard;
 use lib '/easynas/lib/EasyNAS/Controller';
 use Mojo::Base 'Mojolicious::Controller', -signatures;
 use XML::LibXML;
-use Number::Bytes::Human qw(format_bytes parse_bytes);
 use easynas;
 
 
