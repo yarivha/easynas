@@ -80,7 +80,79 @@ sub view ($self) {
    return;
  }
 
-	      
+##### settings #####
+ if (defined $action && $action eq "settings")
+ {
+  my %users=users_info();
+  my %groups=groups_info();
+  my $vol=$self->param("vol");
+  my $fs=$self->param("fs");
+  my $location;
+  my $dir;
+  my $userp;
+  my $groupp;
+  my $otherp;
+  my $uowner;
+  my $gowner;
+  my $userid;
+  my $groupid;
+  my $dirname = "$mount_dir/$fs/$vol";
+  my $perm    = sprintf '%04o', (stat($dirname))[2] & 07777;
+
+  ### get current permmision ###
+    if (substr($perm, 1, 1) eq 7 )
+    {
+	$userp = "Read&Write";
+    }
+    if (substr($perm, 1, 1) eq 5 )
+    {
+	$userp = "Read";
+    }
+    if (substr($perm, 1, 1) eq 0 )
+    {
+	$userp = "None";
+    }
+    if (substr($perm, 2, 1) eq 7 )
+    {
+	$groupp = "Read&Write";
+    }
+    if (substr($perm, 2, 1) eq 5 )
+    {
+	$groupp = "Read";
+    }
+    if (substr($perm, 2, 1) eq 0 )
+    {
+	$groupp = "None";
+    }
+    if (substr($perm, 3, 1) eq 7 )
+    {
+	$otherp = "Read&Write";
+    }
+    if (substr($perm, 3, 1) eq 5 )
+    {
+	$otherp = "Read";
+    }
+    if (substr($perm, 3, 1) eq 0 )
+    {
+	$otherp = "None";
+    }
+
+    ### get current owner ###
+    $userid  = (stat($dirname))[4];
+    $groupid = (stat($dirname))[5];
+    $uowner  = (getpwuid $userid)[0];
+    $gowner  = (getgrgid $groupid)[0];
+
+
+  $self->stash(vol =>$vol,
+  	       fs =>$fs,
+       	       users => \%users,
+               groups => \%groups);
+  $self->render(template => 'easynas/volume_settings');
+  return;
+ 
+ }
+
 ##### menu #######
   my %volumes=vol_info();
   $self->stash(volumes =>\%volumes);
@@ -106,7 +178,6 @@ sub createvol($self) {
    $msg=$TEXT{'vol_no_vol_name'};
    return;
  }
-
 
  if ($fs eq '') 
  {
