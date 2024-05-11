@@ -5,5 +5,5 @@
  <author>Yariv Hakim</author>
  <icon>fa-usb</icon>
  <type>system</type>
- <program>network.pl</program>
+ <program>network</program>
 </addon>

@@ -30,7 +30,8 @@ our @ISA = qw(Exporter);
 our @EXPORT_OK = qw();
 our @EXPORT    = qw( %TEXT %addons @html_output @lang_list 
 		     get_mount_dir get_conf_cron get_categories get_group_default get_lang_list 
-		     write_log easynas_info fs_info vol_info users_info groups_info  disk_info health_info);
+		     write_log easynas_info fs_info vol_info users_info groups_info  disk_info health_info
+		     networks_info);
 
 ############# Declarations #####################
 my $authentication_enable = 1;
@@ -76,6 +77,16 @@ sub easynas_info
  $easynas{'arc'}=$arc;
  return(%easynas);
 }
+
+
+######## networks_info #######
+sub networks_info
+{   
+ my %networks;
+ $networks{'lan0'}=['lan0','dhcp','1G'];
+ return(%networks);
+}       
+
 
 
 ############# get_mount_dir ####################
