@@ -8,14 +8,19 @@
    </div>
    <div class="panel-body">
         <form role="form">
-         <input type=hidden name="action" value="createsnapshot">
+         <input type=hidden name="action" value="savevol">
 	 <input type=hidden name="vol" value="<%= $vol %>">
 	 <input type=hidden name="fs" value="<%= $fs %>">
          <div class="form-group">
            <label><%= ($TEXT->{'vol_user_owner'}) %></label>
            <select name="user" class="form-control">
            % foreach my $user (keys (%$users)) {
+	    %if ($uowner eq $user){
+	    <option selected><%= $user %></option>
+	    %}
+	    %else {
             <option><%= $user %></option>
+	    %}
            %}
            </select>
           </div> 
@@ -23,7 +28,12 @@
            <label><%= ($TEXT->{'vol_group_owner'}) %></label>
            <select name="group" class="form-control">
            % foreach my $group (keys (%$groups)) {
-            <option><%= $group %></option>
+	    %if ($gowner eq $group){
+            <option selected><%= $group %></option>
+	    %}
+	    %else {
+	     <option><%= $group %></option>
+            %}
            %}
            </select>
 	 </div>
@@ -42,17 +52,62 @@
               <th><%= ($TEXT->{'vol_deny'}) %></th>
               </tr>
               <tr><th><%= ($TEXT->{'vol_user'}) %></th>
-              <td><input type="radio" name="user_perm" value="read&write" checked></td>
-	      <td><input type="radio" name="user_perm" value="read"></td>
-	      <td><input type="radio" name="user_perm" value="deny"></td></tr>
+	      %if ($userp eq "read&write"){
+              	<td><input type="radio" name="user_perm" value="read&write" checked></td>
+	      %}
+	      %else {
+		<td><input type="radio" name="user_perm" value="read&write"></td>
+	      %}
+	      %if ($userp eq "read"){
+	      	<td><input type="radio" name="user_perm" value="read" checked></td>
+	      %}
+              %else {
+		<td><input type="radio" name="user_perm" value="read"></td>
+	      %}
+	      %if ($userp eq "deny"){
+	       	<td><input type="radio" name="user_perm" value="deny" checked></td></tr>
+	      %}
+              %else {
+		<td><input type="radio" name="user_perm" value="deny"></td></tr>
+	      %}
 	      <tr><th><%= ($TEXT->{'vol_group'}) %></th>
-	      <td><input type="radio" name="group_perm" value="read&write"></td>
-              <td><input type="radio" name="group_perm" value="read" checked></td>
-              <td><input type="radio" name="group_perm" value="deny"></td></tr>
+	      %if ($groupp eq "read&write"){
+		<td><input type="radio" name="group_perm" value="read&write" checked></td>
+	      %}
+              %else {
+		<td><input type="radio" name="group_perm" value="read&write"></td>
+	      %}
+	      %if ($groupp eq "read"){
+		<td><input type="radio" name="group_perm" value="read" checked></td>
+	      %}
+              %else {
+              	<td><input type="radio" name="group_perm" value="read"></td>
+	      %}
+	      %if ($groupp eq "deny"){
+              	<td><input type="radio" name="group_perm" value="deny" checked></td></tr>
+	      %}
+              %else {
+		<td><input type="radio" name="group_perm" value="deny"></td></tr>
+	      %}
 	      <tr><th><%= ($TEXT->{'vol_others'}) %></th>
-	      <td><input type="radio" name="others_perm" value="read&write"></td>
-              <td><input type="radio" name="others_perm" value="read"></td>
-              <td><input type="radio" name="others_perm" value="deny" checked></td></tr>
+	      %if ($otherp eq "read&write"){
+		<td><input type="radio" name="others_perm" value="read&write" checked></td>
+ 	      %}
+              %else {
+		<td><input type="radio" name="others_perm" value="read&write"></td>
+	      %}
+	      %if ($otherp eq "read"){
+              	<td><input type="radio" name="others_perm" value="read" checked></td>
+	      %}
+	      %else {
+		<td><input type="radio" name="others_perm" value="read"></td>
+	      %}
+	      %if ($otherp eq "deny"){
+             	 <td><input type="radio" name="others_perm" value="deny" checked></td></tr>
+	      %}
+              %else {
+		<td><input type="radio" name="others_perm" value="deny"></td></tr>
+	      %}
               </table>
             <!-- /.table-responsive -->
             </div>

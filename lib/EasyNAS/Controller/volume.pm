@@ -36,6 +36,11 @@ sub view ($self) {
    createvol($self);
  }
 
+##### savevol #####
+ if (defined $action && $action eq "savevol")
+ {
+   savevol($self);
+ }
 
 ####### deletevol ######
  if (defined $action && $action eq "deletevol") 
@@ -100,41 +105,41 @@ sub view ($self) {
   my $perm    = sprintf '%04o', (stat($dirname))[2] & 07777;
 
   ### get current permmision ###
-    if (substr($perm, 1, 1) eq 7 )
+    if (substr($perm, 1, 1) eq 7 || substr($perm, 1, 1) eq 6 )
     {
-	$userp = "Read&Write";
+	$userp = "read&write";
     }
-    if (substr($perm, 1, 1) eq 5 )
+    if (substr($perm, 1, 1) eq 5 || substr($perm, 1, 1) eq 4 )
     {
-	$userp = "Read";
+	$userp = "read";
     }
     if (substr($perm, 1, 1) eq 0 )
     {
-	$userp = "None";
+	$userp = "deny";
     }
-    if (substr($perm, 2, 1) eq 7 )
+    if (substr($perm, 2, 1) eq 7 || substr($perm, 2, 1) eq 6 )
     {
-	$groupp = "Read&Write";
+	$groupp = "read&write";
     }
-    if (substr($perm, 2, 1) eq 5 )
+    if (substr($perm, 2, 1) eq 5 || substr($perm, 2, 1) eq 4  )
     {
-	$groupp = "Read";
+	$groupp = "read";
     }
     if (substr($perm, 2, 1) eq 0 )
     {
-	$groupp = "None";
+	$groupp = "deny";
     }
-    if (substr($perm, 3, 1) eq 7 )
+    if (substr($perm, 3, 1) eq 7 || substr($perm, 3, 1) eq 6)
     {
-	$otherp = "Read&Write";
+	$otherp = "read&write";
     }
-    if (substr($perm, 3, 1) eq 5 )
+    if (substr($perm, 3, 1) eq 5 || substr($perm, 3, 1) eq 4 )
     {
-	$otherp = "Read";
+	$otherp = "read";
     }
     if (substr($perm, 3, 1) eq 0 )
     {
-	$otherp = "None";
+	$otherp = "deny";
     }
 
     ### get current owner ###
@@ -147,7 +152,12 @@ sub view ($self) {
   $self->stash(vol =>$vol,
   	       fs =>$fs,
        	       users => \%users,
-               groups => \%groups);
+               groups => \%groups,
+       	       uowner => $uowner,
+	       gowner => $gowner,
+       	       userp => $userp,
+	       groupp => $groupp,
+	       otherp => $otherp);
   $self->render(template => 'easynas/volume_settings');
   return;
  
@@ -218,12 +228,54 @@ sub createvol($self) {
  }
  else 
  {
-   $rc = system("/usr/bin/sudo /usr/bin/chown $user.$group $mount_dir/$fs/$vol > /dev/null");
+   $rc = system("/usr/bin/sudo /usr/bin/chown $user:$group $mount_dir/$fs/$vol > /dev/null");
    $rc = system("/usr/bin/sudo /bin/chmod $permission $mount_dir/$fs/$vol > /dev/null");  
    $result="success";
    $msg=$TEXT{'vol_created'};
 
  }
+ return;
+}
+
+########### savevol #############
+sub savevol($self) {
+ my $vol=$self->param("vol");
+ my $fs=$self->param("fs");
+ my $user=$self->param("user");
+ my $group=$self->param("group");
+ my $user_perm=$self->param("user_perm");
+ my $group_perm=$self->param("group_perm");
+ my $others_perm=$self->param("others_perm");
+ my $rc;
+ my $permission=0;
+ if ($user_perm eq "read")
+ {
+  $permission = $permission+500;
+ }
+ if ($user_perm eq "read&write")
+ {
+  $permission = $permission+700;
+ }
+ if ($group_perm eq "read")
+ {
+  $permission = $permission+50;
+ }
+ if ($group_perm eq "read&write")
+ {
+  $permission = $permission+70;
+ }
+ if ($others_perm eq "read")
+ {
+  $permission = $permission+5;
+ }
+ if ($others_perm eq "read&write")
+ {
+  $permission = $permission+7;
+ }
+ $rc = system("/usr/bin/sudo /usr/bin/chown $user:$group $mount_dir/$fs/$vol > /dev/null");
+ $rc = system("/usr/bin/sudo /bin/chmod $permission $mount_dir/$fs/$vol > /dev/null");
+ $result="success";
+ $msg=$TEXT{'vol_saved'};
  return;
 }
 

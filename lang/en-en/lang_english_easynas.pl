@@ -454,7 +454,7 @@ $TEXT{'vol_snapshot_name'} = "Snapshot Name";
 $TEXT{'vol_no_snapshot_name'} = "No Snapshot name was entered";
 $TEXT{'vol_failed_to_add_snapshot'} = "Failed to add snapshot";
 $TEXT{'vol_snapshot_created'} = "Snapshot Created Succesfuly";
-$TEXT{'vol_save'} = "Save";
+$TEXT{'vol_saved'} = "Volume Saved Succesfully";
 
 $TEXT{'failed_to_change_owner'} = "Failed to change owner";
 $TEXT{'failed_to_change_permission'} = "Failed to change permission";
