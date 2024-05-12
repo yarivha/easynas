@@ -83,7 +83,42 @@ sub easynas_info
 sub networks_info
 {   
  my %networks;
- $networks{'lan0'}=['lan0','dhcp','1G'];
+ my @nmcli;
+ my $device;
+ my $type;
+ my $hwaddr;
+ my $mtu;
+ my $state;
+ my $ip;
+ my @interfaces = `ls /sys/class/net | /usr/bin/grep -v lo`;
+ foreach (@interfaces)
+    {
+        @nmcli = `/usr/bin/sudo /usr/bin/nmcli device show $_ `;
+        foreach (@nmcli)
+	{
+	 if ($_ =~ /GENERAL.DEVICE:/s) {
+            (undef,$device) = split(" ",$_);
+         }
+	 if ($_ =~ /GENERAL.TYPE:/s) {
+            (undef,$type) = split(" ",$_);
+         }
+	 if ($_ =~ /GENERAL.HWADDR:/s) {
+            (undef,$hwaddr) = split(" ",$_);
+         }
+	 if ($_ =~ /GENERAL.MTU:/s) {
+            (undef,$mtu) = split(" ",$_);
+         }
+	 if ($_ =~ /GENERAL.STATE:/s) {
+            (undef,undef,$state) = split(" ",$_);
+         }
+	 if ($_ =~ /IP4.ADDRESS/s) {
+            (undef,$ip) = split(" ",$_);
+         }
+
+
+	}
+      $networks{$_}=[$device,$type,$state,$ip];
+     }
  return(%networks);
 }       
 
@@ -757,7 +792,12 @@ sub fs_info
          (undef,undef,undef,$free) = split(' ',$_);
         }
        }
-       $percentage=(int((parse_bytes($used))/(parse_bytes($size))*100));
+       if (parse_bytes($size) > 0) {
+        $percentage=(int((parse_bytes($used))/(parse_bytes($size))*100));
+       }
+       else {
+	$percentage=0;
+       }
        if ($fs ne "ROOT" && $fs ne "BOOT")
        {
          $filesystems{$fs}=[$uuid,$health,$size,$used,$free,$percentage,$devices,$mounted,$raid,get_compress_status($fs)];
