@@ -37,9 +37,9 @@
         <link href="css/morris.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
-        <link href="/fontawesome/css/fontawesome.css" rel="stylesheet" />
-        <link href="/fontawesome/css/brands.css" rel="stylesheet" />
-        <link href="/fontawesome/css/solid.css" rel="stylesheet" />
+        <link href="/fonts/css/fontawesome.css" rel="stylesheet" />
+        <link href="/fonts/css/brands.css" rel="stylesheet" />
+        <link href="/fonts/css/solid.css" rel="stylesheet" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
