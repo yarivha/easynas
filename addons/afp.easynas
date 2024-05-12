@@ -3,7 +3,7 @@
  <description>afp</description>
  <version>1.0.0</version>
  <author>Yariv Hakim</author>
- <icon>fa-apple</icon>
+ <icon>fa-brands fa-apple</icon>
  <type>sharing</type>
  <config>/etc/easynas/netatalk/afp.conf</config>
  <program>afp.pl</program>

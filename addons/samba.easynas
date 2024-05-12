@@ -5,7 +5,7 @@
  <author>Yariv Hakim</author>
  <type>sharing</type>
  <program>samba.pl</program>
- <icon>fa-windows</icon>
+ <icon>fa-brands fa-windows</icon>
  <config>/etc/easynas/smb.conf</config>
  <service>easynas-smb.service</service>
 </addon>

@@ -7,5 +7,5 @@
  <program>mariadb.pl</program>
  <config>/etc/easynas/raddb/radiusd.conf</config>
  <service>easynas-db.service</service>
- <icon>fa-file-text-o</icon>
+ <icon>fa-file-text</icon>
 </addon>

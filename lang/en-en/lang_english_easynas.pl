@@ -130,8 +130,17 @@ $TEXT{'testore_completed'} = "Restore Completed";
 
 #### Network settings ####
 $TEXT{'network_setting'} = "Network Settings";
+$TEXT{'network_interface'} = "Interface";
+$TEXT{'network_type'} = "Type";
+$TEXT{'network_state'} = "State";
+$TEXT{'network_speed'} = "Speed";
+$TEXT{'network_ip'} = "IP Address";
+$TEXT{'network_actions'} = "Actions";
+$TEXT{'network_edit'} = "Edit";
+
 $TEXT{'error_ip_demo'} = "Can't change IP in a demo site";
 $TEXT{'network_restart'} = "Restart EasyNAS server for the changes to take place.";
+
 
 #### Scheduler ##########
 $TEXT{'scheduler'} = "Scheduler";

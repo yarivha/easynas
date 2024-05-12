@@ -1,7 +1,7 @@
 <addon>
  <name>disk</name>
  <description>disk_manager</description>
- <icon>fa-hdd-o</icon>
+ <icon>fa-hdd</icon>
  <version>1.0.0</version>
  <author>Yariv Hakim</author>
  <type>storage</type>

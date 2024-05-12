@@ -8,5 +8,5 @@
  <config>/etc/easynas/raddb/radiusd.conf</config>
  <clients>/etc/easynas/raddb/clients.conf</clients>
  <service>easynas-radiusd.service</service>
- <icon>fa-circle-o</icon>
+ <icon>fa-circle</icon>
 </addon>

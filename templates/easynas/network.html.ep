@@ -34,7 +34,7 @@
 						% foreach my $network (keys (%$networks)) {
                                                 <tr>
 						 %if ($networks->{$network}[1] eq "ethernet") {
-                                                 <td><a href="?action=edit&interface=<%= $network %>"><i class="fa fa-usb fa-2x" title="<%= ($TEXT->{'network_edit'}) %>"></i></a></td>
+                                                 <td><a href="?action=edit&interface=<%= $network %>"><i class="fa fa-ethernet fa-2x" title="<%= ($TEXT->{'network_edit'}) %>"></i></a></td>
 						 %}
 						 %if ($networks->{$network}[1] eq "wifi") {
                                                  <td><a href="?action=edit&interface=<%= $network %>"><i class="fa fa-wifi fa-2x" title="<%= ($TEXT->{'network_edit'}) %>"></i></a></td>
