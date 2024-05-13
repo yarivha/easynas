@@ -1,9 +1,0 @@
-<addon>
- <name>backup</name>
- <description>backup_restore</description>
- <version>0.7.0</version>
- <icon>fa-floppy-disk</icon>
- <author>Yariv Hakim</author>
- <type>system</type>
- <program>backup.pl</program>
-</addon>

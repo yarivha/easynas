@@ -1,7 +1,0 @@
-<addons>
- <name>power</name>
- <description>power_management</description>
- <version>1.0.0</version>
- <author>Yariv Hakim</author>
- <program>power.pl</program>
-</addons>

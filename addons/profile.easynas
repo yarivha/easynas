@@ -1,8 +1,0 @@
-<addon>
- <name>user_profile</name>
- <description>user_profile</description>
- <version>1.0.0</version>
- <icon>fa-user</icon>
- <author>Yariv Hakim</author>
- <program>profile.pl</program>
-</addon>
