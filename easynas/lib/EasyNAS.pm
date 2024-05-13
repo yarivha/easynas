@@ -20,6 +20,7 @@ sub startup ($self) {
   # Normal route to controller
   $r->get('/')->to('dashboard#view');
   $r->get('/easynas')->to('dashboard#view');
+  $r->get('/easynas/firmware.pl')->to('dashboard#view');
   $r->any('/login')->to('login#view');
   $r->get('/logout')->to('login#logout');
   $r->get('/firmware')->to('firmware#view');
