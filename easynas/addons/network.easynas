@@ -1,0 +1,9 @@
+<addon>
+ <name>network</name>
+ <description>network_settings</description>
+ <version>1.0.0</version>
+ <author>Yariv Hakim</author>
+ <icon>fa-network-wired</icon>
+ <type>system</type>
+ <program>network</program>
+</addon>

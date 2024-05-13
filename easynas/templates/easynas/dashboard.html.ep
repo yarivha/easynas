@@ -1,0 +1,65 @@
+% layout 'default';
+
+% if ($missing_update) { 
+<div class="alert alert-info alert-dismissable">
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><%= ($TEXT->{'firmware_update_available'}) %><a href="firmware" ><%= ($TEXT->{'firmware_here'}) %></a></div>
+%}
+<div class="row"><div class="col-lg-3 col-md-6"><div class="panel panel-green"><div class="panel-heading"><div class="row"><div class="col-xs-3"><i class="fa-regular fa-hard-drive fa-5x"></i></div><div class="col-xs-9 text-right"><div class="huge"><%= $disk_number %></div><div><%= ($TEXT->{'dashboard_drives'}) %></div></div></div></div><a href="<%= ($addons->{'disk'}->{program}) %>"><div class="panel-footer"><span class="pull-left"><%= ($TEXT->{'dashboard_view_details'}) %></span><span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span><div class="clearfix"></div></div></a></div></div><div class="col-lg-3 col-md-6"><div class="panel panel-primary"><div class="panel-heading">
+
+<div class="row"><div class="col-xs-3"><i class="fa fa-database fa-5x"></i></div><div class="col-xs-9 text-right"><div class="huge"><%= $fs_number %></div><div><%= ($TEXT->{'dashboard_filesystems'}) %></div></div></div></div><a href="<%= ($addons->{'filesystem'}->{program}) %>"><div class="panel-footer"><span class="pull-left"><%= ($TEXT->{'dashboard_view_details'}) %></span><span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span><div class="clearfix"></div></div></a></div></div><div class="col-lg-3 col-md-6"><div class="panel panel-yellow"><div class="panel-heading">
+
+<div class="row"><div class="col-xs-3"><i class="fa fa-folder fa-5x"></i></div><div class="col-xs-9 text-right"><div class="huge"><%= $vol_number %></div><div><%= ($TEXT->{'dashboard_volumes'}) %></div></div></div></div><a href="<%= ($addons->{'volume'}->{program}) %>"><div class="panel-footer"><span class="pull-left"><%= ($TEXT->{'dashboard_view_details'}) %></span><span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span><div class="clearfix"></div></div></a></div></div><div class="col-lg-3 col-md-6"><div class="panel panel-red"><div class="panel-heading">
+
+<div class="row"><div class="col-xs-3"><i class="fa fa-users fa-5x"></i></div><div class="col-xs-9 text-right"><div class="huge"><%= $user_number %></div><div><%= ($TEXT->{'dashboard_users'}) %></div></div></div></div><a href="<%= ($addons->{'users'}->{program}) %>"><div class="panel-footer"><span class="pull-left"><%= ($TEXT->{'dashboard_view_details'}) %></span><span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span><div class="clearfix"></div></div></a></div></div>
+
+
+<div class="col-lg-6"><div class="panel panel-default"><div class="panel-heading"><div class="row"><div class="col-xs-3">Disk</div><div class="panel-body">
+<table>
+<tr>
+% foreach my $disk (keys (%$disks)) {
+ % if ( $disks->{$disk}[3] eq "System") {
+<td><a href="<%= ($addons->{'disk'}->{program}) %>?action=settings&disk=<%= $disk %>"><i class="fa-regular fa-hard-drive fa-5x" style="color:blue" title="<%= $disk %>"></i></a>&nbsp</td>
+ %}
+ % if ( $disks->{$disk}[3] eq "Failed") {
+<td><a href="<%= ($addons->{'disk'}->{program}) %>?action=settings&disk=<%= $disk %>"><i class="fa-regular fa-hard-drive fa-5x" style="color:red" title="<%= $disk %>"></i></a>&nbsp</td>
+ %}
+ % if ( $disks->{$disk}[3] eq "Used") {
+<td><a href="<%= ($addons->{'disk'}->{program}) %>?action=settings&disk=<%= $disk %>"><i class="fa-regular fa-hard-drive fa-5x" style="color:green" title="<%= $disk %>"></i></a>&nbsp</td>
+ %}
+ % if ( $disks->{$disk}[3] eq "Free") {
+<td><a href="<%= ($addons->{'disk'}->{program}) %>?action=settings&disk=<%= $disk %>"><i class="fa-regular fa-hard-drive fa-5x" style="color:gray" title="<%= $disk %>"></i></a>&nbsp</td>
+ %}
+%}
+</tr>
+<tr>
+% foreach my $disk (keys (%$disks)) {
+ <td><%= $disks->{$disk}[2] %></td>
+%}
+</tr>
+</table>
+
+</div></div></div><div class="panel-footer"><span class="pull-left"><i class="fa fa-arrow-circle-right" style="color:red"></i></span><span class="pull-left">&nbsp;Failed</span><br><span class="pull-left"><i class="fa fa-arrow-circle-right" style="color:green"></i></span><span class="pull-left">&nbsp;Used</span><br><span class="pull-left"><i class="fa fa-arrow-circle-right" style="color:blue"></i></span><span class="pull-left">&nbsp;System</span><br><span class="pull-left"><i class="fa fa-arrow-circle-right" style="color:gray"></i></span><span class="pull-left">&nbsp;Free</span><div class="clearfix"></div></div></div></div>
+
+<div class="col-lg-6"><div class="panel panel-default"><div class="panel-heading"><div class="row"><div class="col-xs-3">File System</div><div class="panel-body">
+<table>
+<tr>
+% foreach my $fs (keys (%$filesystems)) {
+ % if ( $filesystems->{$fs}[1]  eq "Good") {
+    <td><a href="<%= ($addons->{'filesystem'}->{program}) %>?action=settings&fs=<%= $fs %>"><i class="fa fa-database fa-5x" style="color:green" title="<%= $fs %>"></i></a>&nbsp</td>
+ %}
+ % else {
+    <td><a href="<%= ($addons->{'filesystem'}->{program}) %>?action=settings&fs=<%= $fs %>"><i class="fa fa-database fa-5x" style="color:red" title="<%= $fs %>"></i></a>&nbsp</td>
+ %}
+%}
+</tr><tr>
+% foreach my $fs (keys (%$filesystems)) {
+ <td>
+  <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="<%= $filesystems->{$fs}[5] %>" aria-valuemin="0" aria-valuemax="100">
+   <%= $filesystems->{$fs}[5] %>%<div class="progress-bar" style="width: <%= $filesystems->{$fs}[5] %>%"></div>
+  </div>
+ </td>
+%}
+</tr>
+</table>
+</div></div></div><div class="panel-footer"><span class="pull-left"><i class="fa fa-arrow-circle-right" style="color:red"></i></span><span class="pull-left">&nbsp;Degraded</span><br><span class="pull-left"><i class="fa fa-arrow-circle-right" style="color:green"></i></span><span class="pull-left">&nbsp;Good</span><br></div></div></div>  
+

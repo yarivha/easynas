@@ -1,0 +1,43 @@
+% layout 'login';
+
+
+%if ($result eq "failed"){
+ <div class="alert alert-danger alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <center><%= $msg %></center>
+ </div>
+%}
+
+
+ <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="login-panel panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><center><%= ($TEXT->{'login_to_easynas'}) %></center></h3>
+                        </div>
+                        <div class="panel-body">
+                            <form role="form" method="post">
+				<input type="hidden" name="action" value="login">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="<%= ($TEXT->{'login_username'}) %>" name="user" type="text" autofocus>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="<%= ($TEXT->{'login_password'}) %>" name="pass" type="password" value="">
+                                    </div>
+                                    <div class="checkbox">
+                                        <label class="checkbox">
+                                            <input name="remember" type="checkbox" value="remember"><%= ($TEXT->{'login_remember_me'}) %>
+                                        </label>
+                                    </div>
+				    <input type="hidden" name="action" value="login">
+                                    <!-- Change this to a button or input when using this as a form -->
+ 				    <input type="submit" value="<%= ($TEXT->{'login'}) %>" class="btn btn-lg btn-success btn-block">
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

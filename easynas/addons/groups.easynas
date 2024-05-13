@@ -1,0 +1,10 @@
+<addon>
+ <name>groups</name>
+ <description>groups_manager</description>
+ <version>1.2.0</version>
+ <author>Yariv Hakim</author>
+ <type>realm</type>
+ <icon>fa-users</icon>
+ <config>/etc/group</config>
+ <program>groups</program>
+</addon>

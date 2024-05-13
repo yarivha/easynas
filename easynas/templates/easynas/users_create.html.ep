@@ -1,0 +1,47 @@
+% layout 'default';
+
+<div class="row">
+ <div class="col-lg-10">
+  <div class="panel panel-default">
+   <div class="panel-heading">
+    <label><%= ($TEXT->{'users_create'}) %></label>
+   </div>
+   <div class="panel-body">
+        <form role="form">
+         <input type=hidden name="action" value="createuser">
+         <div class="form-group">
+          <label><%= ($TEXT->{'users_name'}) %></label>
+          <input class="form-control" name="name">
+         </div>
+         <div class="form-group">
+          <label><%= ($TEXT->{'users_desc'}) %></label>
+	  <input class="form-control" name="desc">
+         </div>
+         <div class="form-group">
+          <label><%= ($TEXT->{'users_password'}) %></label>
+	  <input type="password" class="form-control" name="password1">
+         </div>
+	 <div class="form-group">
+          <label><%= ($TEXT->{'users_password_retype'}) %></label>
+          <input type="password" class="form-control" name="password2">
+         </div>
+	 <div class="form-group">
+          <label><%= ($TEXT->{'users_groups'}) %></label>
+	  <BR>
+	  % foreach my $group (keys (%$groups)) {
+          <input type="checkbox" name="groups" value="<%= $group %>">
+	  <label><%= $group %></label>
+	  <BR>
+          %}
+         </div>
+        </div>
+      <div class="panel-footer">
+       <center>
+        <button type="submit" class="btn btn-default"><%= ($TEXT->{'users_add'}) %></button>
+        <button type="reset" class="btn btn-default"><%= ($TEXT->{'users_reset'}) %></button>
+       </center>
+       </form>
+      </div>
+    </div>
+ </div>
+</div>

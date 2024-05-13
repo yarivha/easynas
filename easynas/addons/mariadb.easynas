@@ -1,0 +1,11 @@
+<addon>
+ <name>mariadb</name>
+ <description>mariadb</description>
+ <version>1.0.0</version>
+ <author>Yariv Hakim</author>
+ <type>services</type>
+ <program>mariadb.pl</program>
+ <config>/etc/easynas/raddb/radiusd.conf</config>
+ <service>easynas-db.service</service>
+ <icon>fa-file-text</icon>
+</addon>

@@ -1,0 +1,64 @@
+% layout 'default';
+
+%if ($result eq "fail"){
+<div class="alert alert-danger alert-dismissible">
+ <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+ <%= $msg %>
+</div>
+ %}
+
+ %if ($result eq "success"){
+<div class="alert alert-success alert-dismissible">
+ <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+ <%= $msg %>
+</div>
+ %}
+
+
+<div class="row">
+                        <div class="col-lg-12">
+                                <!-- /.panel-heading -->
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                            <thead>
+                                                <tr>
+						<th></th>
+						<th><%= ($TEXT->{'fs'}) %></th>
+						<th><%= ($TEXT->{'fs_health'}) %></th>
+						<th><%= ($TEXT->{'fs_size'}) %></th>
+						<th><%= ($TEXT->{'fs_drives'}) %></th>
+						<th><%= ($TEXT->{'fs_status'}) %></th>
+						<th><%= ($TEXT->{'fs_raid_level'}) %></th>
+						<th><%= ($TEXT->{'fs_compression'}) %></th>
+						<th><%= ($TEXT->{'fs_actions'}) %></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+						% foreach my $fs (keys (%$filesystems)) {
+                                                <tr>
+                                                    <td><a href="?action=settingsmenu&fs=<%= $fs %>"><i class="fa fa-database fa-2x" title="Settings"></i></a></td>
+						    <td><a href="?action=settingsmenu&fs=<%= $fs %>"><%= $fs %></a></td>
+						    <td><%= $filesystems->{$fs}[1] %></td>
+						    <td><%= $filesystems->{$fs}[2] %></td>
+						    <td><%= $filesystems->{$fs}[6] %></td>
+						    <td><%= $filesystems->{$fs}[7] %></td>
+						    <td><%= $filesystems->{$fs}[8] %></td>
+						    <td><%= $filesystems->{$fs}[9] %></td>
+						    <td>
+
+ %if ( $filesystems->{$fs}[4] eq "Mounted"){ 
+     <a href=?action=unmount&fs=<%= $fs %>><i class="fa fa-unlink fa-2x" title="<%= $TEXT->{'unmount'} %>"></i>&nbsp;</a>
+     <a onclick="return confirm('<%= ($TEXT->{'fs_delete'}) %>')" href="?action=deletefs&fs=<%= $fs %>&uuid=<%= $filesystems->{$fs}[0] %>"><i class="fa fa-trash-o fa-2x" title="<%= ($TEXT->{'delete'}) %>"></i></a>
+ %}else{
+    <a href=?action=mount&fs=<%= $fs %>><i class="fa fa-link fa-2x" title="<%= $TEXT->{'mount'} %>"></i>&nbsp;</a>
+ %}
+
+</td></tr>
+					 	%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+				</div>
+			        <br><br><a href="?action=createfsmenu">[Create File System]</a>
+
+
