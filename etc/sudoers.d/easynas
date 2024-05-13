@@ -1,0 +1,2 @@
+easynas ALL = NOPASSWD: ALL
+admin   ALL = NOPASSWD: ALL
