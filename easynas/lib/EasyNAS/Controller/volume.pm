@@ -62,11 +62,18 @@ sub view ($self) {
    my %users=users_info();
    my %groups=groups_info();
    my %fs=fs_info();
-   $self->stash(users => \%users,
+   
+   if (keys %fs) {
+    $self->stash(users => \%users,
 	        groups => \%groups,
 		filesystems => \%fs);
-   $self->render(template => 'easynas/volume_create');
-   return;
+    $self->render(template => 'easynas/volume_create');
+    return;
+   }
+   else {
+    $result="fail";
+    $msg=$TEXT{'vol_no_fs'};
+   }
  }
 
 
