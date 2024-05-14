@@ -24,6 +24,7 @@ sub view ($self) {
 		addons =>\%addons,
 		lang_list => \@lang_list);
 
+   ##### edit #####
   if (defined $action && $action eq "edit") {
    my $interface=$self->param("interface");
    my %networks=networks_info();
@@ -32,6 +33,7 @@ sub view ($self) {
    $self->render(template => 'easynas/network_edit');
    return;
   }
+
   ##### menu ######
 
   my %networks=networks_info();

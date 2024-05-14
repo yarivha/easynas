@@ -6,21 +6,157 @@
    <div class="panel-heading">
     <label><%= $interface %></label>
    </div>
+   <BR>
    <form role="form">
    <div class="form-group">
-    <label>Inline Checkboxes</label>
-    <label class="checkbox-inline">
-     <input type="checkbox">1
+   <label><%= ($TEXT->{'network_connection_type'}) %></label>
+    <BR> 
+    <label class="radio-inline">
+     %if ($networks->{$interface}[10] eq "manual") {
+      <input type="radio" name="network" value="manual" checked>
+     %}
+     %else {
+      <input type="radio" name="network" value="manual">
+     %}
+     <%= ($TEXT->{'network_static'}) %>
     </label>
-    <label class="checkbox-inline">
-     <input type="checkbox">2
+    <label class="radio-inline">
+     %if ($networks->{$interface}[10] eq "auto") {
+      <input type="radio" name="network" value="auto" checked>
+     %}
+     %else {
+      <input type="radio" name="network" value="auto">
+     %}
+     <%= ($TEXT->{'network_dhcp'}) %>
     </label>
    </div>
    <div class="form-group">
-    <label>Text Input</label>
-    <input class="form-control">
-    <p class="help-block">Example block-level help text here.</p>
+    <label><%= ($TEXT->{'network_ip'}) %></label>
+    <input class="form-control" value="<%= $networks->{$interface}[4] %>">
+   </div>
+   <div class="form-group">
+    <label><%= ($TEXT->{'network_subnet'}) %></label>
+    <select class="form-control" name="subnet">
+     %if ($networks->{$interface}[5] eq "16") {
+      <option value="16" selected>255.255.0.0</option>
+     %}
+     %else {
+      <option value="16">255.255.0.0</option>
+     %}
+     %if ($networks->{$interface}[5] eq "17") {
+      <option value="17" selected>255.255.128.0</option>
+     %}
+     %else {
+      <option value="17">255.255.128.0</option>
+     %}
+     %if ($networks->{$interface}[5] eq "18") {
+      <option value="18" selected>255.255.192.0</option>
+     %}
+     %else {
+      <option value="18">255.255.192.0</option>
+     %}
+     %if ($networks->{$interface}[5] eq "19") {
+      <option value="19" selected>255.255.224.0</option>
+     %}
+     %else {
+      <option value="19">255.255.224.0</option>
+     %}
+     %if ($networks->{$interface}[5] eq "20") {
+      <option value="20" selected>255.255.240.0</option>
+     %}
+     %else {
+      <option value="20">255.255.240.0</option>
+     %}
+     %if ($networks->{$interface}[5] eq "21") {
+      <option value="21" selected>255.255.248.0</option>
+     %}
+     %else {
+      <option value="21">255.255.248.0</option>
+     %}
+     %if ($networks->{$interface}[5] eq "22") {
+      <option value="22" selected>255.255.252.0</option>
+     %}
+     %else {
+      <option value="22">255.255.252.0</option>
+     %}
+     %if ($networks->{$interface}[5] eq "23") {
+      <option value="23" selected>255.255.254.0</option>
+     %}
+     %else {
+      <option value="23">255.255.254.0</option>
+     %}	
+     %if ($networks->{$interface}[5] eq "24") {
+      <option value="24" selected>255.255.255.0</option>
+     %}
+     %else {
+      <option value="24">255.255.255.0</option>
+     %}
+     %if ($networks->{$interface}[5] eq "25") {
+      <option value="25" selected>255.255.255.128</option>
+     %}
+     %else {
+      <option value="25">255.255.255.128</option>
+     %}
+     %if ($networks->{$interface}[5] eq "26") {
+      <option value="26" selected>255.255.255.192</option>
+     %}
+     %else {
+      <option value="26">255.255.255.192</option>
+     %}
+     %if ($networks->{$interface}[5] eq "27") {
+      <option value="27" selected>255.255.255.224</option>
+     %}
+     %else {
+      <option value="27">255.255.255.224</option>
+     %}
+     %if ($networks->{$interface}[5] eq "28") {
+      <option value="28" selected>255.255.255.240</option>
+     %}
+     %else {
+      <option value="28">255.255.255.240</option>
+     %}
+     %if ($networks->{$interface}[5] eq "29") {
+      <option value="29 selected">255.255.255.248</option>
+     %}
+     %else {
+      <option value="29">255.255.255.248</option>
+     %}
+     %if ($networks->{$interface}[5] eq "30") {
+      <option value="30" selected>255.255.255.252</option>
+     %}
+     %else {
+      <option value="30">255.255.255.252</option>
+     %}
+     %if ($networks->{$interface}[5] eq "31") {
+     <option value="31" selected>255.255.255.254</option>
+     %}
+     %else {
+      <option value="31">255.255.255.254</option>
+     %}
+     %if ($networks->{$interface}[5] eq "32") {
+      <option value="32" selected>255.255.255.255</option>
+     %}
+     %else {
+      <option value="32">255.255.255.255</option>
+     %}
+     </select>
+   </div>
+   <div class="form-group">
+    <label><%= ($TEXT->{'network_gateway'}) %></label>
+    <input class="form-control" value="<%= $networks->{$interface}[6] %>">
+   </div>
+   <div class="form-group">
+    <label><%= ($TEXT->{'network_dns1'}) %></label>
+    <input class="form-control" value="<%= $networks->{$interface}[7] %>">
    </div> 
+   <div class="form-group">
+    <label><%= ($TEXT->{'network_dns2'}) %></label>
+    <input class="form-control" value="<%= $networks->{$interface}[8] %>">
+   </div>
+   <div class="form-group">
+    <label><%= ($TEXT->{'network_domain'}) %></label>
+    <input class="form-control" value="<%= $networks->{$interface}[9] %>">
+   </div>
     <div class="panel-footer">
     <center>
      <button type="submit" class="btn btn-default"><%= ($TEXT->{'vol_save'}) %></button>

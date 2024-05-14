@@ -84,13 +84,20 @@ sub networks_info
 {   
  my %networks;
  my @nmcli;
+ my $nmcli;
  my $device;
  my $type;
  my $hwaddr;
  my $mtu;
  my $state;
+ my $ipv4;
  my $ip;
+ my $subnet;
  my $gateway;
+ my $dns1;
+ my $dns2;
+ my $domain;
+ my $method;
  my @interfaces = `ls /sys/class/net | /usr/bin/grep -v lo`;
  foreach (@interfaces)
     {
@@ -113,14 +120,36 @@ sub networks_info
             (undef,undef,$state) = split(" ",$_);
          }
 	 if ($_ =~ /IP4.ADDRESS/s) {
-            (undef,$ip) = split(" ",$_);
+            (undef,$ipv4) = split(" ",$_);
+	    ($ip,$subnet)=split("/",$ipv4);
          }
 	 if ($_ =~ /IP4.GATEWAY/s) {
             (undef,$gateway) = split(" ",$_);
          }
-
+	 if ($_ =~ /IP4.DNS.1./s) {
+            (undef,$dns1) = split(" ",$_);
+         }
+	 if ($_ =~ /IP4.DNS.2./s) {
+            (undef,$dns2) = split(" ",$_);
+         }
+	 if ($_ =~ /IP4.DOMAIN/s) {
+            (undef,$domain) = split(" ",$_);
+         }
 	}
-      $networks{$_}=[$device,$type,$state,$ip];
+      $nmcli = `/usr/bin/sudo /usr/bin/nmcli -f ipv4.method con show $device `;
+      (undef,$method)=split(" ",$nmcli);
+      $networks{$device}=[$device,$type,$state,$ipv4,$ip,$subnet,$gateway,$dns1,$dns2,$domain,$method];
+      $device="";
+      $type="";
+      $state="";
+      $ipv4="";
+      $ip="";
+      $subnet="";
+      $gateway="";
+      $dns1="";
+      $dns2="";
+      $domain="";
+      $method="";
      }
  return(%networks);
 }       

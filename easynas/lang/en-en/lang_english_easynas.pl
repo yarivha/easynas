@@ -134,9 +134,18 @@ $TEXT{'network_interface'} = "Interface";
 $TEXT{'network_type'} = "Type";
 $TEXT{'network_state'} = "State";
 $TEXT{'network_speed'} = "Speed";
+$TEXT{'network_connection_type'} = "Connection Type";
 $TEXT{'network_ip'} = "IP Address";
+$TEXT{'network_subnet'} = "Subnet Mask";
+$TEXT{'network_gateway'} = "Gateway";
+$TEXT{'network_dns1'} = "Primary DNS";
+$TEXT{'network_dns2'} = "Secondary DNS";
+$TEXT{'network_domain'} = "Domain";
 $TEXT{'network_actions'} = "Actions";
 $TEXT{'network_edit'} = "Edit";
+$TEXT{'network_static'} = "Static";
+$TEXT{'network_dhcp'} = "DHCP";
+
 
 $TEXT{'error_ip_demo'} = "Can't change IP in a demo site";
 $TEXT{'network_restart'} = "Restart EasyNAS server for the changes to take place.";
