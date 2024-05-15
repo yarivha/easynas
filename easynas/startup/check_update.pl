@@ -34,6 +34,13 @@ my $timestamp=localtime();
  print $fh $timestamp." [SYSTEM] Checking EasyNAS updates\n";
  close $fh;
 
+##### Capture Stats ######
+my $version=`cat /etc/ImageVersion`;
+my $ip=`curl -s ifconfig.io`;
+chop($ip);
+my $uuid=`dmidecode | grep UUID`;
+(undef,$serial)=split(" ",$uuid);
+`curl -s https://repo.easynas.org/api/stats.pl -H "Content-Type: application/x-www-form-urlencoded" -d "ver=$version&ip=$ip&serial=$serial"`;
 
 ####### Refresh Repo #######
 `/usr/bin/sudo /usr/bin/zypper --quiet --gpg-auto-import-keys refresh`;
