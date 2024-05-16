@@ -7,36 +7,36 @@
     <label><%= $interface %></label>
    </div>
    <BR>
-   <form role="form">
+   <form role="form" id="networkedit">
    <div class="form-group">
    <label><%= ($TEXT->{'network_connection_type'}) %></label>
     <BR> 
     <label class="radio-inline">
      %if ($networks->{$interface}[10] eq "manual") {
-      <input type="radio" name="network" value="manual" checked>
+      <input type="radio" name="network" id="static" value="manual" checked>
      %}
      %else {
-      <input type="radio" name="network" value="manual">
+      <input type="radio" name="network" id="static" value="manual">
      %}
      <%= ($TEXT->{'network_static'}) %>
     </label>
     <label class="radio-inline">
      %if ($networks->{$interface}[10] eq "auto") {
-      <input type="radio" name="network" value="auto" checked>
+      <input type="radio" name="network" id="dhcp" value="auto" checked>
      %}
      %else {
-      <input type="radio" name="network" value="auto">
+      <input type="radio" name="network" id="dhcp" value="auto">
      %}
      <%= ($TEXT->{'network_dhcp'}) %>
     </label>
    </div>
    <div class="form-group">
     <label><%= ($TEXT->{'network_ip'}) %></label>
-    <input class="form-control" value="<%= $networks->{$interface}[4] %>">
+    <input class="form-control" id="ip" value="<%= $networks->{$interface}[4] %>">
    </div>
    <div class="form-group">
     <label><%= ($TEXT->{'network_subnet'}) %></label>
-    <select class="form-control" name="subnet">
+    <select class="form-control" id="subnet" name="subnet">
      %if ($networks->{$interface}[5] eq "16") {
       <option value="16" selected>255.255.0.0</option>
      %}
@@ -143,19 +143,19 @@
    </div>
    <div class="form-group">
     <label><%= ($TEXT->{'network_gateway'}) %></label>
-    <input class="form-control" value="<%= $networks->{$interface}[6] %>">
+    <input class="form-control" id="gateway" value="<%= $networks->{$interface}[6] %>">
    </div>
    <div class="form-group">
     <label><%= ($TEXT->{'network_dns1'}) %></label>
-    <input class="form-control" value="<%= $networks->{$interface}[7] %>">
+    <input class="form-control" id="dns1" value="<%= $networks->{$interface}[7] %>">
    </div> 
    <div class="form-group">
     <label><%= ($TEXT->{'network_dns2'}) %></label>
-    <input class="form-control" value="<%= $networks->{$interface}[8] %>">
+    <input class="form-control" id="dns2" value="<%= $networks->{$interface}[8] %>">
    </div>
    <div class="form-group">
     <label><%= ($TEXT->{'network_domain'}) %></label>
-    <input class="form-control" value="<%= $networks->{$interface}[9] %>">
+    <input class="form-control" id="domain" value="<%= $networks->{$interface}[9] %>">
    </div>
     <div class="panel-footer">
     <center>
@@ -167,3 +167,51 @@
   </div>
  </div>
 </div>
+
+<script>
+ const form = document.getElementById('networkedit');
+ const dhcp = document.getElementById('dhcp');
+ const static = document.getElementById('static');
+ const ip = document.getElementById('ip');
+ const subnet = document.getElementById('subnet');
+ const gateway = document.getElementById('gateway');
+ const dns1 = document.getElementById('dns1');
+ const dns2 = document.getElementById('dns2');
+ const domain = document.getElementById('domain');
+
+ if (dhcp.checked) {
+  ip.disabled = true;
+  subnet.disabled = true;
+  gateway.disabled = true;
+  dns1.disabled = true;
+  dns2.disabled = true;
+  domain.disabled = true;
+ }
+ if (static.checked) {
+  ip.disabled = false;
+  subnet.disabled = false;
+  gateway.disabled = false;
+  dns1.disabled = false;
+  dns2.disabled = false;
+  domain.disabled = false;
+ }
+
+ form.addEventListener('change', (event) => {
+  if (event.target === dhcp) {
+    ip.disabled = true;
+    subnet.disabled = true;
+    gateway.disabled = true;
+    dns1.disabled = true;
+    dns2.disabled = true;
+    domain.disabled = true;
+  } else if (event.target === static) {
+    ip.disabled = false;
+    subnet.disabled = false;
+    gateway.disabled = false;
+    dns1.disabled = false;
+    dns2.disabled = false;
+    domain.disabled = false;
+  }
+});
+
+</script>
