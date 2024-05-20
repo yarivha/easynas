@@ -145,6 +145,8 @@ $TEXT{'network_actions'} = "Actions";
 $TEXT{'network_edit'} = "Edit";
 $TEXT{'network_static'} = "Static";
 $TEXT{'network_dhcp'} = "DHCP";
+$TEXT{'network_saved'} = "IP address changed";
+$TEXT{'network_failed_to_save'}="Failed to change IP settings";
 
 
 $TEXT{'error_ip_demo'} = "Can't change IP in a demo site";

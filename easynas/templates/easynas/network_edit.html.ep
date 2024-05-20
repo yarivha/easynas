@@ -8,6 +8,8 @@
    </div>
    <BR>
    <form role="form" id="networkedit">
+   <input type=hidden name="interface" value="<%= $interface %>">
+   <input type=hidden name="action" value="save">
    <div class="form-group">
    <label><%= ($TEXT->{'network_connection_type'}) %></label>
     <BR> 
@@ -32,7 +34,7 @@
    </div>
    <div class="form-group">
     <label><%= ($TEXT->{'network_ip'}) %></label>
-    <input class="form-control" id="ip" value="<%= $networks->{$interface}[4] %>">
+    <input class="form-control" name="ip" id="ip" value="<%= $networks->{$interface}[4] %>">
    </div>
    <div class="form-group">
     <label><%= ($TEXT->{'network_subnet'}) %></label>
@@ -143,19 +145,19 @@
    </div>
    <div class="form-group">
     <label><%= ($TEXT->{'network_gateway'}) %></label>
-    <input class="form-control" id="gateway" value="<%= $networks->{$interface}[6] %>">
+    <input class="form-control" name="gateway" id="gateway" value="<%= $networks->{$interface}[6] %>">
    </div>
    <div class="form-group">
     <label><%= ($TEXT->{'network_dns1'}) %></label>
-    <input class="form-control" id="dns1" value="<%= $networks->{$interface}[7] %>">
+    <input class="form-control" name="dns1" id="dns1" value="<%= $networks->{$interface}[7] %>">
    </div> 
    <div class="form-group">
     <label><%= ($TEXT->{'network_dns2'}) %></label>
-    <input class="form-control" id="dns2" value="<%= $networks->{$interface}[8] %>">
+    <input class="form-control" name="dns2" id="dns2" value="<%= $networks->{$interface}[8] %>">
    </div>
    <div class="form-group">
     <label><%= ($TEXT->{'network_domain'}) %></label>
-    <input class="form-control" id="domain" value="<%= $networks->{$interface}[9] %>">
+    <input class="form-control" name="domain" id="domain" value="<%= $networks->{$interface}[9] %>">
    </div>
     <div class="panel-footer">
     <center>
