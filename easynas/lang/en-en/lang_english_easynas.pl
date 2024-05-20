@@ -545,18 +545,26 @@ $TEXT{'users_settings_saved'} = "Settings Saved Succesfully";
 
 #### Groups ####
 $TEXT{'groups_manager'} = "Groups Manager";
-$TEXT{'create_group'} = "Create Group";
-$TEXT{'failed_to_add_group'} = "Failed to add the group";
-$TEXT{'delete_group'} = "Delete Group";
+$TEXT{'groups_create'} = "Create Group";
+$TEXT{'groups_failed_to_add'} = "Failed to add the group";
+$TEXT{'group_delete'} = "Delete Group";
 $TEXT{'group'} = "Group";
 $TEXT{'groups'} = "Groups";
-$TEXT{'can_not_deleted'} = "can't be deleted";
-$TEXT{'failed_to_delete_group'} = "Failed to delete the group";
+$TEXT{'group_can_not_delete'} = "can't be deleted";
+$TEXT{'groups_failed_to_delete'} = "Failed to delete the group";
 $TEXT{'group_name'} = "Group Name";
 $TEXT{'access_permission'} = "Access Permission";
 $TEXT{'groups_settings'} = "Groups Settings";
-$TEXT{'gid'} = "GID";
-$TEXT{'delete_group?'} = "Are you sure you want to delete the group ?";
+$TEXT{'groups_id'} = "Group ID";
+$TEXT{'groups_name'} = "Group Name";
+$TEXT{'groups_actions'} = "Actions";
+$TEXT{'groups_delete?'} = "Are you sure you want to delete the group ?";
+$TEXT{'groups_add'} = "Add Group";
+$TEXT{'groups_reset'} = "Reset";
+$TEXT{'groups_deleted'} = "Group Deleted Succesfully";
+$TEXT{'groups_added'} = "Group Added Succesfully";
+
+
 
 #### Security ####
 $TEXT{'security'} = "Security";
