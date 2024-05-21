@@ -271,12 +271,14 @@ sub raid_status
     my $result; 
     my $fs=$_[0];
     my @fs_df;
+    my $dir;
     if ($fs eq "ROOT") {
-     @fs_df=`sudo /sbin/btrfs fi df / | grep "Data" `;
+     $dir="/";
     }
-    else { 
-     @fs_df=`sudo /sbin/btrfs fi df $mount_dir/$fs | grep "Data" `;
+    else {
+     $dir=$mount_dir."/".$fs;
     }
+    @fs_df=`sudo /sbin/btrfs fi df $dir | grep "Data" `;
     foreach (@fs_df) {
         ($null,$raid,$null,$null)=split(/ /,$_);
     }
@@ -746,14 +748,16 @@ sub vol_info
 
   foreach $fs (keys %fs)
   {
+   if ($fs ne "ROOT") {
     @vol_info = `sudo /sbin/btrfs subvolume list $mount_dir/$fs`;
     foreach (@vol_info)
     {
-       (undef,$id,undef,undef,undef,undef,undef,undef,$vol) = split(" ",$_);
-       $du = `/usr/bin/sudo /usr/bin/du -h -a -c  $mount_dir/$fs/$vol | /usr/bin/tail -1`;
-       ($size,undef) = split(" ",$du);
-        $volumes{$fs."/".$vol}=[$id,$vol,$fs,$size];
+      (undef,$id,undef,undef,undef,undef,undef,undef,$vol) = split(" ",$_);
+      $du = `/usr/bin/sudo /usr/bin/du -h -a -c  $mount_dir/$fs/$vol | /usr/bin/tail -1`;
+      ($size,undef) = split(" ",$du);
+       $volumes{$fs."/".$vol}=[$id,$vol,$fs,$size];
     }
+   }
   }
  return(%volumes);
 }
@@ -773,6 +777,7 @@ sub fs_info
  my $percentage;
  my $devices;
  my %filesystems;
+ my $dir;
  my @filesystem_list = `/usr/bin/sudo /sbin/btrfs filesystem show`;
  my @usage;
  foreach (@filesystem_list)
@@ -784,6 +789,12 @@ sub fs_info
 	    chop($fs);
 	    $fs = substr($fs, 1);
             $health = $TEXT{'good'};
+            if ($fs eq "ROOT") {
+             $dir="/";
+            }
+            else {
+             $dir=$mount_dir."/".$fs;
+            }
 	}
 
        if ($_ =~ m/ Some devices missing/)
@@ -808,7 +819,7 @@ sub fs_info
 	   $raid='';
         }
 	
-       @usage=`/usr/bin/sudo /sbin/btrfs filesystem usage $mount_dir/$fs`;
+       @usage=`/usr/bin/sudo /sbin/btrfs filesystem usage $dir`;
        foreach (@usage) 
        { 
 	if($_ =~ m/Device size:/)
@@ -830,10 +841,7 @@ sub fs_info
        else {
 	$percentage=0;
        }
-       if ($fs ne "ROOT" && $fs ne "BOOT")
-       {
-         $filesystems{$fs}=[$uuid,$health,$size,$used,$free,$percentage,$devices,$mounted,$raid,get_compress_status($fs)];
-       }
+       $filesystems{$fs}=[$uuid,$health,$size,$used,$free,$percentage,$devices,$mounted,$raid,get_compress_status($fs)];
     }
     return (%filesystems);
 }
