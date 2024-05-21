@@ -52,7 +52,7 @@
                                                  <a href="?action=edit&interface=<%= $network %>"><i class="fa fa-wifi fa-2x" title="<%= ($TEXT->{'network_edit'}) %>"></i></a>
                                                  %}
 						 </td>
-						  <td><a href="?action=edit&disk=<%= $network %>"><%= $network %></a></td>
+						  <td><a href="?action=edit&interface=<%= $network %>"><%= $network %></a></td>
 						    <td><%= $networks->{$network}[1] %></td>
 						    <td><%= $networks->{$network}[2] %></td>
 						    <td><%= $networks->{$network}[3] %></td>
