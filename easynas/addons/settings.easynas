@@ -1,9 +1,9 @@
 <addon>
  <name>settings</name>
  <description>settings</description>
- <version>1.0.0</version>
+ <version>1.2.0</version>
  <author>Yariv Hakim</author>
  <icon>fa-gears</icon>
  <type>system</type>
- <program>settings.pl</program>
+ <program>settings</program>
 </addon>

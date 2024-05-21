@@ -30,6 +30,7 @@ our @ISA = qw(Exporter);
 our @EXPORT_OK = qw();
 our @EXPORT    = qw( %TEXT %addons @html_output @lang_list 
 		     get_mount_dir get_conf_cron get_categories get_group_default get_lang_list 
+		     get_service_status get_addon_info 
 		     write_log easynas_info fs_info vol_info users_info groups_info  disk_info health_info
 		     networks_info);
 
@@ -101,12 +102,11 @@ sub networks_info
  my @interfaces = `ls /sys/class/net | /usr/bin/grep -v lo`;
  foreach (@interfaces)
     {
-        @nmcli = `/usr/bin/sudo /usr/bin/nmcli device show $_ `;
+        $device=$_;
+	chomp($device);
+        @nmcli = `/usr/bin/sudo /usr/bin/nmcli device show $device `;
         foreach (@nmcli)
 	{
-	 if ($_ =~ /GENERAL.DEVICE:/s) {
-            (undef,$device) = split(" ",$_);
-         }
 	 if ($_ =~ /GENERAL.TYPE:/s) {
             (undef,$type) = split(" ",$_);
          }
@@ -225,10 +225,17 @@ sub write_log
     `sudo chown easynas.easynas $log_file`;
  }
  open($FH, '>>', $log_file) or die $!;
- print $FH $timestamp." "."[$TEXT{$addons{$addon}->{description}}]"." ".$type." ".get_username()." ".$message."\n";
+ print $FH $timestamp." "."[$TEXT{$addons{$addon}->{description}}]"." ".$type." ".$message."\n";
  close $FH;
 }
 
+
+########## get_addon_info ##########
+sub get_addon_info
+{
+    my $addon = $_[0];
+    return($addons{$addon});
+}
 
 
 ####### mounted ########
@@ -244,6 +251,18 @@ sub mounted
     return $result;
 }    
 
+######## get_service_status ########
+sub get_service_status
+{
+    my $service=$_[0];
+    if (`/usr/bin/sudo /usr/bin/systemctl status $service | /usr/bin/grep "Active: active"` eq "")
+    {
+        return 0;
+    }
+    else {
+        return 1;
+    }
+} 
 
 ########### get_compress_status ##########
 sub get_compress_status

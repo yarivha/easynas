@@ -6,6 +6,8 @@ use easynas;
 
 my $msg;
 my $result;
+my $addon   = get_addon_info("network");
+my $service = ($addon->{service});
 
 sub view ($self) {
   if (!($self->session('is_auth'))) {
@@ -16,17 +18,26 @@ sub view ($self) {
   my $action=$self->param('action'); 
   $msg="";
   $result=""; 
-  $self->stash(title => $TEXT{$addons{network}->{description}},
-                program => $addons{network}->{program},
+  $self->stash(title => $TEXT{$addon->{description}},
+                program => $addon->{program},
 		easynas => \%easynas,
 		menu =>\@html_output,
 		TEXT =>\%TEXT,
 		addons =>\%addons,
 		lang_list => \@lang_list);
-#### save #####
-if (defined $action && $action eq "save") {
+
+  ### activate ###
+  if (defined $action && $action eq "activate") {
+   `/usr/bin/sudo /usr/bin/systemctl start $service`;
+   `/usr/bin/sudo /usr/bin/systemctl enable $service`;
+   write_log($addon->{"name"},"INFO","$addon->{\"description\"} Service started");
+  }
+
+
+  #### save #####
+  if (defined $action && $action eq "save") {
   save($self);
-}
+  }
 
    ##### edit #####
   if (defined $action && $action eq "edit") {
@@ -39,9 +50,11 @@ if (defined $action && $action eq "save") {
   }
 
   ##### menu ######
-
+  
+  my $service_active=get_service_status($service);
   my %networks=networks_info();
-  $self->stash(networks => \%networks,
+  $self->stash(service_active => $service_active,
+	       networks => \%networks,
 	       result => $result,
       	       msg => $msg );
   $self->render(template => 'easynas/network'); 

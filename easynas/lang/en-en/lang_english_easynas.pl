@@ -147,7 +147,9 @@ $TEXT{'network_static'} = "Static";
 $TEXT{'network_dhcp'} = "DHCP";
 $TEXT{'network_saved'} = "IP address changed";
 $TEXT{'network_failed_to_save'}="Failed to change IP settings";
-
+$TEXT{'network_manager_down'}="Network Manager is down";
+$TEXT{'network_settings_can_not_change'}="Network settings can not be changed";
+$TEXT{'network_click_here_to_activate'} = "Click here to activate";
 
 $TEXT{'error_ip_demo'} = "Can't change IP in a demo site";
 $TEXT{'network_restart'} = "Restart EasyNAS server for the changes to take place.";
