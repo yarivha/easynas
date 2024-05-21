@@ -6,7 +6,7 @@ use easynas;
 
 my $msg;
 my $result;
-
+my $addon = get_addon_info("users");
 
 sub view ($self) {
   if (!($self->session('is_auth'))) {
@@ -17,8 +17,7 @@ sub view ($self) {
   my $action=$self->param('action'); 
   $msg="";
   $result="";
-  $self->stash(title => $TEXT{$addons{users}->{description}},
-                program => $addons{users}->{program},
+  $self->stash(addon => $addon,
 		easynas => \%easynas,
                 menu =>\@html_output,
                 TEXT =>\%TEXT,

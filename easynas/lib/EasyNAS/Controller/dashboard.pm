@@ -5,6 +5,8 @@ use XML::LibXML;
 use easynas;
 
 
+my $addon = get_addon_info("dashboard");
+
 sub view ($self) {
   if (!($self->session('is_auth'))) {
         $self->redirect_to('login');
@@ -36,8 +38,7 @@ sub view ($self) {
   }
   
   $self->render(template => 'easynas/dashboard', 
-		title => $TEXT{'dashboard'},
-		program => $addons{dashboard}->{program},
+		addon => $addon,
 		lang_list => \@lang_list,
 		easynas =>\%easynas,
 		menu =>\@html_output,

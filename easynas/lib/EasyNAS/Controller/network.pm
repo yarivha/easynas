@@ -18,13 +18,12 @@ sub view ($self) {
   my $action=$self->param('action'); 
   $msg="";
   $result=""; 
-  $self->stash(title => $TEXT{$addon->{description}},
-                program => $addon->{program},
-		easynas => \%easynas,
-		menu =>\@html_output,
-		TEXT =>\%TEXT,
-		addons =>\%addons,
-		lang_list => \@lang_list);
+  $self->stash(addon => $addon, 
+	       easynas => \%easynas,
+	       menu =>\@html_output,
+	       TEXT =>\%TEXT,
+	       addons =>\%addons,
+	       lang_list => \@lang_list);
 
   ### activate ###
   if (defined $action && $action eq "activate") {

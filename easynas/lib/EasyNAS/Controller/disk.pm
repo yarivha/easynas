@@ -6,6 +6,7 @@ use easynas;
 
 my $msg;
 my $result;
+my $addon = get_addon_info("disk");
 
 sub view ($self) {
   if (!($self->session('is_auth'))) {
@@ -16,8 +17,7 @@ sub view ($self) {
   my $action=$self->param('action'); 
   $msg="";
   $result=""; 
-  $self->stash(title => $TEXT{$addons{disk}->{description}},
-                program => $addons{disk}->{program},
+  $self->stash(addon => $addon,
 		easynas => \%easynas,
 		menu =>\@html_output,
 		TEXT =>\%TEXT,

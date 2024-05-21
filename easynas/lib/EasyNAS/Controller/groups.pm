@@ -6,6 +6,7 @@ use easynas;
 
 my $msg;
 my $result;
+my $addon = get_addon_info("groups");
 
 
 sub view ($self) {
@@ -17,8 +18,7 @@ sub view ($self) {
   my $action=$self->param('action'); 
   $msg="";
   $result="";
-  $self->stash( title => $TEXT{$addons{groups}->{description}},
-                program => $addons{groups}->{program},
+  $self->stash( addon => $addon,
 		easynas =>\ %easynas,
                 menu =>\@html_output,
                 TEXT =>\%TEXT,

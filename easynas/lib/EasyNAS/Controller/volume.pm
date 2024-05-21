@@ -6,6 +6,7 @@ use easynas;
 
 my $msg;
 my $result;
+my $addon = get_addon_info("volume");
 my $mount_dir=get_mount_dir();
 my $conf_cron=get_conf_cron();
 
@@ -20,8 +21,7 @@ sub view ($self) {
   $result="";
   
 
-  $self->stash(template => 'easynas/volume', 
-	       title => $TEXT{$addons{volume}->{description}},
+  $self->stash(addon => $addon,
                program => $addons{volume}->{program},
 	       easynas => \%easynas,
                menu =>\@html_output,

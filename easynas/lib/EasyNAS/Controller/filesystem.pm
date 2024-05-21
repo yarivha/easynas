@@ -3,10 +3,10 @@ use lib '/easynas/lib/EasyNAS/Controller';
 use Mojo::Base 'Mojolicious::Controller', -signatures;
 use easynas;
 
-my $mount_dir=get_mount_dir();
 my $conf_cron=get_conf_cron();
 my $msg;
 my $result;
+my $addon = get_addon_info("filesystem");
 
 sub view($self) {
     if (!($self->session('is_auth'))) {
@@ -17,8 +17,7 @@ sub view($self) {
     my $action=$self->param('action'); 
     $msg="";
     $result="";
-    $self->stash(title => $TEXT{$addons{filesystem}->{description}},
-                program => $addons{filesystem}->{program},
+    $self->stash(addon => $addon,
 		easynas => \%easynas,
                 menu =>\@html_output,
                 TEXT =>\%TEXT,
@@ -121,7 +120,7 @@ sub view($self) {
 
 #--------- deletefs ---------
 sub deletefs($self) {
-
+    my $mount_dir=get_mount_dir();
     my $fs         = $self->param("fs");
     my $uuid       = $self->param("uuid");
     my $auto_mount = `/usr/bin/sudo /usr/bin/grep $uuid /etc/fstab`;
@@ -180,6 +179,7 @@ sub createfs($self) {
     my $ssd        = $self->param("ssd");
     my $defrag     = $self->param("defrag");
     my $compress   = $self->param("compress"); 
+    my $mount_dir=get_mount_dir();
     my $device     = "";
     my $raid_disks = "";
     my $number     = 0;
@@ -304,6 +304,7 @@ if ($ssd)
 sub unmount($self) {
 
     my $fs = $self->param("fs");
+    my $mount_dir=get_mount_dir();
     my $rc;
 
     if ($fs eq "ROOT" || $fs eq "BOOT")
@@ -341,6 +342,7 @@ sub changename($self) {
   my $newfs = $self->param("newfs");
   my %fs=fs_info();
   my $mounted=$fs{$fs}[4];
+  my $mount_dir=get_mount_dir();
   my $rc;
 
   if ($fs eq $newfs)
