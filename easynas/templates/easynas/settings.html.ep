@@ -1,0 +1,133 @@
+% layout 'default';
+
+%if ($result eq "fail"){
+<div class="alert alert-danger alert-dismissible">
+ <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+ <%= $msg %>
+</div>
+ %}
+
+ %if ($result eq "success"){
+<div class="alert alert-success alert-dismissible">
+ <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+ <%= $msg %>
+</div>
+ %}
+
+
+<div class="row">
+                        <div class="col-lg-10">
+                                <!-- /.panel-heading -->
+
+
+<div class="panel panel-default">
+<div class="panel-heading"><%= ($TEXT->{"settings"}) %></div>
+<div class="panel-body">
+<ul class="nav nav-tabs">
+<li class="active"><a href="#tabs-1" data-toggle="tab"><%= ($TEXT->{'settings'}) %></a></li>
+<li><a href="#tabs-2" data-toggle="tab">$TEXT{'date_time'}</a></li>
+<li><a href="#tabs-3" data-toggle="tab">$TEXT{'access_list'}</a></li>
+<li><a href="#tabs-4" data-toggle="tab">$TEXT{'certificate'}</a></li>
+<li><a href="#tabs-5" data-toggle="tab">$TEXT{'repositories'}</a></li>
+</ul>
+<div class="tab-content">
+<div class="tab-pane fade in active" id="tabs-1">
+<br><br>
+$query->start_form(-action=>'settings.pl');
+print $query->hidden( -name=>'action', -value=>'change');
+print $query->hidden( -name=>'menu', -value=>'none');
+print "<table>";
+print "<tr><td>$TEXT{'host_name'}:</td><td>",$query->textfield(-name=>'hostname',-value=>$hostname),"</td></tr>";
+print "<tr><td>$TEXT{'system_port'}:</td><td>",$query->textfield(-name=>'system',-value=>$system),"</td></tr>";
+print "</table><br>";
+print "<br><br>";
+print "<footer>";
+print $query->hidden(-name=>'old',-value=>$old);
+print $query->submit(-value=>$TEXT{'save'}), $query->reset(-value=>$TEXT{'reset'});
+print $query->end_form();
+print "</footer>";
+print "</div><!-- end of #tab1 -->";
+print "<div class=\"tab-pane fade\" id=\"tabs-2\">";
+print "<br><br>";
+print $query->start_form(-action=>'settings.pl');
+print $query->hidden( -name=>'action', -value=>'setdate');
+print $query->hidden( -name=>'menu', -value=>'none');
+print "<table>";
+print "<tr><td>Date:</td><td>",$query->popup_menu(-name=>'year', -values=>\@year, -linebreak=>'true', -default=>$year),"</td>";
+print "<td>",$query->popup_menu(-name=>'month', -values=>\@month, -linebreak=>'true', -default=>$month),"</td>";
+print "<td>",$query->popup_menu(-name=>'day', -values=>\@day, -linebreak=>'true', -default=>$day),"</td></tr>";
+print "<tr><td>Time:</td><td>",$query->popup_menu(-name=>'hour', -values=>\@hour, -linebreak=>'true', -default=>$hour),":</td>";
+print "<td>",$query->popup_menu(-name=>'minute', -values=>\@minute, -linebreak=>'true', -default=>$minute),":</td>";
+print "<td>",$query->popup_menu(-name=>'second', -values=>\@second, -linebreak=>'true', -default=>$second),"</td></tr>";
+print "</table><br>";
+print "<br><br>";
+print "<footer>";
+print $query->submit(-value=>$TEXT{'save'}), $query->reset(-value=>$TEXT{'reset'});
+print $query->end_form();
+print "</footer>";
+print "</div><!-- end of #tab2 -->";
+print "<div class=\"tab-pane fade\" id=\"tabs-3\">";
+print "<br><br>";
+print $query->start_form(-action=>'settings.pl');
+print $query->hidden( -name=>'action', -value=>'acl');
+print $query->hidden( -name=>'menu', -value=>'none');
+print $query->hidden( -name=>'hostname', -value=>$hostname);
+print $query->hidden( -name=>'system', -value=>$system);
+print "<table>";
+print "<tr><td><input type=radio name=\"acl\" value=\"allow_all\" $all_allow></td><td>Allow all connections</td></tr>";
+print "<tr><td><input type=radio name=\"acl\" value=\"deny_ip\" $ip_deny></td><td>Deny ips from list</td></tr>";
+print "<tr><td><input type=radio name=\"acl\" value=\"allow_ip\" $ip_allow ></td><td>Allow only ips from list</td></tr>";
+print "<tr><td></td><td>Enter IPs or network that will be allowed or denied:</td></tr>";
+print "<tr><td></td><td>",$query->textfield(-name=>'ips',-value=>$ips),"</td></tr>";
+print "</table>";
+print "<br><br>";
+print "<footer>";
+print $query->submit(-value=>$TEXT{'save'}), $query->reset(-value=>$TEXT{'reset'});
+print $query->end_form();
+print "</footer>";
+print "</div><!-- end of #tab3 -->";
+print "<div class=\"tab-pane fade\" id=\"tabs-4\">";
+print "<br><br>";
+print "<FORM ENCTYPE=\"multipart/form-data\" ACTION=\"settings.pl\" METHOD=\"POST\">";
+#print $query->start_form(-action=>'settings.pl');
+print $query->hidden( -name=>'action', -value=>'upload_crt');
+print $query->hidden( -name=>'menu', -value=>'none');
+print $TEXT{'cert_details'}.":<br><br>";
+print $cert1."<br>".$cert2."<br>".$cert3."<br><br><br>";
+print "<table>";
+print "<tr><td><input type=\"file\" name=\"cert\"></td></tr>";
+print "</table>";
+print "<br><br>";
+print "<footer>";
+print $query->submit(-value=>$TEXT{'save'}), $query->reset(-value=>$TEXT{'reset'});
+print $query->end_form();
+print "</footer>";
+print "</div><!-- end of #tab4 -->";
+print "<br><br>";
+print "<div class=\"tab-pane fade\" id=\"tabs-5\">";
+$dom = XML::LibXML->load_xml(string => $repos);
+print "<table class=\"table table-striped table-bordered table-hover\" id=\"advanced-table\"  >";
+print "<thead>";
+print "<tr><th>$TEXT{'repository'}</th><th>$TEXT{'status'}</th><th>$TEXT{'actions'}</th></tr>";
+print "</thead><tbody>";
+foreach $repo ($dom->findnodes('/stream/repo-list/repo')) {
+  $repo_name=$repo->findvalue('./@alias');
+  $repo_status=$repo->findvalue('./@enabled');
+  if ($repo_status) {
+	  $repo_status=$TEXT{'enabled'};
+	  $repo_action=$TEXT{'disable'};
+  }
+  else {
+	  $repo_status=$TEXT{'disabled'};
+	  $repo_action=$TEXT{'enable'};
+  }
+  print "<tr><td>".$repo_name."</td><td>".$repo_status."</td><td><a href=\"settings.pl?action=$repo_action&menu=none&repo=$repo_name\">[".$repo_action."]</a></td></tr>";
+}
+print "</tbody></table>";
+print "</div><!-- end of #tab5 -->";
+print "</div><!-- end of .tab_container -->";
+print "</div></div></div></div>";
+
+			</div>
+
+</div>

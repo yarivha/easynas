@@ -1,6 +1,9 @@
 <% 
+ use lib '/easynas/lib/EasyNAS/Controller';
  use easynas;
+
  my $username=$self->session('user'); 
+ my @lang_list = get_lang_list();
 %>
 
 <!DOCTYPE html>
@@ -99,7 +102,7 @@
                             <i class="fa fa-flag fa-fw"></i> <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                          % foreach my $lang (@$lang_list){
+                          % foreach my $lang (@lang_list){
 			  <li><a href="index.pl?action=language&menu=none&lang=<%= ($lang->{'name'}) %>"><img src="/images/<%= ($lang->{'flag'}) %>">&nbsp;<%= ($lang->{'name'}) %></a></li>
                           %}
                         </ul>
@@ -201,7 +204,6 @@
                     </div>
 
 		    <%= content %>
-
                 </div>
             </div>
 

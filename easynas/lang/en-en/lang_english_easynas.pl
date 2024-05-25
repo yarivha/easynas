@@ -260,6 +260,13 @@ $TEXT{'firmware_update_failed'} = "Update Failed";
 
 #### Addons #####
 $TEXT{'addons'} = "Addons";
+$TEXT{'addons_sharing'} = "File Sharing";
+$TEXT{'addons_storage'} = "Storage&Backup";
+$TEXT{'addons_multimedia'} = "Multimedia";
+$TEXT{'addons_services'} = "Services";
+$TEXT{'addons_lang'} = "Language";
+$TEXT{'addons_other'} = "Other Apps";
+
 $TEXT{'addon_installed'} = "Addon installed successfully";
 $TEXT{'addon_not_installed'} = "Error installing addon";
 $TEXT{'addon_deleted'} = "Addon deleted successfully";
