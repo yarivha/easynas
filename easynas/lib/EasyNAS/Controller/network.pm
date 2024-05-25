@@ -13,12 +13,10 @@ sub view ($self) {
   if (!($self->session('is_auth'))) {
         $self->redirect_to('login');
   }
-  my %easynas = easynas_info();
   my $action=$self->param('action'); 
   $msg="";
   $result=""; 
   $self->stash(addon => $addon, 
-	       easynas => \%easynas,
 	       menu =>\@html_output,
 	       TEXT =>\%TEXT,
 	       addons =>\%addons);

@@ -13,8 +13,6 @@ sub view ($self) {
   }
   my $username=$self->session('user');
   my $action=$self->param('action'); 
-#  my @lang_list = get_lang_list();
-  my %easynas = easynas_info();
   my %fs = fs_info();
   my %disks  = disk_info();
   my %vol    = vol_info();
@@ -39,13 +37,10 @@ sub view ($self) {
   
   $self->render(template => 'easynas/dashboard', 
 		addon => $addon,
-		#lang_list => \@lang_list,
-		easynas =>\%easynas,
 		menu =>\@html_output,
 		TEXT =>\%TEXT,
 		missing_update => $missing_update,
 		addons =>\%addons,
-		lang_list => \@lang_list,
 		filesystems => \%fs,
 		disks => \%disks,
 		fs_number => scalar(keys %fs ),
