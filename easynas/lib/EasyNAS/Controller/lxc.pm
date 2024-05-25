@@ -25,7 +25,6 @@ sub view ($self) {
         $self->redirect_to('login');
   }
   my %easynas = easynas_info();
-  my @lang_list = get_lang_list();
   my $action=$self->param('action'); 
   $msg="";
   $result="";
@@ -44,7 +43,6 @@ sub view ($self) {
                 menu =>\@html_output,
                 TEXT =>\%TEXT,
                 addons =>\%addons,
-                lang_list => \@lang_list,
 		systems => \%systems,
                 result => $result,
                 msg => $msg
