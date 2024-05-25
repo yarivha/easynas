@@ -1,0 +1,144 @@
+% layout 'default';
+
+<div class="row">
+ <div class="col-lg-3 col-md-6">
+  <div class="panel panel-green">
+   <div class="panel-heading">
+    <div class="row">
+     <div class="col-xs-3">
+      <i class="fa fa-copy fa-5x"></i>
+     </div>
+     <div class="col-xs-9 text-right">
+      <div class="huge"><%= $fs %></div>
+      <div><%= ($TEXT->{'addons_sharing'}) %></div>
+     </div>
+    </div>
+   </div>
+   <a href="addons.pl?menu=addon&action=view&group=fs">
+    <div class="panel-footer">
+     <span class="pull-left">View Details</span>
+     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+     <div class="clearfix"></div>
+    </div>
+   </a>
+  </div>
+ </div>
+
+<div class="col-lg-3 col-md-6">
+ <div class="panel panel-green">
+  <div class="panel-heading">
+   <div class="row">
+    <div class="col-xs-3">
+     <i class="fa fa-hard-drive fa-5x"></i>
+    </div>
+    <div class="col-xs-9 text-right">
+     <div class="huge"><%= $stg %></div>
+      <div><%= ($TEXT->{'addons_storage'}) %></div>
+     </div>
+    </div>
+   </div>
+   <a href="addons.pl?menu=addon&action=view&group=stg">
+    <div class="panel-footer">
+     <span class="pull-left">View Details</span>
+     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+     <div class="clearfix"></div>
+    </div>
+   </a>
+  </div>
+ </div>
+
+ <div class="col-lg-3 col-md-6">
+  <div class="panel panel-yellow">
+   <div class="panel-heading">
+    <div class="row">
+     <div class="col-xs-3">
+      <i class="fa fa-server fa-5x"></i>
+     </div>
+     <div class="col-xs-9 text-right">
+      <div class="huge"><%= $srv %></div>
+      <div><%= ($TEXT->{'addons_services'}) %></div>
+     </div>
+    </div>
+   </div>
+   <a href="addons.pl?menu=addon&action=view&group=srv">
+    <div class="panel-footer">
+     <span class="pull-left">View Details</span>
+     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+     <div class="clearfix"></div>
+    </div>
+   </a>
+  </div>
+ </div>
+</div>
+
+<div class="row">
+ <div class="col-lg-3 col-md-6">
+  <div class="panel panel-yellow">
+   <div class="panel-heading">
+    <div class="row">
+     <div class="col-xs-3">
+      <i class="fa fa-film fa-5x"></i>
+     </div>
+     <div class="col-xs-9 text-right">
+      <div class="huge"><%= $mm %></div>
+       <div><%= ($TEXT->{'addons_multimedia'}) %></div>
+      </div>
+     </div>
+    </div>
+    <a href="addons.pl?menu=addon&action=view&group=mm">
+     <div class="panel-footer">
+      <span class="pull-left">View Details</span>
+      <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+      <div class="clearfix"></div>
+     </div>
+    </a>
+   </div>
+ </div>
+
+<div class="col-lg-3 col-md-6">
+ <div class="panel panel-primary">
+  <div class="panel-heading">
+   <div class="row">
+    <div class="col-xs-3">
+     <i class="fa fa-truck fa-5x"></i>
+    </div>
+    <div class="col-xs-9 text-right">
+     <div class="huge"><%= $app %></div>
+     <div><%= ($TEXT->{'addons_other'}) %></div>
+    </div>
+   </div>
+  </div>
+  <a href="addons.pl?menu=addon&action=view&group=app">
+   <div class="panel-footer">
+    <span class="pull-left">View Details</span>
+    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+    <div class="clearfix"></div>
+   </div>
+  </a>
+ </div>
+</div>
+
+
+<div class="col-lg-3 col-md-6">
+ <div class="panel panel-red">
+  <div class="panel-heading">
+   <div class="row">
+    <div class="col-xs-3">
+     <i class="fa fa-flag fa-5x"></i>
+    </div>
+    <div class="col-xs-9 text-right">
+     <div class="huge"><%= $lang %></div>
+     <div><%= ($TEXT->{'addons_lang'}) %></div>
+    </div>
+   </div>
+  </div>
+  <a href="addons.pl?menu=addon&action=view&group=lang">
+   <div class="panel-footer">
+    <span class="pull-left">View Details</span>
+    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+    <div class="clearfix"></div>
+   </div>
+  </a>
+ </div>
+</div>
+</div>

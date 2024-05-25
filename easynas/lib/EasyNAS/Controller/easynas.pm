@@ -29,7 +29,7 @@ use Number::Bytes::Human qw(format_bytes parse_bytes);
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw();
 our @EXPORT    = qw( %TEXT %addons @html_output @lang_list 
-		     get_mount_dir get_conf_cron get_categories get_group_default get_lang_list 
+		     get_mount_dir get_conf_cron get_addons_file get_categories get_group_default get_lang_list 
 		     get_service_status get_addon_info 
 		     write_log easynas_info fs_info vol_info users_info groups_info  disk_info health_info
 		     networks_info);
@@ -57,6 +57,7 @@ my $conf_roles=$conf_dir."/easynas.roles";
 my $conf_cert  = $conf_dir."/easynas.pem";
 my $conf_hosts = "/etc/hosts";
 my $log_file = $log_dir."/easynas.log";
+my $addons_file = $conf_dir."/easynas.addons";
 
 ############ Settings ################
 our %addons;
@@ -172,6 +173,12 @@ sub get_group_default
 sub get_conf_cron
 {
  return($conf_cron)
+}
+
+############# get_addons_file ###############
+sub get_addons_file
+{
+ return($addons_file)
 }
 
 
