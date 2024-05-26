@@ -8,6 +8,7 @@ use easynas;
 my $msg;
 my $result;
 my $addon = get_addon_info("addons");
+my %TEXT=get_lang_text($addon->{'name'});
 
 
 sub view ($self) {

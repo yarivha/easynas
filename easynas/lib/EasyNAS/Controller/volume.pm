@@ -7,6 +7,7 @@ use easynas;
 my $msg;
 my $result;
 my $addon = get_addon_info("volume");
+my %TEXT=get_lang_text($addon->{'name'});
 my $mount_dir=get_mount_dir();
 my $conf_cron=get_conf_cron();
 

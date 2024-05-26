@@ -7,6 +7,7 @@ use easynas;
 my $msg;
 my $result;
 my $addon   = get_addon_info("network");
+my %TEXT=get_lang_text($addon->{'name'});
 my $service = ($addon->{service});
 
 sub view ($self) {

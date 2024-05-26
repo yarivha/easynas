@@ -5,6 +5,9 @@ use easynas;
 
 my $msg;
 my $result;
+my $addon = get_addon_info("lxc");
+my %TEXT=get_lang_text($addon->{'name'});
+
 my %systems;
 my @systems;
 my $name;
@@ -36,8 +39,7 @@ sub view ($self) {
   }  
 
   $self->render(template => 'easynas/lxc', 
-	        title => $TEXT{$addons{lxc}->{description}},
-                program => $addons{lxc}->{program},
+	        addon => $addon,
                 menu =>\@html_output,
                 TEXT =>\%TEXT,
                 addons =>\%addons,

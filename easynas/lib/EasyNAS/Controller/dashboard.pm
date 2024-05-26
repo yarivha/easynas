@@ -6,6 +6,7 @@ use easynas;
 
 
 my $addon = get_addon_info("dashboard");
+my %TEXT=get_lang_text($addon->{'name'});
 
 sub view ($self) {
   if (!($self->session('is_auth'))) {

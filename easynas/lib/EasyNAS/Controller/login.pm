@@ -6,6 +6,7 @@ use easynas;
 
 my $msg;
 my $result;
+my %TEXT=get_lang_text('login');
 
 sub view ($self) {
    

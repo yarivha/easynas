@@ -7,7 +7,8 @@ use easynas;
 
 my $msg;
 my $result;
-
+my $addon = get_addon_info("firmware");
+my %TEXT=get_lang_text($addon->{'name'});
 
 sub view ($self) {
   if (!($self->session('is_auth'))) {
@@ -16,8 +17,7 @@ sub view ($self) {
   my $action=$self->param('action'); 
   $msg="";
   $result="";
-  $self->stash(title => $TEXT{$addons{firmware}->{description}},
-                program => $addons{firmware}->{program},
+  $self->stash(addon => $addon,
                 menu =>\@html_output,
                 TEXT =>\%TEXT,
                 addons =>\%addons);

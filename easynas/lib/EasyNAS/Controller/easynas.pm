@@ -28,9 +28,9 @@ use Exporter;
 use Number::Bytes::Human qw(format_bytes parse_bytes);
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw();
-our @EXPORT    = qw( %TEXT %addons @html_output  
+our @EXPORT    = qw( %addons @html_output  
 		     get_mount_dir get_conf_cron get_addons_file get_categories get_group_default get_lang_list 
-		     get_service_status get_addon_info 
+		     get_lang_text get_service_status get_addon_info 
 		     write_log easynas_info fs_info vol_info users_info groups_info  disk_info health_info
 		     networks_info);
 
@@ -63,7 +63,7 @@ my $addons_file = $conf_dir."/easynas.addons";
 our %addons;
 our @html_output;
 our @categories;
-our %TEXT;
+#our %TEXT;
 
 
 ######## easynas_info #######
@@ -231,7 +231,7 @@ sub write_log
     `sudo chown easynas.easynas $log_file`;
  }
  open($FH, '>>', $log_file) or die $!;
- print $FH $timestamp." "."[$TEXT{$addons{$addon}->{description}}]"." ".$type." ".$message."\n";
+ print $FH $timestamp." "."[$addons{$addon}->{description}]"." ".$type." ".$message."\n";
  close $FH;
 }
 
@@ -394,10 +394,11 @@ sub get_lang_list
 
 ########## load_language ###########
 
-sub load_language
+sub get_lang_text
 {
-
+    my $addon=$_[0];
     my $file;
+    our %TEXT;
 
     ### load default language stings ###
     if (current_lang() ne $lang_default)
@@ -423,6 +424,7 @@ sub load_language
 	}
     }
     close(DIR);
+    return(%TEXT);
 }
 
 
@@ -566,7 +568,7 @@ sub get_addons
 
 	    ### sort infos into categories
              if ($addon_type and $addon_enable ne "false") {
-     	      push @{ $addons_by_type->{$addon_type}},{name=>$TEXT{$addon_description},icon=>$addon_icon,program=>$addon_program};
+     	      push @{ $addons_by_type->{$addon_type}},{name=>$addon_description,icon=>$addon_icon,program=>$addon_program};
 	     }  
 	    close(FR);
 
@@ -588,7 +590,7 @@ sub get_addons
     closedir(DIR);
     foreach $type (sort keys %$addons_by_type) 
     {
-     push(@html_output,{type=>$TEXT{$type},addons=>$addons_by_type->{$type}});
+     push(@html_output,{type=>$type,addons=>$addons_by_type->{$type}});
      push(@categories,$type);
     }
   }
@@ -670,17 +672,17 @@ sub disk_info
 
         if (index(`/usr/bin/sudo /usr/bin/mount | grep "on / "`,$disk) != -1) 
         {
-         $status=$TEXT{'disk_system'}; 
+         $status="disk_system"; 
         }
 	else 
 	{
 	  if (`/usr/bin/sudo /sbin/btrfs filesystem show | /usr/bin/grep $disk`)
  	  {
-	   $status=$TEXT{'disk_used'};
+	   $status="disk_used";
 	  }
 	  else
 	  {
-  	   $status=$TEXT{'disk_free'};
+  	   $status="disk_free";
 	  }
 	}
         $disks{$disk}=[$disk,$type,$size.$presize,$status,$model];
@@ -712,11 +714,11 @@ sub health_info
     {
         ($disk,undef,undef,undef,undef,undef)=split(" ", $_);
         @sysmon = `/usr/bin/sudo /usr/sbin/smartctl -H  $disk`;
-        $health=$TEXT{'disk_bad'};
+        $health="disk_bad";
         foreach (@sysmon)
         {
           if (($_ =~ /PASSED/s) or ($_ =~ /OK/s)) {
-            $health=$TEXT{'disk_good'};
+            $health="disk_good";
           }
         }
         @errors=`/usr/bin/sudo /sbin/btrfs device stat $disk`;
@@ -813,7 +815,7 @@ sub fs_info
 	    (undef,$fs,undef,$uuid)=split(" ", $_);
 	    chop($fs);
 	    $fs = substr($fs, 1);
-            $health = $TEXT{'good'};
+            $health = "good";
             if ($fs eq "ROOT") {
              $dir="/";
             }
@@ -824,7 +826,7 @@ sub fs_info
 
        if ($_ =~ m/ Some devices missing/)
        {
-        $health = $TEXT{'degraded'};
+        $health = "degraded";
        }
 
        if($_ =~ m/Total/)
@@ -875,7 +877,6 @@ sub fs_info
 ########################### Main ############################
 
 check_env;
-load_language;
 get_addons;
 
 
