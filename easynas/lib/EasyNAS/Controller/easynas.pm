@@ -28,7 +28,7 @@ use Exporter;
 use Number::Bytes::Human qw(format_bytes parse_bytes);
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw();
-our @EXPORT    = qw( %TEXT %addons @html_output @lang_list 
+our @EXPORT    = qw( %TEXT %addons @html_output  
 		     get_mount_dir get_conf_cron get_addons_file get_categories get_group_default get_lang_list 
 		     get_service_status get_addon_info 
 		     write_log easynas_info fs_info vol_info users_info groups_info  disk_info health_info
@@ -64,7 +64,6 @@ our %addons;
 our @html_output;
 our @categories;
 our %TEXT;
-our @lang_list;
 
 
 ######## easynas_info #######
