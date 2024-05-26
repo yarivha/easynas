@@ -18,16 +18,16 @@
 <table>
 <tr>
 % foreach my $disk (keys (%$disks)) {
- % if ( $disks->{$disk}[3] eq "System") {
+ % if ( $disks->{$disk}[3] eq "disk_system") {
 <td><a href="<%= ($addons->{'disk'}->{program}) %>?action=settings&disk=<%= $disk %>"><i class="fa-regular fa-hard-drive fa-5x" style="color:blue" title="<%= $disk %>"></i></a>&nbsp</td>
  %}
- % if ( $disks->{$disk}[3] eq "Failed") {
+ % if ( $disks->{$disk}[3] eq "disk_failed") {
 <td><a href="<%= ($addons->{'disk'}->{program}) %>?action=settings&disk=<%= $disk %>"><i class="fa-regular fa-hard-drive fa-5x" style="color:red" title="<%= $disk %>"></i></a>&nbsp</td>
  %}
- % if ( $disks->{$disk}[3] eq "Used") {
+ % if ( $disks->{$disk}[3] eq "disk_used") {
 <td><a href="<%= ($addons->{'disk'}->{program}) %>?action=settings&disk=<%= $disk %>"><i class="fa-regular fa-hard-drive fa-5x" style="color:green" title="<%= $disk %>"></i></a>&nbsp</td>
  %}
- % if ( $disks->{$disk}[3] eq "Free") {
+ % if ( $disks->{$disk}[3] eq "disk_free") {
 <td><a href="<%= ($addons->{'disk'}->{program}) %>?action=settings&disk=<%= $disk %>"><i class="fa-regular fa-hard-drive fa-5x" style="color:gray" title="<%= $disk %>"></i></a>&nbsp</td>
  %}
 %}
@@ -45,7 +45,7 @@
 <table>
 <tr>
 % foreach my $fs (keys (%$filesystems)) {
- % if ( $filesystems->{$fs}[1]  eq "Good") {
+ % if ( $filesystems->{$fs}[1]  eq "good") {
     <td><a href="<%= ($addons->{'filesystem'}->{program}) %>?action=settings&fs=<%= $fs %>"><i class="fa fa-database fa-5x" style="color:green" title="<%= $fs %>"></i></a>&nbsp</td>
  %}
  % else {
