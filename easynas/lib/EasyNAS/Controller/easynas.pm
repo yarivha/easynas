@@ -415,7 +415,7 @@ sub get_menu
  my $type;
 
  foreach $addon (keys %addons) {
-  if ($addons{$addon}{type} and $addons{$addon}{enable} ne "false") {
+  if (($addons{$addon}{type} ne "") and ($addons{$addon}{enable} ne "false")) {
    push @{ $addons_by_type->{$addons{$addon}{type}}},{name=>$addons{$addon}{description},icon=>$addons{$addon}{icon},program=>$addons{$addon}{program}};
   }
  }
@@ -564,7 +564,7 @@ sub get_addons
  		}
 	    }
 	    ### push collected infos in %addons
-   	     $addons{$addon_name}={name=>$addon_name, description=>$addon_description, icon=>$addon_icon, version=>$addon_version, author=>$addon_author, type=>$addon_type, program=>$addon_program, config=>$addon_config, config2=>$addon_config2, clients=>$addon_clients, secrets=>$addon_secrets, service=>$addon_service};
+   	     $addons{$addon_name}={enable=>$addon_enable, name=>$addon_name, description=>$addon_description, icon=>$addon_icon, version=>$addon_version, author=>$addon_author, type=>$addon_type, program=>$addon_program, config=>$addon_config, config2=>$addon_config2, clients=>$addon_clients, secrets=>$addon_secrets, service=>$addon_service};
 
 	    close(FR);
 
