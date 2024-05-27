@@ -15,7 +15,7 @@ sub startup ($self) {
   # Router
   my $r = $self->routes;
   
-  #  my %addons=addons_info();
+  my %addons=get_addons();
 
   # Normal route to controller
   $r->get('/')->to('dashboard#view');

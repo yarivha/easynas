@@ -28,9 +28,9 @@ use Exporter;
 use Number::Bytes::Human qw(format_bytes parse_bytes);
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw();
-our @EXPORT    = qw( %addons @html_output  
-		     get_mount_dir get_conf_cron get_addons_file get_categories get_group_default get_lang_list 
-		     get_lang_text get_service_status get_addon_info 
+our @EXPORT    = qw(   
+		     get_mount_dir get_conf_cron get_addons_file get_update_file get_categories get_group_default get_lang_list 
+		     get_lang_text get_service_status get_menu get_addons get_addon_info 
 		     write_log easynas_info fs_info vol_info users_info groups_info  disk_info health_info
 		     networks_info);
 
@@ -58,13 +58,7 @@ my $conf_cert  = $conf_dir."/easynas.pem";
 my $conf_hosts = "/etc/hosts";
 my $log_file = $log_dir."/easynas.log";
 my $addons_file = $conf_dir."/easynas.addons";
-
-############ Settings ################
-our %addons;
-our @html_output;
-our @categories;
-#our %TEXT;
-
+my $update_file = $conf_dir."/easynas.updates";
 
 ######## easynas_info #######
 sub easynas_info
@@ -181,6 +175,13 @@ sub get_addons_file
 }
 
 
+############# get_update_file ###############
+sub get_update_file
+{
+ return($update_file)
+}
+
+
 ######### get_lang #########
 sub get_lang
 {
@@ -231,7 +232,7 @@ sub write_log
     `sudo chown easynas.easynas $log_file`;
  }
  open($FH, '>>', $log_file) or die $!;
- print $FH $timestamp." "."[$addons{$addon}->{description}]"." ".$type." ".$message."\n";
+ print $FH $timestamp." "."[$addon]"." ".$type." ".$message."\n";
  close $FH;
 }
 
@@ -240,6 +241,7 @@ sub write_log
 sub get_addon_info
 {
     my $addon = $_[0];
+    my %addons = get_addons();
     return($addons{$addon});
 }
 
@@ -366,31 +368,6 @@ sub get_lang_list
 }
 
 
-########## get_lang_text ###########
-#syb get_lang_text
-#{
-#  my $addon=$_;
-#  if (current_lang() ne $lang_default)
-#    {
-#     require "$lang_dir/$lang_default/$file";
-#    }
-#
-#    ### load selected language string #####
-#    opendir (DIR, $lang_dir."/".current_lang() ) or die "Error";
-#    while ($file = readdir(DIR))
-#    {
-#        if ($file ne "iso.txt" && $file ne "." && $file ne ".." )
-#        {
-#            require "$lang_dir/".current_lang()."/$file";
-#        }
-#    }
-#    close(DIR);
-#}
-
- 
-
-
-
 
 ########## load_language ###########
 
@@ -428,6 +405,29 @@ sub get_lang_text
 }
 
 
+######### get_menu ###########
+sub get_menu 
+{
+ my @menu;
+ my %addons=get_addons();
+ my $addons_by_type;
+ my $addon;
+ my $type;
+
+ foreach $addon (keys %addons) {
+  if ($addons{$addon}{type} and $addons{$addon}{enable} ne "false") {
+   push @{ $addons_by_type->{$addons{$addon}{type}}},{name=>$addons{$addon}{description},icon=>$addons{$addon}{icon},program=>$addons{$addon}{program}};
+  }
+ }
+
+ foreach $type (sort keys %$addons_by_type)
+    {           
+     push(@menu,{type=>$type,addons=>$addons_by_type->{$type}});
+    }           
+ return(@menu);
+}
+
+
 
 ######### get_addons  #########
 
@@ -436,6 +436,7 @@ sub get_addons
     my $file;
     my $line;
     my $type;
+    my %addons;
     my $addons_by_type;
     my $addon_enable;
     my $addon_name;
@@ -451,7 +452,6 @@ sub get_addons
     my $addon_service;
     my $addon_program;
     
-    if (!@html_output) {
      opendir (DIR, $addons_dir) or die $!;
      while ($file = readdir(DIR))
      {
@@ -566,10 +566,6 @@ sub get_addons
 	    ### push collected infos in %addons
    	     $addons{$addon_name}={name=>$addon_name, description=>$addon_description, icon=>$addon_icon, version=>$addon_version, author=>$addon_author, type=>$addon_type, program=>$addon_program, config=>$addon_config, config2=>$addon_config2, clients=>$addon_clients, secrets=>$addon_secrets, service=>$addon_service};
 
-	    ### sort infos into categories
-             if ($addon_type and $addon_enable ne "false") {
-     	      push @{ $addons_by_type->{$addon_type}},{name=>$addon_description,icon=>$addon_icon,program=>$addon_program};
-	     }  
 	    close(FR);
 
 	    ### Undefine variables for next run
@@ -587,13 +583,8 @@ sub get_addons
 	    undef($addon_program);
 	}
     }
-    closedir(DIR);
-    foreach $type (sort keys %$addons_by_type) 
-    {
-     push(@html_output,{type=>$type,addons=>$addons_by_type->{$type}});
-     push(@categories,$type);
-    }
-  }
+ closedir(DIR);
+ return(%addons);
 }
 
 
@@ -877,7 +868,5 @@ sub fs_info
 ########################### Main ############################
 
 check_env;
-get_addons;
-
 
 1;

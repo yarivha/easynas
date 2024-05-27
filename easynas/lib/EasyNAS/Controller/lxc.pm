@@ -40,9 +40,7 @@ sub view ($self) {
 
   $self->render(template => 'easynas/lxc', 
 	        addon => $addon,
-                menu =>\@html_output,
                 TEXT =>\%TEXT,
-                addons =>\%addons,
 		systems => \%systems,
                 result => $result,
                 msg => $msg

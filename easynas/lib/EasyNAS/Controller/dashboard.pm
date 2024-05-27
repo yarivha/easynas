@@ -5,20 +5,20 @@ use XML::LibXML;
 use easynas;
 
 
-my $addon = get_addon_info("dashboard");
-my %TEXT=get_lang_text($addon->{'name'});
-
 sub view ($self) {
   if (!($self->session('is_auth'))) {
         $self->redirect_to('login');
   }
   my $username=$self->session('user');
   my $action=$self->param('action'); 
+  my $addon = get_addon_info("dashboard");
+  my %addons = get_addons();
+  my %TEXT=get_lang_text($addon->{'name'});
   my %fs = fs_info();
   my %disks  = disk_info();
   my %vol    = vol_info();
   my %users  = users_info();
-  my $updates="/etc/easynas/easynas.updates";
+  my $updates= get_update_file();
   my $missing_update;
   my $dom;
   
@@ -38,7 +38,6 @@ sub view ($self) {
   
   $self->render(template => 'easynas/dashboard', 
 		addon => $addon,
-		menu =>\@html_output,
 		TEXT =>\%TEXT,
 		missing_update => $missing_update,
 		addons =>\%addons,

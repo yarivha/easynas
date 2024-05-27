@@ -21,11 +21,7 @@ sub view ($self) {
   
 
   $self->stash(addon => $addon,
-               program => $addons{volume}->{program},
-               menu =>\@html_output,
-               TEXT =>\%TEXT,
-               addons =>\%addons
-	      );
+               TEXT =>\%TEXT);
 
 ##### createvol #######	     
  if (defined $action && $action eq "createvol")

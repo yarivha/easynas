@@ -18,9 +18,7 @@ sub view ($self) {
   $msg="";
   $result=""; 
   $self->stash(addon => $addon, 
-	       menu =>\@html_output,
-	       TEXT =>\%TEXT,
-	       addons =>\%addons);
+	       TEXT =>\%TEXT);
 
   ### activate ###
   if (defined $action && $action eq "activate") {

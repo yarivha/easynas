@@ -5,7 +5,8 @@
  my $username=$self->session('user'); 
  my @lang_list = get_lang_list();
  my %easynas = easynas_info();
- #my (%addons,@menu) = get_addons();
+ my %addons = get_addons();
+ my @menu = get_menu();
 
 %>
 
@@ -175,7 +176,7 @@
                         <li>
                             <a href="/" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
-			% foreach my $categorie (@$menu) {
+			% foreach my $categorie (@menu) {
   			<li>
    			    <a href="#"><i class="fa fa-align-left fa-fw"></i><%= ($TEXT->{$categorie->{type}}) %><span class="fa arrow"></span></a>	
 
@@ -205,7 +206,7 @@
 				<h1 class="page-header"><a href="<%= ($addon->{'program'}) %>"><%= ($TEXT->{$addon->{'description'}}) %></a></h1>
                         </div>
                     </div>
-
+<%= @menu %>
 		    <%= content %>
                 </div>
             </div>
