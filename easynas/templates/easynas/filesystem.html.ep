@@ -38,7 +38,7 @@
                                                 <tr>
                                                     <td><a href="?action=settingsmenu&fs=<%= $fs %>"><i class="fa fa-database fa-2x" title="Settings"></i></a></td>
 						    <td><a href="?action=settingsmenu&fs=<%= $fs %>"><%= $fs %></a></td>
-						    <td><%= $filesystems->{$fs}[1] %></td>
+						    <td><%= ($TEXT->{$filesystems->{$fs}[1]}) %></td>
 						    <td><%= $filesystems->{$fs}[2] %></td>
 						    <td><%= $filesystems->{$fs}[6] %></td>
 						    <td><%= $filesystems->{$fs}[7] %></td>
