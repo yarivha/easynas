@@ -206,7 +206,6 @@
 				<h1 class="page-header"><a href="<%= ($addon->{'program'}) %>"><%= ($TEXT->{$addon->{'description'}}) %></a></h1>
                         </div>
                     </div>
-<%= @menu %>
 		    <%= content %>
                 </div>
             </div>
