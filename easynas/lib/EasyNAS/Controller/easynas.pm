@@ -414,7 +414,7 @@ sub get_menu
  my $addon;
  my $type;
 
- foreach $addon (keys %addons) {
+ foreach $addon (sort keys %addons) {
   if (($addons{$addon}{type} ne "") and ($addons{$addon}{enable} ne "false")) {
    push @{ $addons_by_type->{$addons{$addon}{type}}},{name=>$addons{$addon}{description},icon=>$addons{$addon}{icon},program=>$addons{$addon}{program}};
   }
