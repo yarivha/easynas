@@ -61,7 +61,7 @@ sub view($self) {
 
       foreach (sort(keys(%disks)))
       {
-        if ($disks{$_}[3] eq "Free")
+        if ($disks{$_}[3] eq "disk_free")
         {
             $size=$disks{$_}[2];
             push(@free_disks,$_." ".$size);
