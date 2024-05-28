@@ -32,7 +32,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-						% foreach my $disk (keys (%$disks)) {
+						% foreach my $disk (sort keys (%$disks)) {
                                                 <tr>
 						   %if ($health->{$disk}[0] eq "disk_good")  {
                                                     <td><a href="?action=settingsmenu&disk=<%= $disk %>"><i class="fa fa-hard-drive fa-2x" style="color:green" title="Settings"></i></a></td>

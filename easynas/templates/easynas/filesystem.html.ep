@@ -34,7 +34,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-						% foreach my $fs (keys (%$filesystems)) {
+						% foreach my $fs (sort keys (%$filesystems)) {
                                                 <tr>
                                                     <td><a href="?action=settingsmenu&fs=<%= $fs %>"><i class="fa fa-database fa-2x" title="Settings"></i></a></td>
 						    <td><a href="?action=settingsmenu&fs=<%= $fs %>"><%= $fs %></a></td>

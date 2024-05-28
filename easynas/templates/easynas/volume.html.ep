@@ -31,7 +31,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-					    % foreach my $vol (keys (%$volumes)) {
+					    % foreach my $vol (sort keys (%$volumes)) {
                                                 <tr>
                                                     <td><a href="?action=settings&vol=<%= $volumes->{$vol}[1] %>&fs=<%= $volumes->{$vol}[2] %>"><i class="fa fa-folder fa-2x" title="Settings"></i></a></td>
 						    <td><a href="?action=settings&vol=<%= $volumes->{$vol}[1] %>&fs=<%= $volumes->{$vol}[2] %>"><%= $volumes->{$vol}[0] %></a></td>
