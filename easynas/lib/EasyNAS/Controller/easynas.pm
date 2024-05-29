@@ -630,7 +630,9 @@ sub addons_info
     $desc=$info2;
    }
   }
-  $addons{$package}=[$name,$group,$desc,$status,$version];
+  if ($package ne "easynas") {
+   $addons{$package}=[$name,$group,$desc,$status,$version];
+  }
  }
  
  return(%addons);
