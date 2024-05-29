@@ -28,11 +28,11 @@ use Exporter;
 use Number::Bytes::Human qw(format_bytes parse_bytes);
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw();
-our @EXPORT    = qw(   
-		     get_mount_dir get_conf_cron get_addons_file get_update_file get_categories get_group_default get_lang_list 
+our @EXPORT    = qw( get_mount_dir get_conf_cron get_addons_file get_update_file get_categories 
+                     get_group_default get_lang_list 
 		     get_lang_text get_service_status get_menu get_addons get_addon_info 
-		     write_log easynas_info fs_info vol_info users_info groups_info  disk_info health_info
-		     networks_info);
+		     write_log easynas_info addons_info fs_info vol_info users_info groups_info 
+                     disk_info health_info networks_info);
 
 ############# Declarations #####################
 my $authentication_enable = 1;
@@ -369,7 +369,7 @@ sub get_lang_list
 
 
 
-########## load_language ###########
+########## get_lang_text ###########
 
 sub get_lang_text
 {
@@ -587,6 +587,54 @@ sub get_addons
  return(%addons);
 }
 
+
+########## addons_info #########
+sub addons_info
+{
+ my %addons;
+ my $addon;
+ my $fh;
+ my $dom;
+ my $package;
+ my $name;
+ my $group;
+ my @info;
+ my $info1;
+ my $info2;
+ my $version;
+ my $status;
+ my $desc;
+ if (-e $addons_file) {
+  open my $fh, '<', $addons_file;
+  binmode $fh; # drop all PerlIO layers possibly created by a use open pragma
+  $dom = XML::LibXML->load_xml(IO => $fh);
+ }
+ foreach $addon ($dom->findnodes('/stream/search-result/solvable-list/solvable')) {
+  $package=$addon->findvalue('./@name');
+  $package =~ s/^\s+//;
+  (undef,$group,$name)=split("-",$package);
+  @info=`cat $conf_dir/$package.addon`;
+  foreach(@info)
+  {
+   ($info1,$info2) = split /:/,$_;
+   if ($info1 =~ "Version") 
+   {
+    $version=$info2;
+   }
+   if ($info1 =~ "Status") 
+   {
+    $status=$info2;
+   }
+   if ($info1 =~ "Summary") 
+   {
+    $desc=$info2;
+   }
+  }
+  $addons{$package}=[$name,$group,$desc,$status,$version];
+ }
+ 
+ return(%addons);
+}
 
 ######## users_info ###########
 sub users_info

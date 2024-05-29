@@ -266,6 +266,13 @@ $TEXT{'addons_multimedia'} = "Multimedia";
 $TEXT{'addons_services'} = "Services";
 $TEXT{'addons_lang'} = "Language";
 $TEXT{'addons_other'} = "Other Apps";
+$TEXT{'addons_name'} = "Addon Name";
+$TEXT{'addons_version'} = "Version";
+$TEXT{'addons_update'} = "Update";
+$TEXT{'addons_delete'} = "Delete";
+$TEXT{'addons_status'} = "Status";
+$TEXT{'addons_desc'} = "Description";
+$TEXT{'addons_actions'} = "Actions";
 
 $TEXT{'addon_installed'} = "Addon installed successfully";
 $TEXT{'addon_not_installed'} = "Error installing addon";

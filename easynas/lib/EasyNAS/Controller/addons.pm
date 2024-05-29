@@ -21,25 +21,28 @@ sub view ($self) {
   $self->stash( addon => $addon,
                 TEXT =>\%TEXT);
 
+ ##### addonslist #####
+ if ($action eq "addonslist") {
+  my $group=$self->param('group');
+  my %addons=addons_info();
+  $self->stash(group => $group,
+               addons => \%addons);
+  $self->render(template => 'easynas/addons_list');
+  return;
+ }
+
  ##### menu #####
   
- my $addons_file = get_addons_file();
- my $addon_entry;
+ my %addons=addons_info();
  my $package;
- my $dom;
  my $lang=0;
  my $srv=0;
  my $app=0;
  my $fs=0;
  my $stg=0;
- my $mm=0; 
- if (-e $addons_file) {
- open my $fh, '<', $addons_file;
- binmode $fh; # drop all PerlIO layers possibly created by a use open pragma
- $dom = XML::LibXML->load_xml(IO => $fh);
- foreach $addon_entry ($dom->findnodes('/stream/search-result/solvable-list/solvable')) {
-  $package=$addon_entry->findvalue('./@name');
-  $package =~ s/^\s+//;
+ my $mm=0;
+ foreach $package (keys %addons) {
+  print $package; 
   if ($package =~ /easynas-lang/) 
   {
    $lang++;
@@ -65,8 +68,7 @@ sub view ($self) {
    $mm++;
   }
  }
-} 
-  $self->stash(result => $result,
+ $self->stash(result => $result,
                msg => $msg,
                fs => $fs,
                mm => $mm,
@@ -74,7 +76,7 @@ sub view ($self) {
                lang => $lang,
                stg => $stg,
 	       app => $app );
-  $self->render(template => 'easynas/addons');
+ $self->render(template => 'easynas/addons');
 }
 
 
