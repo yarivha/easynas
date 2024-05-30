@@ -29,7 +29,7 @@ use Number::Bytes::Human qw(format_bytes parse_bytes);
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw();
 our @EXPORT    = qw( get_mount_dir get_conf_cron get_addons_file get_update_file get_categories 
-                     get_group_default get_lang_list 
+                     get_group_default get_lang_list get_addons_update_dir 
 		     get_lang_text get_service_status get_menu get_addons get_addon_info 
 		     write_log easynas_info addons_info fs_info vol_info users_info groups_info 
                      disk_info health_info networks_info);
@@ -175,6 +175,11 @@ sub get_addons_file
  return($addons_file)
 }
 
+############# get_addons_update_dir ###############
+sub get_addons_update_dir
+{
+ return($addons_update_dir)
+}
 
 ############# get_update_file ###############
 sub get_update_file

@@ -21,6 +21,11 @@ sub view ($self) {
   $self->stash( addon => $addon,
                 TEXT =>\%TEXT);
 
+ ##### install #####
+ if ($action eq "install") {
+  install($self);
+ }
+
  ##### addonslist #####
  if ($action eq "addonslist") {
   my $group=$self->param('group');
@@ -78,5 +83,37 @@ sub view ($self) {
  $self->render(template => 'easynas/addons');
 }
 
+
+sub install($self) {
+ my $package=$self->param("package");
+ my $addons_update_dir=get_addons_update_dir();
+ my @info;
+ my $info1;
+ my $info2;
+ my $rc; 
+ my $installed=0;
+ $rc = `sudo /usr/bin/zypper -n install $package`;
+ @info=`sudo /usr/bin/zypper info $package`;
+ foreach(@info)
+ {
+   ($info1,$info2) = split /:/,$_;
+   if ($info1 =~ "Installed" && $info2 =~ "Yes")
+   {
+    $installed=1
+   }
+ }
+ if ($installed)
+ {
+  $result="success";
+  $msg=$TEXT{'addons_installed'};
+  `/usr/bin/sudo /usr/bin/zypper --xmlout info $package | /usr/bin/sudo /usr/bin/tee $addons_update_dir/$package.addon`;
+ }
+ else
+ {
+  $result="failed";
+  $msg=$TEXT{'addons_not_installed'};
+ }
+ return;
+}
 
 1;
