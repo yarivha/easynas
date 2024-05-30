@@ -44,7 +44,7 @@ my $uuid=`/usr/sbin/dmidecode | grep UUID`;
 
 ####### Refresh Repo #######
 `/usr/bin/sudo /usr/bin/zypper --quiet --gpg-auto-import-keys refresh`;
-`/usr/bin/sudo /usr/bin/zypper --quiet --xmlout search easynas | /usr/bin/sudo /usr/bin/tee /etc/easynas/easynas.addons`;
+`/usr/bin/sudo /usr/bin/zypper --quiet --xmlout search easynas | /usr/bin/sudo /usr/bin/tee /etc/easynas/addons/easynas.addons`;
 `/usr/bin/sudo /usr/bin/zypper --quiet --xmlout lu -a --repo EasyNAS | /usr/bin/sudo /usr/bin/tee  /etc/easynas/easynas.updates`;
 if (-e $addons) {
   open my $fh, '<', $addons;
@@ -55,7 +55,7 @@ if (-e $addons) {
     $package =~ s/^\s+//;
     if ($package =~ /easynas/) 
     {
-     `sudo /usr/bin/zypper --xmlout info $package | /usr/bin/tee /etc/easynas/$package.addon`;
+     `sudo /usr/bin/zypper --xmlout info $package | /usr/bin/tee /etc/easynas/addons/$package.addon`;
     }
   }
 }
