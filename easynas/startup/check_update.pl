@@ -22,7 +22,7 @@ use lib '.';
 use XML::LibXML;
 
 ##### Declaration ####
-my $addons="/etc/easynas/easynas.addons";
+my $addons="/etc/easynas/addons/easynas.addons";
 my $log_file="/var/log/easynas/easynas.log";
 my $package;
 my $dom;
