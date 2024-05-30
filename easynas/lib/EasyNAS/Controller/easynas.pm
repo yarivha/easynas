@@ -49,6 +49,7 @@ my $lang_dir= "/easynas/lang";
 my $conf_dir= "/etc/easynas";
 my $log_dir= "/var/log/easynas";
 my $mount_dir = "/mnt";
+my $addons_update_dir = $conf_dir."/addons";
 
 ##########  Configuration files ############
 my $lang_conf=$conf_dir."/easynas.lang";
@@ -57,7 +58,7 @@ my $conf_roles=$conf_dir."/easynas.roles";
 my $conf_cert  = $conf_dir."/easynas.pem";
 my $conf_hosts = "/etc/hosts";
 my $log_file = $log_dir."/easynas.log";
-my $addons_file = $conf_dir."/easynas.addons";
+my $addons_file= $addons_update_dir."/easynas.addons";
 my $update_file = $conf_dir."/easynas.updates";
 
 ######## easynas_info #######
@@ -613,7 +614,7 @@ sub addons_info
   $package=$addon->findvalue('./@name');
   $package =~ s/^\s+//;
   (undef,$group,$name)=split("-",$package);
-  @info=`cat $conf_dir/$package.addon`;
+  @info=`cat $addons_update_dir/$package.addon`;
   foreach(@info)
   {
    ($info1,$info2) = split /:/,$_;

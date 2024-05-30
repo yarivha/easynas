@@ -42,7 +42,6 @@ sub view ($self) {
  my $stg=0;
  my $mm=0;
  foreach $package (keys %addons) {
-  print $package; 
   if ($package =~ /easynas-lang/) 
   {
    $lang++;
