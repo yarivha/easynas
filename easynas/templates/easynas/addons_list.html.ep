@@ -31,7 +31,7 @@
 						    <td><%= $addons->{$addon}[3] %></td>
 						    <td><%= $addons->{$addon}[4] %></td>
 						    <td>
-							<a href="#" data-toggle="modal" data-target="#$package"><i class="fa fa-info-circle fa-2x" title="<%= ($TEXT->{'addons_info'}) %>"></i>&nbsp;</a>
+							<a href="#" data-toggle="modal" data-target="#<%= $addon %>"><i class="fa fa-info-circle fa-2x" title="<%= ($TEXT->{'addons_info'}) %>"></i>&nbsp;</a>
 						    %if ($addons->{$addon}[3] =~ "not installed") {
                                                         <a onclick="return confirm('<%= ($TEXT->{'addons_install?'}) %>')" href="?action=install_addon&package=<%= $addon %>"><i class="fa fa-cloud-download fa-2x" title="<%= ($TEXT->{'addons_install'}) %>"></i>&nbsp;</a>
 						    %}
@@ -44,6 +44,30 @@
 						    %}
 						    </td>
 						  </tr>
+						  <div class="modal fade" id="<%= $addon %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   						   <div class="modal-dialog">
+  						    <div class="modal-content">
+  						     <div class="modal-header">
+   						      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  						      <h4 class="modal-title" id="myModalLabel"><%= $addon %></h4>
+  						     </div>
+  						     <div class="modal-body">
+   						      <%= $addons->{$addon}[2] %><br>
+  						      <%= ($TEXT->{'addons_version'}) %>: <%= $addons->{$addon}[4] %>
+  						     </div>
+   						     <div class="modal-footer">
+						     %if ($addons->{$addon}[3] =~ "not installed") {
+   							<button onclick=window.location.href="?action=install_addon&package=<%= $addon %>" type="button" class="btn btn-default"><%= ($TEXT->{'addons_install'}) %></button>
+                                                     %}
+						     %if ($addons->{$addon}[3] =~ "out-of-date") {
+                                                        <button onclick=window.location.href="?action=update_addon&package=<%= $addon %>" type="button" class="btn btn-default"><%= ($TEXT->{'addons_update'}) %></button>
+                                                     %}
+						     <button onclick=window.location.href="?action=delete_addon&package=<%= $addon %>" type="button" class="btn btn-default"><%= ($TEXT->{'addons_delete'}) %></button>
+  						     <button type="button" class="btn btn-default" data-dismiss="modal"><%= ($TEXT->{'addons_close'}) %></button>
+  						     </div>
+  						    </div>
+  						   </div>
+   						  </div>
  						 %}
 						%}
                                             </tbody>

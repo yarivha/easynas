@@ -286,7 +286,7 @@ $TEXT{'addons_deleted'} = "Addon deleted successfully";
 $TEXT{'addons_not_deleted'} = "Error deleting Addon";
 $TEXT{'addons_updated'} = "Addon updated successfully";
 $TEXT{'addons_not_updated'} = "Error updating addon";
-
+$TEXT{'addons_close'} = "Close";
 
 
 $TEXT{'firmware_upgrade'} = "Firmware Upgrade";
