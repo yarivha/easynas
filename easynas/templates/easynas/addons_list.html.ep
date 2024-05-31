@@ -33,14 +33,14 @@
 						    <td>
 							<a href="#" data-toggle="modal" data-target="#$package"><i class="fa fa-info-circle fa-2x" title="<%= ($TEXT->{'addons_info'}) %>"></i>&nbsp;</a>
 						    %if ($addons->{$addon}[3] =~ "not installed") {
-                                                        <a onclick="return confirm('<%= ($TEXT->{'addons_install?'}) %>')" href="?action=install&package=<%= $addon %>"><i class="fa fa-cloud-download fa-2x" title="<%= ($TEXT->{'addons_install'}) %>"></i>&nbsp;</a>
+                                                        <a onclick="return confirm('<%= ($TEXT->{'addons_install?'}) %>')" href="?action=install_addon&package=<%= $addon %>"><i class="fa fa-cloud-download fa-2x" title="<%= ($TEXT->{'addons_install'}) %>"></i>&nbsp;</a>
 						    %}
 						    %if ($addons->{$addon}[3] =~ "out-of-date") {
-                                                        <a onclick="return confirm('<%= ($TEXT->{'addons_update?'}) %>')" href="action=update&package=<%= $addon %>"><i class="fa fa-cloud-download fa-2x" title="<%= ($TEXT->{'addons_update'}) %>"></i>&nbsp;</a>
- 							<a onclick="return confirm('<%= ($TEXT->{'addons_delete?'}) %>')" href="action=delete&package=<%= $addon %>"><i class="fa fa-trash fa-2x" title="<%= ($TEXT->{'addons_delete'}) %>"></i>&nbsp;</a>
+                                                        <a onclick="return confirm('<%= ($TEXT->{'addons_update?'}) %>')" href="?action=update_addon&package=<%= $addon %>"><i class="fa fa-cloud-download fa-2x" title="<%= ($TEXT->{'addons_update'}) %>"></i>&nbsp;</a>
+ 							<a onclick="return confirm('<%= ($TEXT->{'addons_delete?'}) %>')" href="?action=delete_addon&package=<%= $addon %>"><i class="fa fa-trash fa-2x" title="<%= ($TEXT->{'addons_delete'}) %>"></i>&nbsp;</a>
 						    %}
 						    %if ($addons->{$addon}[3] =~ "up-to-date") {
-						       <a onclick="return confirm('<%= ($TEXT->{'addons_delete?'}) %>')" href="action=delete&package=<%= $addon %>"><i class="fa fa-trash fa-2x" title="<%= ($TEXT->{'addons_delete'}) %>"></i>&nbsp;</a>
+						       <a onclick="return confirm('<%= ($TEXT->{'addons_delete?'}) %>')" href="?action=delete_addon&package=<%= $addon %>"><i class="fa fa-trash fa-2x" title="<%= ($TEXT->{'addons_delete'}) %>"></i>&nbsp;</a>
 						    %}
 						    </td>
 						  </tr>

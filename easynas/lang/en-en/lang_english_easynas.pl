@@ -280,13 +280,15 @@ $TEXT{'addons_install?'} = "Install Addon ?";
 $TEXT{'addons_update?'} = "Update Addon ?";
 $TEXT{'addons_delete?'} = "Delete Addon ?";
 $TEXT{'addons_info'} = "Information";
+$TEXT{'addons_installed'} = "Addon installed successfully";
+$TEXT{'addons_not_installed'} = "Error installing addon";
+$TEXT{'addons_deleted'} = "Addon deleted successfully";
+$TEXT{'addons_not_deleted'} = "Error deleting Addon";
+$TEXT{'addons_updated'} = "Addon updated successfully";
+$TEXT{'addons_not_updated'} = "Error updating addon";
 
-$TEXT{'addon_installed'} = "Addon installed successfully";
-$TEXT{'addon_not_installed'} = "Error installing addon";
-$TEXT{'addon_deleted'} = "Addon deleted successfully";
-$TEXT{'addon_not_deleted'} = "Error deleting Addon";
-$TEXT{'addon_updated'} = "Addon updated successfully";
-$TEXT{'addon_not_updated'} = "Error updating addon";
+
+
 $TEXT{'firmware_upgrade'} = "Firmware Upgrade";
 $TEXT{'lang'} = "Language";
 $TEXT{'other_apps'} = "Other Apps";

@@ -21,9 +21,14 @@ sub view ($self) {
   $self->stash( addon => $addon,
                 TEXT =>\%TEXT);
 
- ##### install #####
- if ($action eq "install") {
-  install($self);
+ ##### install addon #####
+ if ($action eq "install_addon") {
+  install_addon($self);
+ }
+ 
+ ##### delete addon #####
+ if ($action eq "delete_addon") {
+  delete_addon($self);
  }
 
  ##### addonslist #####
@@ -83,8 +88,8 @@ sub view ($self) {
  $self->render(template => 'easynas/addons');
 }
 
-
-sub install($self) {
+############# install addon ###############
+sub install_addon($self) {
  my $package=$self->param("package");
  my $addons_update_dir=get_addons_update_dir();
  my @info;
@@ -110,10 +115,45 @@ sub install($self) {
  }
  else
  {
-  $result="failed";
+  $result="fail";
   $msg=$TEXT{'addons_not_installed'};
  }
  return;
+}
+
+
+############# delete addon ###############
+sub delete_addon($self) {
+ my $package=$self->param("package");
+ my $addons_update_dir=get_addons_update_dir();
+ my @info;
+ my $info1;
+ my $info2;
+ my $rc;
+ my $deleted=0;
+ $rc = `sudo /usr/bin/zypper -n remove $package`;
+ @info=`sudo /usr/bin/zypper info $package`;
+ foreach(@info)
+  {
+   ($info1,$info2) = split /:/,$_;
+   if ($info1 =~ "Installed" && $info2 =~ "No")
+   {
+     $deleted=1
+    }
+   }
+ if ($deleted)
+ {
+  `/usr/bin/sudo /usr/bin/zypper --xmlout info $package | /usr/bin/sudo /usr/bin/tee $addons_update_dir/$package.addon`;
+  $result="success";
+  $msg=$TEXT{'addons_deleted'};
+ }
+ else
+ {
+  $result="fail";
+  $msg=$TEXT{'addons_not_deleted'};
+ }
+ return;
+
 }
 
 1;
