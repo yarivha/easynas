@@ -31,6 +31,12 @@ sub view ($self) {
   delete_addon($self);
  }
 
+
+#### update addon #####
+ if ($action eq "update_addon") {
+  update_addon($self);
+ }
+
  ##### addonslist #####
  if ($action eq "addonslist") {
   my $group=$self->param('group');
@@ -155,5 +161,40 @@ sub delete_addon($self) {
  return;
 
 }
+
+
+############## update_addon ##############
+sub update_addon($self) {
+ my $package=$self->param("package");
+ my $addons_update_dir=get_addons_update_dir();
+ my @info;
+ my $info1;
+ my $info2;
+ my $rc;
+ my $updated=0;
+ $rc = `sudo /usr/bin/zypper -n update $package`;
+ @info=`sudo /usr/bin/zypper info $package`;
+ foreach(@info)
+  {
+   ($info1,$info2) = split /:/,$_;
+   if ($info1 =~ "Status" && $info2 =~ "up-to-date")
+   {
+     $updated=1
+    }
+   }
+ if ($updated) {
+  `/usr/bin/sudo /usr/bin/zypper --xmlout info $package | /usr/bin/sudo /usr/bin/tee $addons_update_dir/$package.addon`;
+  $result="success";
+  $msg=$TEXT{'addons_updated'};
+ }
+ else
+ {
+  $result="fail";
+  $msg=$TEXT{'addons_not_updated'};
+ }
+
+return;
+}
+
 
 1;
