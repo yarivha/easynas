@@ -89,26 +89,27 @@ $TEXT{'total_swap_memory'} = "Total Swap Memory";
 $TEXT{'free_swap_memory'} = "Free Swap Memory";
 
 #### Settings ####
+$TEXT{'settings'} = "Settings"; 
+$TEXT{'settings_date_time'} = "Date / Time";
+$TEXT{'settings_cert'} = "Certificate";
+$TEXT{'settings_repo'} = "Repository";
+
+
 $TEXT{'general_settings'} = "General Settings";
 $TEXT{'bad_system_port'} = "Bad System Port";
 $TEXT{'bad_secure_port'} = "Bad Secure Port";
-$TEXT{'bad_web_port'} = "Bad Web Port";
-$TEXT{'settings'} = "Settings";
-$TEXT{'date_time'} = "Date / Time";
+$TEXT{'bad_web_port'} = "Bad Web Port"; 
 $TEXT{'access_list'} = "Access List";
 $TEXT{'host_name'} = "Host Name";
 $TEXT{'system_port'} = "System Port";
 $TEXT{'secure_port'} = "System Secure Port";
 $TEXT{'change_settings_in_progress'} = "Change Settings in Progress....";
-$TEXT{'certificate'} = "Certificate";
 $TEXT{'cert_details'} = "Certificate Details";
 $TEXT{'no_cert'} = "No Certificate found";
 $TEXT{'bad_cert'} = "Bad Certificate";
 $TEXT{'upload'} = "Upload";
 $TEXT{'error_updating_date'} = "Error updating Date / Time";
 $TEXT{'error_settings_demo'} = "Can not change settings in a demo site";
-$TEXT{'repositories'} = "Repositories";
-$TEXT{'repository'} = "Repository";
 $TEXT{'enabled'} = "Enabled";
 $TEXT{'disabled'} = "Disabled";
 $TEXT{'enable'} = "Enable";
