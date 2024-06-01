@@ -1,0 +1,10 @@
+<addon>
+ <name>ssh</name>
+ <description>ssh</description>
+ <version>1.2.0</version>
+ <author>Yariv Hakim</author>
+ <type>sharing</type>
+ <service>easynas-sshd.service</service>
+ <icon>fa-terminal</icon>
+ <program>ssh</program>
+</addon>
