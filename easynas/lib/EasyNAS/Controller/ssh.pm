@@ -7,7 +7,7 @@ use easynas;
 my $msg;
 my $result;
 my $addon = get_addon_info("ssh");
-
+my $service = ($addon->{service});
 my %TEXT=get_lang_text($addon->{'name'});
 
 sub view ($self) {
@@ -20,11 +20,23 @@ sub view ($self) {
   $self->stash(addon => $addon,
                 TEXT =>\%TEXT);
 
+##### sshon #####
+ if (defined($action) && $action eq "sshon") {
+  `/usr/bin/sudo /usr/bin/systemctl start $service`;
+  `/usr/bin/sudo /usr/bin/systemctl enable $service`;
+ }
+
+#### sshoff #####
+ if (defined($action) && $action eq "sshoff") {
+  `/usr/bin/sudo /usr/bin/systemctl stop $service`;
+  `/usr/bin/sudo /usr/bin/systemctl disable $service`;
+ }
 
 ##### menu ######
-
-  $self->stash(result => $result);
-  $self->stash(msg => $msg);
+  my $service_active=get_service_status($service);
+  $self->stash(service_active => $service_active,
+	       result => $result,
+	       msg => $msg);
   $self->render(template => 'easynas/ssh'); 
 
 }
