@@ -1,46 +1,44 @@
 % layout 'default';
 
 <div class="row">
- <div class="col-lg-10">
+ <div class="col-lg-8">
   <div class="panel panel-default">
    <div class="panel-heading">
     <label><%= ($TEXT->{'fs_create'}) %></label>
    </div>
    <div class="panel-body">
-    <div class="row">
-      <div class="col-lg-8">
-        <form role="form">
-         <input type=hidden name="action" value="createfs">
-         <div class="form-group">
-          <label><%= ($TEXT->{'fs_name'}) %></label>
-          <input class="form-control" name="name">
-         </div>
-         <div class="form-group">
-          <label><%= ($TEXT->{'fs_raid_level'}) %></label>
-	  <BR>
-	  <table class="table">
-	  % if ($numberoffree > 0) {
-	  <tr><td><label class="radio-inline">
-           <input type="radio" name="raid" value="single" checked></td>
-           <td><img src="/images/jbod.png" width="120" height="100"></td>
-	   <td><%= ($TEXT->{'fs_jbod_info'}) %></td>
-          </label>
-          </tr>
-	  %}
-	  % if ($numberoffree > 1) {
-	  <tr><td><label class="radio-inline">
-           <input type="radio" name="raid" value="raid0"></td>
-           <td><img src="/images/raid0.png" width="120" height="100"></td>
-           <td><%= ($TEXT->{'fs_raid0_info'}) %></td>
-          </label>
-          </tr>
-	  <tr><td><label class="radio-inline">
-           <input type="radio" name="raid" value="raid1"></td>
-           <td><img src="/images/raid1.png" width="120" height="100"></td>
-           <td><%= ($TEXT->{'fs_raid1_info'}) %></td> 
-	   </label>
-          </tr>
-	  %}
+    <form role="form">
+     <input type=hidden name="action" value="createfs">
+     <div class="form-group">
+      <label><%= ($TEXT->{'fs_name'}) %></label>
+      <input class="form-control" name="name">
+     </div>
+     <div class="form-group">
+      <label><%= ($TEXT->{'fs_raid_level'}) %></label>
+      <BR>
+      <table class="table">
+       % if ($numberoffree > 0) {
+       <tr><td><label class="radio-inline">
+       <input type="radio" name="raid" value="single" checked></td>
+       <td><img src="/images/jbod.png" width="120" height="100"></td>
+       <td><%= ($TEXT->{'fs_jbod_info'}) %></td>
+       </label>
+       </tr>
+       %}
+       % if ($numberoffree > 1) {
+       <tr><td><label class="radio-inline">
+       <input type="radio" name="raid" value="raid0"></td>
+       <td><img src="/images/raid0.png" width="120" height="100"></td>
+       <td><%= ($TEXT->{'fs_raid0_info'}) %></td>
+       </label>
+       </tr>
+       <tr><td><label class="radio-inline">
+       <input type="radio" name="raid" value="raid1"></td>
+       <td><img src="/images/raid1.png" width="120" height="100"></td>
+       <td><%= ($TEXT->{'fs_raid1_info'}) %></td> 
+       </label>
+       </tr>
+       %}
 	  % if ($numberoffree > 2) {
 	  <tr><td><label class="radio-inline">
            <input type="radio" name="raid" value="raid5"></td>
@@ -58,6 +56,7 @@
           </tr>
 	  %}
 	  </table>
+          </div>
 	  <div class="form-group">
            <label><%= ($TEXT->{'fs_compression'}) %></label>
 	   <select name="compress" class="form-control">
@@ -79,8 +78,7 @@
 	   <select multiple class="form-control" name="disks">
 	    % foreach my $disk (@$freedisks) {
 	    <option><%= $disk %></option>
-	   %}
-  
+	    %}
 	   </select>
           </div>
 	  <div class="form-group">
@@ -100,12 +98,15 @@
             </label>
 	   </div>
           </div>
-       <button type="submit" class="btn btn-default"><%= ($TEXT->{'fs_add'}) %></button>
-       <button type="reset" class="btn btn-default"><%= ($TEXT->{'fs_reset'}) %></button>
+        </div>
+       <div class="panel-footer">
+        <center>
+        <button type="submit" class="btn btn-default"><%= ($TEXT->{'fs_add'}) %></button>
+        <button type="reset" class="btn btn-default"><%= ($TEXT->{'fs_reset'}) %></button>
+        </center>
+       </div>
       </form>
       </div>
-    </div>
-   </div>
   </div>
  </div>
 </div>
