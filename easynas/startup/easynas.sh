@@ -24,7 +24,7 @@ while [[ true ]] ; do
     IP_ADDR=$(/usr/sbin/ip address | grep " inet " | cut -d'/' -f1 | awk '{print $2}' | grep -m 1 -v 127.0.0.1)
     INT=ifcfg-$(ls /sys/class/net/ | grep -v lo)
     INT_DIR=$(dirname $(sudo find /etc/sysconfig/ -name 'ifcfg-lo'))
-    PORT=$(/bin/grep '$SERVER' /etc/easynas/lighttpd/easynas.conf | /bin/awk '{gsub(/"/,"",$3); print $3}' | grep -v 19998)
+    PORT=$(/bin/grep ExecStart /usr/lib/systemd/system/easynas.service | cut -d" " -f6 | grep -oP '(?<=[*])[^?]*')
     clear
     echo "#########################################"
     cat /etc/ImageVersion
