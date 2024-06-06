@@ -1,5 +1,6 @@
 <addon>
  <name>samba</name>
+ <enable>false</enable>
  <description>samba</description>
  <version>1.0.0</version>
  <author>Yariv Hakim</author>

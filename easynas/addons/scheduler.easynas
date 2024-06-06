@@ -1,5 +1,6 @@
 <addon>
  <name>scheduler</name>
+ <enable>false</enable>
  <description>scheduler</description>
  <icon>fa-clock</icon>
  <version>0.7.0</version>
