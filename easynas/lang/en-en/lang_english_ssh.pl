@@ -1,3 +1,5 @@
+# lang_english_ssh.pl
+# Version 1.2.0
 #
 # EasyNAS is free software: You can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -9,10 +11,9 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
-# This file is part of @MYNAME_UC@ (c) created by @PROJECT_AUTHOR@ 2012-@YEAR@
+# This file is part of EasyNAS (c) created by Yariv Hakim 2012-2024
 #
-# Homepage    : @PROJECT_URL@
-# Sourceforge : @PROJECT_SF_URL@
+# Homepage    : https://www.easynas.org
 #
 #########################################################################
 
