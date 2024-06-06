@@ -93,16 +93,13 @@ $TEXT{'settings'} = "Settings";
 $TEXT{'settings_date_time'} = "Date / Time";
 $TEXT{'settings_cert'} = "Certificate";
 $TEXT{'settings_repo'} = "Repository";
+$TEXT{'settings_hostname'} = "Hostname";
+$TEXT{'settings_port'} = "Port";
+$TEXT{'settings_save'} = "Save";
+$TEXT{'settings_reset'} = "Reset";
+$TEXT{'settings_bad_port'} = "Bad System Port";
+$TEXT{'settings_saved'} = "New Settings were saved. Restart might be required for the settings to take effect.";
 
-
-$TEXT{'general_settings'} = "General Settings";
-$TEXT{'bad_system_port'} = "Bad System Port";
-$TEXT{'bad_secure_port'} = "Bad Secure Port";
-$TEXT{'bad_web_port'} = "Bad Web Port"; 
-$TEXT{'access_list'} = "Access List";
-$TEXT{'host_name'} = "Host Name";
-$TEXT{'system_port'} = "System Port";
-$TEXT{'secure_port'} = "System Secure Port";
 $TEXT{'change_settings_in_progress'} = "Change Settings in Progress....";
 $TEXT{'cert_details'} = "Certificate Details";
 $TEXT{'no_cert'} = "No Certificate found";

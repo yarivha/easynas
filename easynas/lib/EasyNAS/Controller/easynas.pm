@@ -29,7 +29,7 @@ use Number::Bytes::Human qw(format_bytes parse_bytes);
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw();
 our @EXPORT    = qw( get_mount_dir get_conf_cron get_addons_file get_update_file get_categories 
-                     get_group_default get_lang_list get_addons_update_dir 
+                     get_group_default get_conf_webui get_conf_hosts  get_lang_list get_addons_update_dir 
 		     get_lang_text get_service_status get_menu get_addons get_addon_info 
 		     write_log easynas_info addons_info fs_info vol_info users_info groups_info 
                      disk_info health_info networks_info);
@@ -57,6 +57,7 @@ my $conf_cron="/etc/cron.d/easynas.cron";
 my $conf_roles=$conf_dir."/easynas.roles";
 my $conf_cert  = $conf_dir."/easynas.pem";
 my $conf_hosts = "/etc/hosts";
+my $conf_webui = "/usr/lib/systemd/system/easynas.service";
 my $log_file = $log_dir."/easynas.log";
 my $addons_file= $addons_update_dir."/easynas.addons";
 my $update_file = $conf_dir."/easynas.updates";
@@ -154,7 +155,7 @@ sub networks_info
 ############# get_mount_dir ####################
 sub get_mount_dir
 {
- return($mount_dir)
+ return($mount_dir);
 }
 
 ########### get_group_default ###########
@@ -166,25 +167,38 @@ sub get_group_default
 ############# get_conf_cron ###############
 sub get_conf_cron
 {
- return($conf_cron)
+ return($conf_cron);
 }
 
 ############# get_addons_file ###############
 sub get_addons_file
 {
- return($addons_file)
+ return($addons_file);
 }
 
 ############# get_addons_update_dir ###############
 sub get_addons_update_dir
 {
- return($addons_update_dir)
+ return($addons_update_dir);
 }
 
 ############# get_update_file ###############
 sub get_update_file
 {
- return($update_file)
+ return($update_file);
+}
+
+############# get_conf_hosts ################
+sub get_conf_hosts
+{
+ return($conf_hosts);
+}
+
+
+########### get_conf_webui ############
+sub get_conf_webui
+{
+ return($conf_webui);
 }
 
 
