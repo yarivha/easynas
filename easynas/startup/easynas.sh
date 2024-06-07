@@ -25,26 +25,29 @@ while [[ true ]] ; do
     INT=ifcfg-$(ls /sys/class/net/ | grep -v lo)
     INT_DIR=$(dirname $(sudo find /etc/sysconfig/ -name 'ifcfg-lo'))
     PORT=$(/bin/grep ExecStart /usr/lib/systemd/system/easynas.service | cut -d" " -f6 | grep -oP '(?<=[*])[^?]*')
+    ACTIVE=$(sudo /usr/sbin/service easynas status | grep "Active" | cut -d ":" -f2)
     clear
     echo "#########################################"
     cat /etc/ImageVersion
     echo
     echo "#########################################"
     echo ""
+    echo "Status: $ACTIVE"
     echo "Browse to https://$IP_ADDR$PORT to configure EasyNAS"
     echo ""
     echo ""
     echo "Admin Tasks:"
     echo ""
     echo " 1. Change admin password"
-    echo " 2. Restart network"
-    echo " 3. Reset to default settings"
-    echo " 4. Check for EasyNAS updates"
-    echo " 5. Restart"
-    echo " 6. Shutdown"
-    echo " 7. Shell"
+    echo " 2. Start/Stop EasyNAS"
+    echo " 3. Restart network"
+    echo " 4. Reset to default settings"
+    echo " 5. Check for EasyNAS updates"
+    echo " 6. Restart"
+    echo " 7. Shutdown"
+    echo " 8. Shell"
     echo ""
-    echo "Selection (1-7) :" 
+    echo "Selection (1-8) :" 
     read CHOOSE
 
     case "$CHOOSE" in
@@ -60,12 +63,27 @@ while [[ true ]] ; do
 	;;
 
 	"2" )
+            if [[ $ACTIVE =~ "running" ]]; then 
+	        echo "Stopping EasyNAS"
+		sudo /usr/bin/systemctl stop easynas.service 
+	        echo "EasyNAS Stopped"
+	        read -p "Press Enter key to continue ..."
+	    else 
+		echo "Starting EasyNAS"
+		sudo /usr/bin/systemctl start easynas.service  
+		echo "EasyNAS Started"
+                read -p "Press Enter key to continue ..."
+	    fi
+	;;
+
+
+	"3" )
 	    read -p "Press Enter key to restart network"
 	    sudo /usr/sbin/service network restart 
 	    read -p "Press Enter key to continue ..."
 	;;
 
-	"3" )
+	"4" )
 	    read -p "Press Enter key to reset settings"
 	    sudo /bin/tar -xf /easynas/startup/settings.tar -C /
 	    sudo /bin/rm /etc/resolv.conf
@@ -74,23 +92,23 @@ while [[ true ]] ; do
 	    sudo /usr/bin/systemctl reboot
 	;;
 	
-	"4" )
+	"5" )
 	    sudo /usr/bin/zypper update easynas*
             read -p "Press Enter key to continue ..."
 	;;
 
 
-	"5" )
+	"6" )
 	    read -p "Press Enter key to restart EasyNAS ..."
 	    sudo /usr/bin/systemctl reboot
 	;;
 
-	"6" )
+	"7" )
 	    read -p "Press Enter key to shutdown EasyNAS ..."
 	    sudo /usr/bin/systemctl poweroff
 	;;
 
-	"7" )
+	"8" )
 	    /bin/bash
 	;;
 
