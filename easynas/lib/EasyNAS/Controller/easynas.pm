@@ -72,11 +72,11 @@ sub easynas_info
  my $uuid;
  my $serial;
  (undef,$version)=split("-",$imageversion);	
- my $uuid=`/usr/sbin/dmidecode | grep UUID`;
+ $uuid=`/usr/sbin/dmidecode | grep UUID`;
  (undef,$serial)=split(" ",$uuid);
  $easynas{'version'}=$version;
  $easynas{'arc'}=$arc;
- $easynas('serial')=$serial;
+ $easynas{'serial'}=$serial;
  return(%easynas);
 }
 
