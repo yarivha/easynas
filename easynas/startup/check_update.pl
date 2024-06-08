@@ -36,7 +36,7 @@ my $timestamp=localtime();
 
 ##### Capture Stats ######
 my $version=`cat /etc/ImageVersion`;
-my $ip=`curl -s ifconfig.io`;
+my $ip=`curl -s ifconfig.io/ip`;
 chop($ip);
 my $uuid=`/usr/sbin/dmidecode | grep UUID`;
 (undef,$serial)=split(" ",$uuid);
