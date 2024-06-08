@@ -21,10 +21,10 @@
                                                   <tr>
 						    <td>
 						    %if ($addons->{$addon}[3] =~ "not installed") { 
-							<a href=?action=settingsmenu&username=><i class="fa fa-box fa-2x" title="<%= ($TEXT->{'addons_info'}) %>"></i></a></td>
+							<a href="#" data-toggle="modal" data-target="#<%= $addon %>"><i class="fa fa-box fa-2x" title="<%= ($TEXT->{'addons_info'}) %>"></i></a></td>
 						    %}
 						    %else {
-							<a href=?action=settingsmenu&username=><i class="fa fa-box-open fa-2x" title="<%= ($TEXT->{'addons_info'}) %>"></i></a></td>
+							<a href="#" data-toggle="modal" data-target="#<%= $addon %>"><i class="fa fa-box-open fa-2x" title="<%= ($TEXT->{'addons_info'}) %>"></i></a></td>
 						    %} 
 						    <td><%= $addon %></td>
 						    <td><%= $addons->{$addon}[2] %></td>
