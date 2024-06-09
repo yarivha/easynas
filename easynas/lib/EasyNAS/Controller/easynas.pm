@@ -709,6 +709,7 @@ sub groups_info
 sub disk_info
 {
     my $disk;
+    my $disk_name;
     my %disks;
     my $type;
     my $status;
@@ -722,6 +723,7 @@ sub disk_info
     foreach (@disks)
     {
 	($disk,undef,$type,undef,undef,undef)=split(" ", $_);
+	(undef,undef,$disk_name)=split("/",$disk);
 	@sysmon = `/usr/bin/sudo /usr/sbin/smartctl -i  $disk`; 
 	foreach (@sysmon) 
 	{
@@ -751,7 +753,7 @@ sub disk_info
   	   $status="disk_free";
 	  }
 	}
-        $disks{$disk}=[$disk,$type,$size.$presize,$status,$model];
+        $disks{$disk_name}=[$disk_name,$type,$size.$presize,$status,$model];
 	$type="";
 	$size="";
 	$presize="";

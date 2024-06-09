@@ -33,27 +33,47 @@
                                             </thead>
                                             <tbody>
 						% foreach my $disk (sort keys (%$disks)) {
-                                                <tr>
-						   %if ($health->{$disk}[0] eq "disk_good")  {
-                                                    <td><a href="?action=settingsmenu&disk=<%= $disk %>"><i class="fa fa-hard-drive fa-2x" style="color:green" title="Settings"></i></a></td>
+                                                <tr><td>
+						   %if ($health->{'/dev/'.$disk}[0] eq "disk_good")  {
+                                                    <a href="#" data-toggle="modal" data-target="#<%= $disk %>"><i class="fa fa-hard-drive fa-2x" style="color:green" title="Settings"></i></a>
 						   %}
-						   %if ($health->{$disk}[0] eq "disk_bad")  {
-                                                    <td><a href="?action=settingsmenu&disk=<%= $disk %>"><i class="fa fa-hard-drive fa-2x" style="color:red" title="Settings"></i></a></td>
+						   %if ($health->{'/dev/'.$disk}[0] eq "disk_bad")  {
+                                                    <a href="#" data-toggle="modal" data-target="#<%= $disk %>"><i class="fa fa-hard-drive fa-2x" style="color:red" title="Settings"></i></a>
                                                    %}
-						    <td><a href="?action=settingsmenu&disk=<%= $disk %>"><%= $disk %></a></td>
+						    </td>
+						    <td><a href="#" data-toggle="modal" data-target="#<%= $disk %>"><%= $disk %></a></td>
 						    <td><%= $disks->{$disk}[1] %></td>
 						    <td><%= $disks->{$disk}[2] %></td>
 						    <td><%= ($TEXT->{$disks->{$disk}[3]}) %></td>
-						    <td><a href="?action=healthmenu&disk=<%= $disk %>"><%= ($TEXT->{$health->{$disk}[0]}) %></a></td>
+						    <td><a href="?action=healthmenu&disk=/dev/<%= $disk %>"><%= ($TEXT->{$health->{'/dev/'.$disk}[0]}) %></a></td>
 						    <td>
-						    <a onclick="return confirm('<%= ($TEXT->{'disk_format_are_u_sure'}) %>')" href=?action=format&disk=<%= $disk %>><i class="fa fa-trash fa-2x" title="<%= ($TEXT->{'disk_format'}) %>"></i>&nbsp;</a>
-						    <a href="disk.pl?menu=settings&action=display&disk=<%= $disk %>"><i class="fa fa-sliders fa-2x" title="<%= ($TEXT->{'settings'}) %>"></i>&nbsp;</a>
+						    <a onclick="return confirm('<%= ($TEXT->{'disk_format_are_u_sure'}) %>')" href=?action=format&disk=/dev/<%= $disk %>><i class="fa fa-trash fa-2x" title="<%= ($TEXT->{'disk_format'}) %>"></i>&nbsp;</a>
+						    <a href="disk.pl?menu=settings&action=display&disk=/dev/<%= $disk %>"><i class="fa fa-sliders fa-2x" title="<%= ($TEXT->{'settings'}) %>"></i>&nbsp;</a>
 						</td></tr>
+						<div class="modal fade" id="<%= $disk %>" tabindex="-1" role="dialog" aria-labelledby="DiskModalLabel" aria-hidden="true">
+                                                   <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                     <div class="modal-header">
+                                                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                      <h4 class="modal-title" id="DiskModalLabel"><%= $disk %></h4>
+                                                     </div>
+                                                     <div class="modal-body">
+							<label><%= ($TEXT->{'disk_type'}) %>:</label> <%= $disks->{$disk}[1] %><BR>
+							<label><%= ($TEXT->{'disk_status'}) %>:</label> <%= ($TEXT->{$disks->{$disk}[3]}) %><BR>
+							<label><%= ($TEXT->{'disk_size'}) %>:</label> <%= $disks->{$disk}[2] %><BR>
+							<label><%= ($TEXT->{'disk_model'}) %>: </label> <%= $disks->{$disk}[4] %><BR>
+                                                     </div>
+                                                     <div class="modal-footer">
+                                                      <button type="button" class="btn btn-default" data-dismiss="modal"><%= ($TEXT->{'disk_close'}) %></button>
+                                                     </div>
+                                                    </div>
+                                                   </div>
+                                                  </div>
+
 					 	%}
                                             </tbody>
                                         </table>
                                     </div>
 				</div>
 			</div>
-
 

@@ -353,6 +353,7 @@ $TEXT{'disk_generation_errs'} = "Generation Errors";
 $TEXT{'disk_clean_errs'} = "Clean Errors";
 $TEXT{'disk_clean_errs_success'} = "Errors Cleaned";
 $TEXT{'disk_clean_errs_failed'} = "Errors Failed to Clean";
+$TEXT{'disk_close'} = "Close";
 
 #### File System ####
 $TEXT{'fs'} = "File System";
@@ -379,6 +380,8 @@ $TEXT{'fs_better'} = "Better";
 $TEXT{'fs_faster'} = "Faster";
 $TEXT{'fs_optimized'} = "Optimized";
 $TEXT{'fs_none'} = "None";
+$TEXT{'fs_mount'} = "Mount";
+$TEXT{'fs_unmount'} = "Unmount";
 
 $TEXT{'cancel'} = "Cancel";
 $TEXT{'resume'} = "Resume";
@@ -391,8 +394,6 @@ $TEXT{'none'} = "None";
 $TEXT{'health'} = "Health";
 $TEXT{'good'} = "Good";
 $TEXT{'degreded'} = "Degraded";
-$TEXT{'mount'} = "Mount";
-$TEXT{'unmount'} = "UnMount";
 $TEXT{'remove_hd'} = "Remove HD";
 $TEXT{'replace_hd'} = "Replace HD";
 $TEXT{'source_hd'} = "Source HD";
