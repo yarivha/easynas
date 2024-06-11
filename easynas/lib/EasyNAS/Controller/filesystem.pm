@@ -167,7 +167,7 @@ sub deletefs($self) {
 ####### createfs #######
 sub createfs($self) {
 
-    my @disks      = $self->param("disks");
+    my $disks      = $self->every_param("disks");
     my $fs         = $self->param("name");
     my $raid       = $self->param("raid");
     my $options    = $self->param("options");
@@ -183,7 +183,6 @@ sub createfs($self) {
     my $btrfs;
     my $disk;
     my $rc;
-
 if ($ssd)
     {
 	$ssd = "ssd,discard,noatime";
@@ -200,11 +199,11 @@ if ($ssd)
     {
 	$defrag = "";
     }
-    foreach (@disks)
+    foreach (@{$disks})
     {
 	($disk,undef) = split(" ", $_);
-	$raid_disks   = $raid_disks." ".$disk;
-	$device       = $device."device=".$disk.",";
+	$raid_disks   = $raid_disks." "."/dev/".$disk;
+	$device       = $device."device="."/dev/".$disk.",";
 	$number++;
     }
 
