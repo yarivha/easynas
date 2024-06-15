@@ -56,7 +56,7 @@ sub view ($self) {
 sub disk_format($self) {
 
  my $disk = $self->param("disk");
- my $rc = system("/usr/bin/sudo /usr/sbin/wipefs -t brtfs -f -a  $disk >/dev/null");
+ my $rc = system("/usr/bin/sudo /usr/sbin/wipefs -t brtfs -f -o 0x10040  $disk >/dev/null");
  
  if ($rc) {
   $result="fail";
