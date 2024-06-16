@@ -1,42 +1,120 @@
 % layout 'default';
 
 <div class="row">
-<div class="col-lg-8">
-<div class="panel panel-default">
-<div class="panel-heading"><%= $fs_name %></div>
-<div class="panel-body"><ul class="nav nav-tabs"><li class="active"><a href="#tab-default-1" data-toggle="tab"><%= ($TEXT->{'fs_name'}) %></a></li>
-<li><a href="#tab-default-2" data-toggle="tab"><%= ($TEXT->{'fs_raidlevel'}) %></a></li><li><a href="#tab-default-3" data-toggle="tab"><%= ($TEXT->{'fs_mount_options'}) %></a></li><li><a href="#tab-default-4" data-toggle="tab"><%= ($TEXT->{'fs_disks'}) %></a></li></ul>
-<div class="tab-content">
-<div class="tab-pane fade in active" id="tab-default-1"><br><br>
-%= form_for filesystem => begin
-%= hidden_field action=>'changename'
-%= hidden_field fs=>$fs_name
-<table><TR><TD>
-%= label_for name => ($TEXT->{'fs_name'})
-</TD></TR>
-<TR><TD>
-%= text_field newname=>$fs_name, class => 'appearance-none block w-full py-3 px-4 leading-tight text-gray-700 focus:bg-white border border-gray-200 focus:border-gray-500 rounded focus:outline-none'
-</TD></TR></TABLE><br><br>
-%= submit_button ($TEXT->{'fs_change_name'})
-% end
-</div><!-- end of #tab1 -->
-<div class="tab-pane fade" id="tab-default-2"><br><br><form method="post" action="filesystem.pl" enctype="multipart/form-data"><table><tr><td>Raid Profile:</td><td><select name="raid" >
-<option value="raid1">RAID1</option>
-<option value="raid0">RAID0</option>
-<option value="raid10">RAID10</option>
-<option value="raid5">RAID5</option>
-<option value="raid6">RAID6</option>
-<option selected="selected" value="single">JBOD</option>
-</select></td></tr><tr><td><label><input type="checkbox" name="force" value="OFF" />Force Raid Change</label></td></tr></table><input type="hidden" name="fs" value="Data"  /><input type="hidden" name="disk" value="/dev/sdc"  /><input type="hidden" name="menu" value="none"  /><input type="hidden" name="number" value="1"  /><br><br><input type="submit" name="action" value="Change Raid" /><div><input type="hidden" name=".cgifields" value="force"  />
-</div></form></div><!-- end of #tab2 -->
-<div class="tab-pane fade" id="tab-default-3"><br><br><form method="post" action="filesystem.pl" enctype="multipart/form-data"><table><tr><td>Compression:</td><td><select name="compress"  linebreak="true">
-<option selected="selected" value="lzo">Faster</option>
-<option value="zlib">Better</option>
-<option value="no">None</option>
-</select></td></tr><tr><td>Mount Options:</td><td><select name="options"  linebreak="true">
-<option value="ro">ReadOnly</option>
-<option selected="selected" value="rw">Read&amp;Write</option>
-</select></td></tr><tr><td>SSD Optimization:</td><td><label><input type="checkbox" name="ssd" value="on" /></label></td></tr><tr><td>Auto Defrag:</td><td><label><input type="checkbox" name="defrag" value="on" /></label></td></tr></table><input type="hidden" name="fs" value="Data"  /><input type="hidden" name="menu" value="none"  /><br><br><input type="submit" name="action" value="ChangeMount" /><input type="submit" name="action" value="UnMount" /><input type="hidden" name="fs" value="Data"  /><input type="hidden" name="uuid" value="e8d91dbc-cd4e-4a16-8a77-b2603a76e916"  /><div><input type="hidden" name=".cgifields" value="defrag"  /><input type="hidden" name=".cgifields" value="ssd"  /></div></form>
+ <div class="col-lg-8">
+  <div class="panel panel-default">
+   <div class="panel-heading"><%= $fs_name %></div>
+   <div class="panel-body">
+    <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab-default-1" data-toggle="tab"><%= ($TEXT->{'fs_name'}) %></a></li>
+    <li><a href="#tab-default-2" data-toggle="tab"><%= ($TEXT->{'fs_raidlevel'}) %></a></li>
+    <li><a href="#tab-default-3" data-toggle="tab"><%= ($TEXT->{'fs_mount_options'}) %></a></li>
+    <li><a href="#tab-default-4" data-toggle="tab"><%= ($TEXT->{'fs_disks'}) %></a></li></ul>
+    <div class="tab-content">
+     <div class="tab-pane fade in active" id="tab-default-1"><br><br>
+      <form>
+       <input type="hidden" name="fs" value="<%= $fs_name %>" >
+       <input type="hidden" name="action" value="changename" >
+       <div class="form-group">
+        <label> <%= ($TEXT->{'fs_name'}) %> </label>
+        <input class="form-control" name="newfs" value="<%= $fs_name %>">
+       </div>
+       <BR>
+       <button type="submit" class="btn btn-default"><%= ($TEXT->{'fs_change_name'}) %></button>
+      </form>
+     </div><!-- end of #tab1 -->
+     <div class="tab-pane fade" id="tab-default-2">
+      <form>
+      <div class="form-group">
+       <label><%= ($TEXT->{'fs_raid_level'}) %></label>
+       <BR>
+       <table class="table">
+       % if ($number_disks > 0) {
+       <tr><td><label class="radio-inline">
+       <input type="radio" name="raid" value="single" checked></td>
+       <td><img src="/images/jbod.png" width="120" height="100"></td>
+       <td><%= ($TEXT->{'fs_jbod_info'}) %></td>
+       </label>
+       </tr>
+       %}
+       % if ($number_disks > 1) {
+       <tr><td><label class="radio-inline">
+       <input type="radio" name="raid" value="raid0"></td>
+       <td><img src="/images/raid0.png" width="120" height="100"></td>
+       <td><%= ($TEXT->{'fs_raid0_info'}) %></td>
+       </label>
+       </tr>
+       <tr><td><label class="radio-inline">
+       <input type="radio" name="raid" value="raid1"></td>
+       <td><img src="/images/raid1.png" width="120" height="100"></td>
+       <td><%= ($TEXT->{'fs_raid1_info'}) %></td> 
+       </label>
+       </tr>
+       %}
+	  % if ($number_disks > 2) {
+	  <tr><td><label class="radio-inline">
+           <input type="radio" name="raid" value="raid5"></td>
+           <td><img src="/images/raid5.png" width="170" height="100"></td>
+          <td><%= ($TEXT->{'fs_raid5_info'}) %></td>
+	  </label>
+          </tr>
+	  %}
+	  % if ($number_disks > 3) {
+	  <tr><td><label class="radio-inline">
+           <input type="radio" name="raid" value="raid6"></td>
+           <td><img src="/images/raid6.png" width="170" height="100"></td>
+	   <td><%= ($TEXT->{'fs_raid6_info'}) %></td>
+          </label>
+          </tr>
+	  %}
+	  </table>
+          </div>
+
+
+     </form></div><!-- end of #tab2 -->
+     <div class="tab-pane fade" id="tab-default-3">
+      <br><br>
+      <form>
+      <input type="hidden" name="fs" value="<%= $fs_name %>" >
+      <input type="hidden" name="action" value="changesettings" >
+      <div class="form-group">
+           <label><%= ($TEXT->{'fs_compression'}) %></label>
+	   <select name="compress" class="form-control">
+	    <option value="lzo" selected><%= ($TEXT->{'fs_faster'}) %></option>
+            <option value="zlib"><%= ($TEXT->{'fs_better'}) %></option>
+	    <option value="zstd"><%= ($TEXT->{'fs_optimized'}) %></option>
+            <option value="none"><%= ($TEXT->{'fs_none'}) %></option>
+           </select>
+          </div>
+       <div class="form-group">
+       <div class="form-group">
+           <label><%= ($TEXT->{'fs_mount_options'}) %></label>
+	   <select name="mount" class="form-control">
+	    <option value="readonly"><%= ($TEXT->{'fs_readonly'}) %></option>
+	    <option value="read&write" selected><%= ($TEXT->{'fs_read&write'}) %></option>
+	   </select>
+          </div>
+	  <div class="form-group">
+	   <div class="checkbox">
+            <label>
+             <input type="checkbox" name="ssd"><%= ($TEXT->{'fs_ssd_optimization'}) %>
+            </label>
+	   </div>
+ 	   <div class="checkbox">
+            <label>
+	     <input type="checkbox" name="defrag" checked><%= ($TEXT->{'fs_auto_defrag'}) %>
+            </label>
+           </div>
+	   <div class="checkbox">
+            <label>
+             <input type="checkbox" name="mount" checked><%= ($TEXT->{'fs_auto_mount'}) %>
+            </label>
+	   </div>
+          </div>
+        </div>
+        <BR>
+       <button type="submit" class="btn btn-default"><%= ($TEXT->{'fs_change_settings'}) %></button>
+      </form>
 </div><!-- end of #tab3 -->
 <div class="tab-pane fade" id="tab-default-4"><br><br><table class="table table-bordered table-striped"><thead><tr><th></th><th>Number</th><th>Disk</th><th>Total Size</th><th>Used</th><th>Status</th><th>Actions</th></tr></thead><tbody><tr><td><a href="disk.pl?menu=settings&action=display&disk=/dev/sdc"><i class="fa fa-hdd-o fa-2x" title="Settings"></i></a></td><td>1</td><td>/dev/sdc</td><td>10.00GiB</td><td>4.28GiB</td><td>Used</td><td><a href=disk.pl?action=display&menu=settings&disk=/dev/sdc><i class="fa fa-sliders fa-2x" title="Settings"></i>&nbsp;</a><a onclick="return confirm('Are you sure you want to remove the hardisk ?')" href=filesystem.pl?action=removehd&menu=none&fs=Data&uuid=e8d91dbc-cd4e-4a16-8a77-b2603a76e916&disk=/dev/sdc><i class="fa fa-trash fa-2x" title="Remove HD"></i>&nbsp;</a><a href=filesystem.pl?action=display&menu=exchange&disk=/dev/sdc&fs=Data><i class="fa fa-exchange fa-2x" title="Replace HD"></i>&nbsp;</a><a onclick="return confirm('Are you sure you want to repair the hardisk ?')" href=filesystem.pl?action=repairhd&menu=none&fs=Data&uuid=e8d91dbc-cd4e-4a16-8a77-b2603a76e916&disk=/dev/sdc><i class="fa fa-wrench fa-2x" title="Repair HD"></i></a></td></tr></tbody></table><br><a href=filesystem.pl?menu=add_hd&action=display&fs=Data&uuid=e8d91dbc-cd4e-4a16-8a77-b2603a76e916>[Add Hard Disk]</a><br><br><form method="post" action="filesystem.pl" enctype="multipart/form-data"><input type="submit" name="action" value="Balance" /><input type="submit" name="action" value="Scrub" /><input type="hidden" name="menu" value="none"  /><input type="hidden" name="fs" value="Data"  /><input type="hidden" name="uuid" value="e8d91dbc-cd4e-4a16-8a77-b2603a76e916"  /></form></div><!-- end of #tab4 --></div><!-- end of .tab_container --></div></div></div></div> 
 

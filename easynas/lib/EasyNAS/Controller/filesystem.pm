@@ -34,14 +34,19 @@ sub view($self) {
         
 
 #-------- Unmount ---------
-    if (defined $action && $action eq "unmoun") {
+    if (defined $action && $action eq "unmount") {
         &unmount($self);
     }
 
-
-#------- Mount -------
-   if (defined $action && $action eq "mount") {
+#-------- mount ---------
+    if (defined $action && $action eq "mount") {
         &mount($self);
+    }
+
+
+#------- changesettings -------
+   if (defined $action && $action eq "changesettings") {
+        &changesettings($self);
     }
 
 #-------ChangeName -------
@@ -85,9 +90,9 @@ sub view($self) {
 #--------- settingsmenu ---------
     if (defined $action && $action eq "settingsmenu") {
       my $fs=$self->param("fs");
-      #  my $uuid=$self->param("uuid");
+      my $uuid=$self->param("uuid");
       #my $raid = raid_status($fs);
-      #my @disks = `/usr/bin/sudo /sbin/btrfs filesystem show $uuid | /usr/bin/grep devid`;
+      my @disks = `/usr/bin/sudo /sbin/btrfs filesystem show $uuid | /usr/bin/grep devid`;
       #my %disks = drive_status();
       my $pre_disk = 0;
       my $number_disks = 0;
@@ -97,8 +102,13 @@ sub view($self) {
       my $used;
       my $status;
       my $compress;
-       
-      $self->stash( fs_name => $fs);
+      
+      foreach (@disks)
+      {
+	$number_disks++;
+      } 
+      $self->stash( fs_name => $fs,
+		    number_disks => $number_disks);
       $self->render(template => 'easynas/filesystem_settings');
       return;
     }  
@@ -306,96 +316,142 @@ sub unmount($self) {
     {
       $result="fail";
       $msg=$TEXT{'fs_failed_unmounting_fs'};
-      write_log("filesystem","ERROR",$TEXT{'fs_failed_unmounting_fs'});
       return;
     }
     $rc = system("/usr/bin/sudo /usr/bin/umount -l $mount_dir/$fs > /dev/null");
     if ($rc ne 0) {
       $result="fail";
       $msg=$TEXT{'fs_failed_unmounting_fs'};
-      write_log("filesystem","ERROR",$TEXT{'fs_failed_unmounting_fs'});
       return;
     }
-    $rc = system("/usr/bin/sudo /usr/bin/sed -i '$mount_dir.$fs /d' /etc/fstab > /dev/null");
+#    $rc = system("/usr/bin/sudo /usr/bin/sed -i '$mount_dir.$fs /d' /etc/fstab > /dev/null");
     $result="success";
     $msg="Filesystem was unmouted";
-    write_log("filesystem","INFO","Unmount $mount_dir/$fs");
 }
 
 
-
-sub mount($self) {
-
-
-
+######## mount ########
+sub mount($self)
+{
+ my $fs = $self->param("fs");
+ my $rc;
+ my $mount_dir=get_mount_dir();
+ $rc = system("/usr/bin/sudo /usr/bin/mount  $mount_dir/$fs > /dev/null");
+    if ($rc ne 0)
+    {
+     $result="fail";
+     $msg=$TEXT{"fs_failed_mounting"};
+     return;
+    }
+ $result="success";
+ $msg=$TEXT{'fs_mounted'};
 }
+
+
+######## changesettings ########
+sub changesettings($self) {
+
+ my $fs = $self->param("fs");
+ my $uuid = $self->param("uuid");
+ my $compress = $self->param("compress");
+ my $options = $self->param("options");
+ my $ssd = $self->param("ssd");
+ my $defrag = $self->param("defrag");
+ my $mount_dir = get_mount_dir; 
+ my $rc;
+
+ if ($ssd)
+ {
+  $ssd = "ssd,discard,noatime";
+ }
+ else 
+ {
+  $ssd="";
+ }
+ if ($defrag)
+ {
+  $defrag = "autodefrag";
+ }
+  else
+ {
+  $defrag = "";
+ }
+ if (!(-e $mount_dir/$fs))
+    {
+     $rc = system("/usr/bin/sudo /bin/mkdir $mount_dir/$fs");
+     if ($rc ne 0)
+     {
+      $result="fail";
+      $msg=$TEXT{'fs_failed_creating_dir'};
+     }
+    }
+    $rc = system("/bin/echo \"UUID=$uuid $mount_dir/$fs btrfs $options,compress=$compress,$ssd,$defrag 0 0\" | /usr/bin/sudo /usr/bin/tee -a /etc/fstab > /dev/null");
+    $rc = system("/usr/bin/sudo /usr/bin/mount -t btrfs -o $options,compress=$compress,,$ssd,$defrag $mount_dir/$fs > /dev/null");
+    if ($rc ne 0)
+    {
+     $result="fail";
+     $msg=$TEXT{"fs_failed_mounting"};
+     $rc = system("/usr/bin/sudo /bin/sed -i '$mount_dir.$fs /d' /etc/fstab > /dev/null");
+     return;
+    }
+ $result="success";
+ $msg=$TEXT{'fs_mounted'};
+}
+
 
 ##### changename #######
 sub changename($self) {
 
   my $fs    = $self->param("fs");
   my $newfs = $self->param("newfs");
-  my %fs=fs_info();
-  my $mounted=$fs{$fs}[4];
+  my $mounted=mounted($fs);
   my $mount_dir=get_mount_dir();
   my $rc;
 
   if ($fs eq $newfs)
     {
      $result="fail";	
-     $msg=$TEXT{'filesystem_not_changed'}.$mounted;
-     write_log("filesystem","ERROR",$TEXT{'filesystem_not_changed'});
+     $msg=$TEXT{'filesystem_not_changed'};
      return;
     }
 
-    #    if (mounted($fs) eq "UnMounted")
-    #{
-    # $msg=$TEXT{'fs_need_to_be_unmounted'};
-    # $result="fail";
-    # write_log("filesystem","ERROR",$TEXT{'fs_need_to_be_unmounted'});
-    # return;
-    #}
-    
-    if ($fs eq "ROOT" || $fs eq "BOOT")
-    {
-     $msg=$TEXT{'filesystem_not_changed'};
-     $result="fail";
-     write_log("filesystem","ERROR",$TEXT{'filesystem_not_changed'});
-     return;
-    }
-
-    $rc = system("/usr/bin/sudo /sbin/btrfs filesystem label $mount_dir/$fs $newfs >/dev/null");
-    if ($rc ne 0)
-    {
-     $msg=$TEXT{'filesystem_not_changed'};
-     $result="fail";
-     write_log("filesystem","ERROR",$TEXT{'filesystem_not_changed'});
-     return;
-    }
-    write_log("filesystem","INFO","FileSystem $fs changed name to $newfs");
-    $rc = system("/usr/bin/sudo /usr/bin/umount -l $mount_dir/$fs > /dev/null");
-    if ($rc ne 0)
-    {
-     $msg=$TEXT{'fs_failed_unmounting_fs'};
-     $result="fail";
-     write_log("filesystem","ERROR",$TEXT{'fs_failed_unmounting_fs'});
-     return;
-    }
-    write_log("filesystem","INFO","Filesystem $fs was unmounted");
-    `/usr/bin/sudo /usr/bin/mv $mount_dir/$fs $mount_dir/$newfs`;
-    `/usr/bin/sudo /usr/bin/sed -i 's%$mount_dir/$fs%$mount_dir/$newfs%g' /etc/fstab`;
-    $rc = system("/usr/bin/sudo /usr/bin/mount $mount_dir/$newfs > /dev/null");
-    if ($rc ne 0)
-    {
-     $msg=$TEXT{'failed_mounting_fs'};
-     $result="fail";
-     write_log("filesystem","ERROR",$TEXT{'failed_mounting_fs'});
-     return;
-    }
-    $msg=$TEXT{'fs_name_changed'};
-    $result="success";
-    write_log("filesystem","INFO","Filesystem $newfs was mounted");
-    return;
+ if ($fs eq "ROOT" || $fs eq "BOOT")
+ {
+  $msg=$TEXT{'filesystem_not_changed'};
+  $result="fail";
+  return;
+ }
+ if ($mounted eq "Mounted") {
+  $rc = system("/usr/bin/sudo /usr/bin/umount -l $mount_dir/$fs > /dev/null");
+ if ($rc ne 0)
+  {
+   $msg=$TEXT{'fs_failed_unmounting_fs'};
+   $result="fail";
+   return;
+  }
+ }
+ 
+ $rc = system("/usr/bin/sudo /sbin/btrfs filesystem label $mount_dir/$fs $newfs >/dev/null");
+ if ($rc ne 0)
+ {
+  $msg=$TEXT{'filesystem_failed_changing_label'};
+  $result="fail";
+  return;
+ }
+ `/usr/bin/sudo /usr/bin/mv $mount_dir/$fs $mount_dir/$newfs`;
+ `/usr/bin/sudo /usr/bin/sed -i 's%$mount_dir/$fs%$mount_dir/$newfs%g' /etc/fstab`;
+  $rc = system("/usr/bin/sudo /usr/bin/mount $mount_dir/$newfs > /dev/null");
+  if ($rc ne 0)
+  {
+   $msg=$TEXT{'failed_mounting_fs'};
+   $result="fail";
+   return;
+  }
+  $msg=$TEXT{'fs_name_changed'};
+  $result="success";
+  return;
 }
+
+
 1;
 
