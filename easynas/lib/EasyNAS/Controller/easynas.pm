@@ -28,7 +28,7 @@ use Exporter;
 use Number::Bytes::Human qw(format_bytes parse_bytes);
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw();
-our @EXPORT    = qw( get_mount_dir get_conf_cron get_addons_file get_update_file get_categories 
+our @EXPORT    = qw( get_mount_dir get_conf_cron get_addons_file get_update_file get_categories mounted 
                      get_group_default get_conf_webui get_conf_hosts  get_lang_list get_addons_update_dir 
 		     get_lang_text get_service_status get_menu get_addons get_addon_info 
 		     write_log easynas_info addons_info fs_info vol_info users_info groups_info 
@@ -907,29 +907,33 @@ sub fs_info
         {
            $mounted="Mounted";
 	   $raid=raid_status($fs);
+	   @usage=`/usr/bin/sudo /sbin/btrfs filesystem usage $dir`;
+       foreach (@usage)
+       {
+        if($_ =~ m/Device size:/)
+        {
+         (undef,undef,$size) = split(' ',$_);
+        }
+        if($_ =~ m/Used:\s/)
+        {
+         (undef,$used) = split(' ',$_);
+        }
+        if($_ =~ m/Free \(/)
+        {
+         (undef,undef,undef,$free) = split(' ',$_);
+        }
+       }
+
    	}
         else
         {
            $mounted="UnMounted";
 	   $raid='';
+	   $size="";
+	   $free=""; 
+	   $used=""; 
         }
 	
-       @usage=`/usr/bin/sudo /sbin/btrfs filesystem usage $dir`;
-       foreach (@usage) 
-       { 
-	if($_ =~ m/Device size:/)
-        {
-         (undef,undef,$size) = split(' ',$_);
-        }
-	if($_ =~ m/Used:\s/)
-        {
-         (undef,$used) = split(' ',$_);
-        }
-	if($_ =~ m/Free \(/)
-        {
-         (undef,undef,undef,$free) = split(' ',$_);
-        }
-       }
        if (parse_bytes($size) > 0) {
         $percentage=(int((parse_bytes($used))/(parse_bytes($size))*100));
        }
