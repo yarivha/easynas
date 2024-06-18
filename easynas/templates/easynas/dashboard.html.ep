@@ -46,10 +46,10 @@
 <tr>
 % foreach my $fs (keys (%$filesystems)) {
  % if ( $filesystems->{$fs}[1]  eq "good") {
-    <td><a href="<%= ($addons->{'filesystem'}->{program}) %>?action=settings&fs=<%= $fs %>"><i class="fa fa-database fa-5x" style="color:green" title="<%= $fs %>"></i></a>&nbsp</td>
+    <td><a href="<%= ($addons->{'filesystem'}->{program}) %>?action=settingsmenu&fs=<%= $fs %>"><i class="fa fa-database fa-5x" style="color:green" title="<%= $fs %>"></i></a>&nbsp</td>
  %}
  % else {
-    <td><a href="<%= ($addons->{'filesystem'}->{program}) %>?action=settings&fs=<%= $fs %>"><i class="fa fa-database fa-5x" style="color:red" title="<%= $fs %>"></i></a>&nbsp</td>
+    <td><a href="<%= ($addons->{'filesystem'}->{program}) %>?action=settingsmenu&fs=<%= $fs %>"><i class="fa fa-database fa-5x" style="color:red" title="<%= $fs %>"></i></a>&nbsp</td>
  %}
 %}
 </tr><tr>
