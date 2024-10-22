@@ -193,7 +193,7 @@ sub createfs($self) {
     my $btrfs;
     my $disk;
     my $rc;
-if ($ssd)
+    if ($ssd)
     {
 	$ssd = "ssd,discard,noatime";
     }
@@ -229,7 +229,7 @@ if ($ssd)
 	$result="fail";    
 	$msg=$TEXT{'no_fs_name_was_entered'};
 	return;
-}
+    }
     if ($fs eq "ROOT" || $fs eq "BOOT")
     {
 	$result="fail";    
@@ -409,47 +409,39 @@ sub changename($self) {
   my $rc;
 
   if ($fs eq $newfs)
-    {
-     $result="fail";	
-     $msg=$TEXT{'filesystem_not_changed'};
-     return;
-    }
-
- if ($fs eq "ROOT" || $fs eq "BOOT")
- {
-  $msg=$TEXT{'filesystem_not_changed'};
-  $result="fail";
-  return;
- }
- if ($mounted eq "Mounted") {
-  $rc = system("/usr/bin/sudo /usr/bin/umount -l $mount_dir/$fs > /dev/null");
- if ($rc ne 0)
   {
-   $msg=$TEXT{'fs_failed_unmounting_fs'};
+   $result="fail";	
+   $msg=$TEXT{'filesystem_not_changed'};
+   return;
+  }
+
+  if ($fs eq "ROOT" || $fs eq "BOOT")
+  {
+   $msg=$TEXT{'filesystem_not_changed'};
    $result="fail";
    return;
   }
- }
- 
- $rc = system("/usr/bin/sudo /sbin/btrfs filesystem label $mount_dir/$fs $newfs >/dev/null");
- if ($rc ne 0)
- {
-  $msg=$TEXT{'filesystem_failed_changing_label'};
-  $result="fail";
-  return;
- }
- `/usr/bin/sudo /usr/bin/mv $mount_dir/$fs $mount_dir/$newfs`;
- `/usr/bin/sudo /usr/bin/sed -i 's%$mount_dir/$fs%$mount_dir/$newfs%g' /etc/fstab`;
-  $rc = system("/usr/bin/sudo /usr/bin/mount $mount_dir/$newfs > /dev/null");
+
+  if ($mounted eq "Mounted") 
+  {
+   $msg=$TEXT{'fs_umount_first'};
+   $result="fail";
+   return;
+  }
+
+  $rc = system("/usr/bin/sudo /sbin/btrfs filesystem label $mount_dir/$fs $newfs >/dev/null");
   if ($rc ne 0)
   {
-   $msg=$TEXT{'failed_mounting_fs'};
+   $msg=$TEXT{'fs_failed_changing_label'};
    $result="fail";
    return;
   }
-  $msg=$TEXT{'fs_name_changed'};
-  $result="success";
-  return;
+
+  `/usr/bin/sudo /usr/bin/mv $mount_dir/$fs $mount_dir/$newfs`;
+  `/usr/bin/sudo /usr/bin/sed -i 's%$mount_dir/$fs%$mount_dir/$newfs%g' /etc/fstab`;
+   $msg=$TEXT{'fs_name_changed'};
+   $result="success";
+   return;
 }
 
 
