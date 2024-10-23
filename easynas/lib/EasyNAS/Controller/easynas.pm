@@ -865,6 +865,7 @@ sub fs_info
  my $uuid;
  my $health;
  my $mounted;
+ my $path;
  my $raid;
  my $size;
  my $used;
@@ -896,6 +897,12 @@ sub fs_info
        {
         $health = "degraded";
        }
+      
+       if ($_ =~ m/ david/)
+       {
+        (undef,undef,undef,undef,undef,undef,undef,$path) = split(' ',$_);
+       }
+
 
        if($_ =~ m/Total/)
        {
@@ -940,7 +947,7 @@ sub fs_info
        else {
 	$percentage=0;
        }
-       $filesystems{$fs}=[$uuid,$health,$size,$used,$free,$percentage,$devices,$mounted,$raid,get_compress_status($fs)];
+       $filesystems{$fs}=[$uuid,$health,$size,$used,$free,$percentage,$devices,$path,$mounted,$raid,get_compress_status($fs)];
     }
     return (%filesystems);
 }
