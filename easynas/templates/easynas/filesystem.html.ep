@@ -45,12 +45,13 @@
 						    <td><%= $filesystems->{$fs}[8] %></td>
 						    <td><%= $filesystems->{$fs}[9] %></td>
 						    <td>
-
- %if ( $filesystems->{$fs}[7] eq "Mounted"){ 
+ %if ($fs ne "ROOT"){
+   %if ( $filesystems->{$fs}[7] eq "Mounted"){ 
      <a href=?action=unmount&fs=<%= $fs %>><i class="fa fa-unlink fa-2x" title="<%= $TEXT->{'fs_unmount'} %>"></i>&nbsp;</a>
      <a onclick="return confirm('<%= ($TEXT->{'fs_delete?'}) %>')" href="?action=deletefs&fs=<%= $fs %>&uuid=<%= $filesystems->{$fs}[0] %>"><i class="fa fa-trash fa-2x" title="<%= ($TEXT->{'delete'}) %>"></i></a>
- %}else{
+   %}else{
     <a href=?action=mount&fs=<%= $fs %>><i class="fa fa-link fa-2x" title="<%= $TEXT->{'fs_mount'} %>"></i>&nbsp;</a>
+   %}
  %}
 
 </td></tr>
