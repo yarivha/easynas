@@ -898,7 +898,7 @@ sub fs_info
         $health = "degraded";
        }
       
-       if ($_ =~ m/ david/)
+       if ($_ =~ m/devid/)
        {
         (undef,undef,undef,undef,undef,undef,undef,$path) = split(' ',$_);
        }

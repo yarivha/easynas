@@ -350,7 +350,6 @@ sub mount($self)
 
 ######## changesettings ########
 sub changesettings($self) {
-
  my $fs = $self->param("fs");
  my $uuid = $self->param("uuid");
  my $compress = $self->param("compress");
@@ -401,12 +400,14 @@ sub changesettings($self) {
 
 ##### changename #######
 sub changename($self) {
-
+  my %fs_info=fs_info();
   my $fs    = $self->param("fs");
   my $newfs = $self->param("newfs");
+  my $path=$fs_info{$fs}[7];
   my $mounted=mounted($fs);
   my $mount_dir=get_mount_dir();
   my $rc;
+  print $path;
 
   if ($fs eq $newfs)
   {
@@ -429,7 +430,7 @@ sub changename($self) {
    return;
   }
 
-  $rc = system("/usr/bin/sudo /sbin/btrfs filesystem label $mount_dir/$fs $newfs >/dev/null");
+  $rc = system("/usr/bin/sudo /sbin/btrfs filesystem label $path $newfs >/dev/null");
   if ($rc ne 0)
   {
    $msg=$TEXT{'fs_failed_changing_label'};
