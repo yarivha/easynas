@@ -45,7 +45,8 @@
 						    <td><%= $filesystems->{$fs}[9] %></td>
 						    <td><%= $filesystems->{$fs}[10] %></td>
 						    <td>
- %if ($fs ne "ROOT"){
+  <a href="?action=settingsmenu&fs=<%= $fs %>"><i class="fa fa-sliders fa-2x" title="<%= ($TEXT->{'settings'}) %>"></i>&nbsp;</a>
+  %if ($fs ne "ROOT"){
    %if ( $filesystems->{$fs}[8] eq "Mounted"){ 
      <a href=?action=unmount&fs=<%= $fs %>><i class="fa fa-unlink fa-2x" title="<%= $TEXT->{'fs_unmount'} %>"></i>&nbsp;</a>
    %}else{
