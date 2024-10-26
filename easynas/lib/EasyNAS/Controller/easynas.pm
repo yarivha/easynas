@@ -846,11 +846,14 @@ sub vol_info
    if ($fs ne "ROOT") {
     @vol_info = `sudo /sbin/btrfs subvolume list $mount_dir/$fs`;
     foreach (@vol_info)
-    {
+    { 
       (undef,$id,undef,undef,undef,undef,undef,undef,$vol) = split(" ",$_);
-      $du = `/usr/bin/sudo /usr/bin/du -h -a -c  $mount_dir/$fs/$vol | /usr/bin/tail -1`;
-      ($size,undef) = split(" ",$du);
+      if ($vol ne "@") {
+       (undef,undef,$vol)=split("/",$vol);
+       $du = `/usr/bin/sudo /usr/bin/du -h -a $mount_dir/$fs/$vol | /usr/bin/tail -1`;
+       ($size,undef) = split(" ",$du);
        $volumes{$fs."/".$vol}=[$id,$vol,$fs,$size];
+      }
     }
    }
   }
