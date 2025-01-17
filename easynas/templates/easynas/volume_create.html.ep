@@ -17,7 +17,9 @@
            <label><%= ($TEXT->{'vol_filesystem'}) %></label>
 	   <select name="fs" class="form-control">
            % foreach my $fs (keys (%$filesystems)) {
-	    <option><%= $fs %></option>
+             % if ($fs ne "ROOT") {
+	      <option><%= $fs %></option>
+	     %}
 	   %}
 	   </select>
           </div>
