@@ -835,6 +835,7 @@ sub vol_info
   my %fs=fs_info();
   my %volumes;
   my @vol_info;
+  my @vols_info;
   my $id;
   my $du;
   my $vol;
@@ -844,12 +845,13 @@ sub vol_info
   foreach $fs (keys %fs)
   {
    if ($fs ne "ROOT") {
-    @vol_info = `sudo /sbin/btrfs subvolume list $mount_dir/$fs`;
-    foreach (@vol_info)
+    @vols_info = `sudo /sbin/btrfs subvolume list $mount_dir/$fs`;
+    foreach (@vols_info)
     { 
-      (undef,$id,undef,undef,undef,undef,undef,undef,$vol) = split(" ",$_);
+      @vol_info=split(' ',$_);
+      $vol=$vol_info[8];
+      $id=$vol_info[1];
       if ($vol ne "@") {
-       (undef,undef,$vol)=split("/",$vol);
        $du = `/usr/bin/sudo /usr/bin/du -h -a $mount_dir/$fs/$vol | /usr/bin/tail -1`;
        ($size,undef) = split(" ",$du);
        $volumes{$fs."/".$vol}=[$id,$vol,$fs,$size];
@@ -958,6 +960,6 @@ sub fs_info
 
 ########################### Main ############################
 
-check_env;
+#check_env;
 
 1;
